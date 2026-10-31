@@ -16,7 +16,7 @@ Phase 1 is approved as v1.1. Phase 2 is approved as a concept visual system, wit
 | Reverse-logistics cost per exchange and margin impact | `policies.md` §4 | Planning model; 3PL quote needed |
 | Size guide with UK/EU/US/cm and last flags | `size-guide.md`, `size-guide.csv` | Conversion table; last must confirm |
 | Hero products, margin targets, 90-day launch plan, two drops a year | `merchandising-plan.md` | Concept plan |
-| SQLAlchemy 2.0 seed script | `seed.py` | Tested against SQLite; PostgreSQL needs `psycopg` |
+| SQLAlchemy 2.0 reference seed | `seed.py` | Phase 3 payload check; Phase 4 uses `apps/api/scripts/seed.py` |
 | Fields to confirm | `fields-to-confirm.md`, `fields-to-confirm.csv` | 1,085 rows |
 | Data contract and field meanings | `product-schema.md` | Concept schema |
 | Reproducible generator and validator | `build_catalogue.py`, `validate_catalogue.py` | Passing |
@@ -56,22 +56,22 @@ python brand/phase-3/build_catalogue.py
 
 # Validate counts, GST/margin math, SKU patterns, image names and flags
 python brand/phase-3/validate_catalogue.py
-
-# Validate the seed payload without a database
-python brand/phase-3/seed.py --dry-run
-
-# Install the seed dependencies (not needed for --dry-run)
-pip install "SQLAlchemy>=2.0" "psycopg[binary]>=3.2"
-
-# Development only: create tables and seed PostgreSQL 16
-$env:DATABASE_URL="postgresql+psycopg://USER:PASSWORD@HOST:5432/DBNAME"
-python brand/phase-3/seed.py --create-tables
-
-# Production: run Alembic first, then seed without --create-tables
-python brand/phase-3/seed.py
 ```
 
-The seed script is idempotent (`session.merge`) and has no hard-coded credentials. Do not commit `DATABASE_URL`. Use `--create-tables` only in development. The local smoke test used SQLite; PostgreSQL 16 with `psycopg` is the target.
+The canonical Phase 4 loader is `apps/api/scripts/seed.py`. It uses the Alembic
+schema and the API models; run it from `apps/api` after `alembic upgrade head`.
+
+The older standalone `brand/phase-3/seed.py` remains as a Phase 3 payload
+reference and supports `--dry-run`. It is not the Phase 4 loader.
+
+```bash
+# Phase 3 reference only
+python brand/phase-3/seed.py --dry-run
+```
+
+The Phase 4 seed is idempotent and has no hard-coded credentials. Do not commit
+`DATABASE_URL`. See `../phase-4/README.md` and `../../apps/api/README.md` for the
+current commands.
 
 ---
 
@@ -93,8 +93,9 @@ The seed script is idempotent (`session.merge`) and has no hard-coded credential
 | `product-schema.md` | Data contract and field meanings. |
 | `build_catalogue.py` | Single source of truth; writes the data and generated docs. |
 | `validate_catalogue.py` | Independent checks; exits non-zero on failure. |
-| `seed.py` | SQLAlchemy 2.0 models and idempotent seed. |
+| `seed.py` | Phase 3 reference seed. Phase 4 uses `apps/api/scripts/seed.py`. |
 | `../phase-4/schema-gap-report.md` | Master-prompt comparison and Phase 4 handoff. |
+| `../phase-4/README.md` | Phase 4 Milestone 1 delivery notes and verification. |
 
 ---
 

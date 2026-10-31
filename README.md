@@ -7,22 +7,40 @@ packaging, collateral and design tokens. Phase 3 is the 30-product catalogue,
 GST/pricing model, policies, size guide and merchandising plan.
 
 **Status: concept only.** Phase 2 is approved as a concept visual system. Phase 3
-is approved as working data, with its open items kept. Phase 4 Milestone 1 is in
-progress. No print, domain or ad spend until the attorney opinion and
-native-speaker connotation test are back. The name is not cleared.
+is approved as working data, with its open items kept. Phase 4 Milestone 1 is
+delivered and awaiting founder approval. No print, domain or ad spend until the
+attorney opinion and native-speaker connotation test are back. The name is not
+cleared.
 
-## View the brand system
+## Monorepo
+
+| Path | Contents |
+|---|---|
+| `apps/storefront/` | Next.js 16 app: `/brand` concept route and `/catalogue` storefront route |
+| `apps/api/` | FastAPI + SQLAlchemy + Alembic catalogue and inventory API |
+| `brand/strategy.md` | Phase 1 strategy, v1.1 approvals and open items |
+| `brand/naming.md` | Naming risk memo, spelling policy and clearance status |
+| `brand/logos/` | Legibility test, harness and decision record |
+| `brand/phase-2/` | Phase 2 specs, tokens, static tests and social boards |
+| `brand/phase-3/` | Phase 3 catalogue, GST/pricing, policies, size guide and merchandising |
+| `brand/phase-4/` | Phase 4 schema gap report and Milestone 1 notes |
+
+## Storefront
+
+Node 22 or newer is recommended.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open `http://localhost:3000/brand`.
+Open `http://localhost:3000` for the concept landing page,
+`http://localhost:3000/catalogue` for the publish-gated catalogue, and
+`http://localhost:3000/brand` for the concept brand book.
 
-The route is a concept brand book, not the storefront. It self-hosts Archivo,
-Inter, Noto Sans Devanagari and Noto Serif Devanagari (test only) through
-`next/font/local`.
+The catalogue reads `API_URL` (default `http://localhost:8000`). Copy
+`apps/storefront/.env.example` to `apps/storefront/.env` if the API runs
+elsewhere.
 
 Build checks:
 
@@ -31,40 +49,59 @@ npm run typecheck
 npm run build
 ```
 
-## Where things are
-
-| Path | Contents |
-|---|---|
-| `brand/strategy.md` | Phase 1 strategy, v1.1 approvals and open items |
-| `brand/naming.md` | Naming risk memo, spelling policy and clearance status |
-| `brand/logos/` | Legibility test, harness and decision record |
-| `brand/phase-2/` | Phase 2 specs, tokens, static tests and social boards |
-| `brand/phase-3/` | Phase 3 catalogue, GST/pricing, policies, size guide, merchandising and seed |
-| `brand/phase-4/` | Phase 4 schema gap report and build notes |
-| `app/brand/page.tsx` | `/brand` concept route |
-| `public/brand/` | Served copies of logos, tokens, tests, social boards and licences |
-| `app/fonts/`, `public/fonts/` | Self-hosted TTFs and OFL licence files |
-
-## Reproduce
+## API
 
 ```bash
-python brand/phase-2/generate-logos.py
-python brand/phase-2/contrast.py
-python brand/phase-3/build_catalogue.py
-python brand/phase-3/validate_catalogue.py
-python brand/phase-3/seed.py --dry-run
+cd apps/api
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# macOS/Linux: source .venv/bin/activate
+pip install -e ".[dev]"
+
+cp .env.example .env
+# Set DATABASE_URL and ADMIN_API_TOKEN in .env. Do not commit .env.
+
+alembic upgrade head
+python scripts/seed.py
+uvicorn app.main:app --reload --port 8000
 ```
 
-The logo SVGs are outlined and self-contained. The contrast ratios are
-calculated, not estimated. The social boards are fixed-size HTML/CSS concept
-templates; export only after the name is cleared. The Phase 3 seed script needs
-`DATABASE_URL` and SQLAlchemy 2.0; `--dry-run` needs neither. See
-`brand/phase-3/README.md` for the PostgreSQL command and the open items.
+The seed loads the Phase 3 catalogue: 30 products, 330 variants, 5 categories and
+330 inventory rows. Every product stays `draft` because the product facts still
+contain `[TO CONFIRM]` fields. The publish guard blocks those products, and the
+public catalogue never renders a flagged value.
+
+API docs: `http://localhost:8000/docs`. See `apps/api/README.md` for endpoints,
+configuration, inventory semantics and the OpenTelemetry setup.
+
+## Verify
+
+```bash
+# Phase 3 data
+python brand/phase-3/build_catalogue.py
+python brand/phase-3/validate_catalogue.py
+
+# API
+cd apps/api
+python -m pytest -q
+
+# Storefront
+cd ../..
+npm run typecheck
+npm run build
+```
+
+The API test suite includes the parallel last-unit reservation test: two threads
+reserve the same final unit, and exactly one succeeds.
 
 ## Guardrails
 
 - No material, sustainability, grip or fit claim without evidence.
 - No lorem ipsum, TODO placeholders or invented product facts.
-- No hard-coded secrets.
+- No hard-coded secrets. `.env` files, keys and local databases are ignored.
+- A product with any unresolved `[TO CONFIRM]` field cannot be published.
+- The storefront must never render a `[TO CONFIRM]` value, including after a
+  forced-published row.
+- No cart, checkout or payment work until Phase 4 Milestone 1 is approved.
 - The Devanagari wordmark has a 20 px absolute screen floor and a 6 mm measured
   print floor. Below 20 px, use the monogram or symbol.

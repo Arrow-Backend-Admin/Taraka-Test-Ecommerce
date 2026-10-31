@@ -1,7 +1,7 @@
 # Sāntvana — Brand Strategy
 
 **Phase 1 deliverable · v1.1 · 30 October 2026**
-Owner: brand strategy · Status: Phase 2 approved as a concept; Phase 3 awaiting approval; no print, domain or ad spend until the attorney opinion
+Owner: brand strategy · Status: Phase 2 approved as a concept; Phase 3 approved as working data; Phase 4 Milestone 1 awaiting approval; no print, domain or ad spend until the attorney opinion
 
 **v1.1 changes:** The previous name is dropped. Sāntvana (सांत्वना; also spelled सान्त्वना) replaces it throughout. Name-dependent wordplay is removed, the origin story is rebuilt around founder-supplied facts rather than an invented anecdote, and Phase 2 now carries a bilingual Devanagari requirement.
 
@@ -360,7 +360,8 @@ Every outward claim that is not yet evidenced. This table is the guardrail for P
 - [ ] Small-size rule accepted: below 20 px use the Latin monogram or symbol, never the Devanagari wordmark
 - [x] Legibility test re-run after the final Devanagari typeface is chosen — Noto Sans Devanagari 600, 30 October 2026; 20 px/1× passes the automated check, 28 px retained pending founder decision (`logos/legibility-test-anusvara.md` §5)
 - [x] **Phase 2 approved as a concept visual system** — 31 October 2026; the open items in `phase-2/README.md` are kept
-- [ ] **Phase 3 catalogue approved** — pending founder review, 31 October 2026
+- [x] **Phase 3 approved as working data** — 31 October 2026; all open items kept; price band reconciled to ₹2,299–₹4,999
+- [ ] **Phase 4 Milestone 1 approved** — monorepo, API, publish guard, inventory test and OpenTelemetry delivered 31 October 2026; awaiting founder review
 
 ---
 

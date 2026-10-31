@@ -39,12 +39,13 @@ Phase 3 is approved as working data with its open items kept. This report compar
 | Meta description (155 chars) | `seo_description` | **Gap** | Current descriptions are 161–256 characters, over 155. Add a length check and rewrite without new claims. |
 | 6 image filenames | `images` | **Gap** | Four roles per product: `hero-45`, `side-profile`, `sole-macro`, `on-foot-34`. Add two roles, e.g. `detail-45` and `unboxing-45`, or revise the master list to four. |
 
-## What Phase 4 will do
+## What Phase 4 Milestone 1 implements
 
-- Add nullable model columns for `sub_category`, `audience`, `summary_15w`, `description_120w`, `feature_bullets`, `colourways`, `launch_stock_qty` and the extra image roles.
-- Seed the Phase 3 data without inventing the missing values. Missing content stays null or empty; it does not become a claim.
-- Keep the publish guard on every string that contains `[TO CONFIRM]`. A separate content-completeness check can flag missing master-prompt fields before launch.
-- Keep the four-image Phase 2 set as the current asset brief. Do not add image filenames without a role, alt text and release status.
+- Adds nullable model columns for `sub_category`, `audience`, `summary_15w`, `description_120w`, `feature_bullets`, `colourways` and `sale_price_inr`; adds `launch_stock_qty` per variant.
+- Seeds the Phase 3 data without inventing product facts. The seed maps the Phase 1 audience target, the single Phase 3 colourway and the five existing safe feature bullets where present. Missing content stays null or empty.
+- Keeps the publish guard on every product and variant string that contains `[TO CONFIRM]`. A separate content-completeness check can flag missing master-prompt fields before launch.
+- Stores images as a JSON list. The four-image Phase 2 set remains the current asset brief; no extra image filenames are invented.
+- Adds `apps/api/scripts/seed.py`, the Alembic schema and the admin CRUD API. See `README.md` in this folder for verification.
 
 ## Decision needed
 

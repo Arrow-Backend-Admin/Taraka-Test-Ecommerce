@@ -36,9 +36,9 @@ const notoSerifDevanagari = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Sāntvana — brand system (concept)",
+  title: "Sāntvana — concept storefront",
   description:
-    "Phase 2 concept brand system for Sāntvana: bilingual logo suite, colour, typography, imagery, packaging, collateral and design tokens.",
+    "Phase 4 Milestone 1 concept storefront for Sāntvana, with the Phase 2 brand system and a publish-gated catalogue.",
   robots: {
     index: false,
     follow: false,

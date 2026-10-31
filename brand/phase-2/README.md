@@ -17,9 +17,9 @@ No print, domain or ad spend until the attorney opinion in `../naming.md` §6 is
 | Graphic language: Long Line, Tread Field, Ground Crop, Mile Marks, social formats | `graphic-language.md` | Concept spec |
 | Packaging: box, mailer, tissue, care card, sticker, hangtag, size guide | `packaging.md` | Concept spec, no dieline |
 | Collateral: card, letterhead, shipping label, thank-you card, email | `collateral.md` | Concept spec |
-| Social templates | `social/` | Fixed-size HTML/CSS boards; copied to `public/brand/social/` |
+| Social templates | `social/` | Fixed-size HTML/CSS boards; copied to `apps/storefront/public/brand/social/` |
 | Design tokens | `tokens.json`, `tokens.css` | Concept, v0.1.0 |
-| `/brand` route | `../../app/brand/page.tsx` | Next.js concept route; build verified |
+| `/brand` route | `../../apps/storefront/app/brand/page.tsx` | Next.js concept route; build verified |
 | Legibility final-face re-run | `../logos/legibility-test-anusvara.md` §5 | Noto Sans Devanagari 600; 20 px/1× passes |
 
 ---
@@ -49,7 +49,7 @@ npm run dev
 
 Open `http://localhost:3000/brand`.
 
-The route is a concept brand book, not the storefront. It uses the self-hosted fonts and the same tokens as the rest of the system. It links to static copies in `public/brand/`: the type test, legibility harness, contrast report, three social boards, `tokens.json` and the font licence.
+The route is a concept brand book, not the storefront. It uses the self-hosted fonts and the same tokens as the rest of the system. It links to static copies in `apps/storefront/public/brand/`: the type test, legibility harness, contrast report, three social boards, `tokens.json` and the font licence.
 
 Build check:
 
@@ -81,7 +81,7 @@ python -m http.server 8000
 python brand/phase-2/generate-logos.py
 ```
 
-The generator shapes **Sāntvana** in Archivo 600 and **सांत्वना** in Noto Sans Devanagari 600 with HarfBuzz, then outlines the glyphs with fontTools. It writes the ten SVGs in `logos/`. Copy them to `public/brand/logos/` for the `/brand` route after regenerating.
+The generator shapes **Sāntvana** in Archivo 600 and **सांत्वना** in Noto Sans Devanagari 600 with HarfBuzz, then outlines the glyphs with fontTools. It writes the ten SVGs in `logos/`. Copy them to `apps/storefront/public/brand/logos/` for the `/brand` route after regenerating.
 
 ## Reproduce the contrast ratios
 
