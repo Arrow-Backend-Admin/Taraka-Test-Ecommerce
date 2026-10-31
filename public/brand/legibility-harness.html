@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sāntvana — legibility harness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1F1D1A;
+      --paper: #F7F2E8;
+      --card: #FFFDF8;
+      --muted: #6B645A;
+      --line: #D8CEBE;
+      --accent: #A44A2A;
+      --pass: #244A36;
+      --fail: #8A2E1E;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--paper); color: var(--ink);
+      font-family: "Segoe UI", Inter, Arial, sans-serif; line-height: 1.5;
+    }
+    main { max-width: 1280px; margin: 0 auto; padding: 44px 24px 72px; }
+    .kicker { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin: 0 0 8px; }
+    h1 { font-size: clamp(28px, 3.4vw, 42px); line-height: 1.08; margin: 0 0 12px; letter-spacing: -.02em; }
+    .lede { max-width: 840px; color: var(--muted); margin: 0 0 26px; }
+    .controls {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: end;
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin: 0 0 28px;
+    }
+    label { display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 6px; }
+    input {
+      font: inherit; padding: 9px 11px; border: 1px solid var(--line); border-radius: 8px;
+      background: #fff; color: var(--ink); min-width: 260px;
+    }
+    button {
+      font: inherit; font-weight: 700; padding: 10px 16px; border: 0; border-radius: 8px;
+      background: var(--ink); color: var(--paper); cursor: pointer;
+    }
+    button:hover { background: #3A352F; }
+    .hint { font-size: 13px; color: var(--muted); margin: 0; }
+    section { margin-top: 34px; }
+    h2 { font-size: 24px; margin: 0 0 6px; letter-spacing: -.01em; }
+    h3 { font-size: 17px; margin: 22px 0 8px; }
+    p { margin: 0 0 10px; }
+    .note { color: var(--muted); font-size: 14px; max-width: 900px; }
+    table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin: 12px 0 0; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; font-size: 14px; }
+    th { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); background: #F2EBDD; }
+    tr:last-child td { border-bottom: 0; }
+    .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .pass { color: var(--pass); font-weight: 700; }
+    .fail { color: var(--fail); font-weight: 700; }
+    .warn { color: #8A5A12; font-weight: 700; }
+    .specimens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 12px; }
+    .specimen { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px; overflow: auto; }
+    .specimen .label { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    .specimen canvas { display: block; background: #fff; border: 1px solid #EEE7DA; border-radius: 6px; max-width: 100%; height: auto; }
+    .rule {
+      margin-top: 22px; padding: 16px 18px; border-left: 4px solid var(--accent);
+      background: #FBF4EA; border-radius: 0 12px 12px 0;
+    }
+    .rule strong { color: var(--ink); }
+    footer { margin-top: 38px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    @media (max-width: 860px) {
+      .specimens { grid-template-columns: 1fr; }
+      main { padding: 30px 14px 52px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <p class="kicker">Phase 2 · legibility harness · v2</p>
+  <h1>Test the mark, not the headline.</h1>
+  <p class="lede">This harness renders the selected anusvara form at CSS sizes 16, 20, 24, 28 and 32 px, at device-pixel ratios 1×, 1.5× and 2×, against 40/255 and 128/255 alpha thresholds. It measures the anusvara dot and the full-word <strong>त्व</strong> counter. Change the font name to the final Devanagari face and run it again.</p>
+
+  <div class="controls">
+    <div>
+      <label for="font">Devanagari font family</label>
+      <input id="font" value="Noto Sans Devanagari" spellcheck="false">
+    </div>
+    <button id="run">Run test</button>
+    <p class="hint" id="status">Ready.</p>
+  </div>
+
+  <section>
+    <h2>1. Anusvara dot</h2>
+    <p class="note">Dot = topmost separate component above the shirorekha in <strong>सांत्वना</strong>. Solid-pixel size is the bounding box at the stated alpha threshold; area is in device pixels. The 20 px floor is CSS px, so a high-DPR screen gives more device pixels but does not lower the CSS floor.</p>
+    <div id="dot-table"></div>
+  </section>
+
+  <section>
+    <h2>2. त्व conjunct</h2>
+    <p class="note">Measured in the full word <strong>सांत्वना</strong>, cropped to the <strong>त्व</strong> region. Two checks: (a) the enclosed counter must survive at the threshold; (b) the horizontal ink-density waist must be ≤ 50% of the lower adjacent peak. The counter is the stricter check on 1×. The isolated conjunct is only a unit check; the full word governs.</p>
+    <div id="conjunct-table"></div>
+    <h3>1× size sweep at 50% alpha</h3>
+    <p class="note">The first passing full-word त्व counter size on 1× establishes the practical 1× minimum. The 20 px floor remains the absolute floor; it is not the safe 1× size.</p>
+    <div id="sweep-table"></div>
+  </section>
+
+  <section>
+    <h2>3. Specimens</h2>
+    <p class="note">The same canvas at 1×, 1.5× and 2× device pixels. The CSS size is identical; only the device-pixel density changes. At 20 and 24 px on 1×, look for the त्व counter closing.</p>
+    <div class="specimens" id="specimens"></div>
+  </section>
+
+  <section>
+    <h2>4. Zoomed 1× proof</h2>
+    <p class="note">Full word at 20, 24, 28 and 32 px on a 1× display, cropped to the त्व region and enlarged with nearest-neighbor sampling. This is the pixel evidence behind the sweep: the counter closes at 20 and 24 px, and opens at 28 px.</p>
+    <div class="specimens" id="zoom-proof"></div>
+  </section>
+
+  <div class="rule">
+    <strong>Rule:</strong> below 20 px, use the Latin monogram or symbol, never the Devanagari wordmark. The absolute floor is 20 px on screen and 6 mm measured wordmark height in print. If the 1× solid threshold closes the त्व counter at 20 or 24 px, use 28 px on 1× or the Latin monogram. 20 px is approved only at DPR ≥ 1.5.
+  </div>
+
+  <footer>
+    Final-face re-run: Noto Sans Devanagari 600 (Google Fonts test build; the /brand route self-hosts the same family). Print floor is not proven by this screen test; approve a physical 6 mm measured wordmark height proof on final stock.
+  </footer>
+</main>
+
+<script>
+(() => {
+  const SIZES = [16, 20, 24, 28, 32];
+  const DPRS = [1, 1.5, 2];
+  const THRESHOLDS = [40, 128];
+  const WORD = 'सांत्वना';
+  const CSS_W = 620;
+  const CSS_H = 240;
+  const BASELINE = 170;
+
+  const $ = (sel) => document.querySelector(sel);
+
+  function render(text, size, dpr, font) {
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(CSS_W * dpr);
+    canvas.height = Math.round(CSS_H * dpr);
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    ctx.scale(dpr, dpr);
+    ctx.fillStyle = '#000';
+    ctx.textBaseline = 'alphabetic';
+    ctx.font = `600 ${size}px "${font}"`;
+    ctx.fillText(text, 40, BASELINE);
+    return { canvas, ctx, w: canvas.width, h: canvas.height };
+  }
+
+  function inkAt(data, w, x, y, threshold) {
+    return data[(y * w + x) * 4 + 3] >= threshold;
+  }
+
+  function bbox(data, w, h, threshold, x0 = 0, x1 = w - 1) {
+    let minX = w, maxX = -1, minY = h, maxY = -1;
+    for (let y = 0; y < h; y++) {
+      for (let x = x0; x <= x1; x++) {
+        if (!inkAt(data, w, x, y, threshold)) continue;
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      }
+    }
+    if (maxX < 0) return null;
+    return { minX, maxX, minY, maxY, width: maxX - minX + 1, height: maxY - minY + 1 };
+  }
+
+  function components(data, w, h, threshold) {
+    const seen = new Uint8Array(w * h);
+    const out = [];
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        const i = y * w + x;
+        if (seen[i] || !inkAt(data, w, x, y, threshold)) continue;
+        const stack = [[x, y]];
+        seen[i] = 1;
+        let area = 0, minX = x, maxX = x, minY = y, maxY = y;
+        while (stack.length) {
+          const [cx, cy] = stack.pop();
+          area++;
+          if (cx < minX) minX = cx;
+          if (cx > maxX) maxX = cx;
+          if (cy < minY) minY = cy;
+          if (cy > maxY) maxY = cy;
+          for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              const nx = cx + dx, ny = cy + dy;
+              if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue;
+              const ni = ny * w + nx;
+              if (!seen[ni] && inkAt(data, w, nx, ny, threshold)) {
+                seen[ni] = 1;
+                stack.push([nx, ny]);
+              }
+            }
+          }
+        }
+        out.push({ area, minX, maxX, minY, maxY, width: maxX - minX + 1, height: maxY - minY + 1 });
+      }
+    }
+    out.sort((a, b) => b.area - a.area);
+    return out;
+  }
+
+  function holes(data, w, h, threshold, x0 = 0, x1 = w - 1) {
+    const seen = new Uint8Array(w * h);
+    let count = 0;
+    for (let y = 0; y < h; y++) {
+      for (let x = x0; x <= x1; x++) {
+        const i = y * w + x;
+        if (seen[i] || inkAt(data, w, x, y, threshold)) continue;
+        const stack = [[x, y]];
+        seen[i] = 1;
+        let touchesEdge = false;
+        while (stack.length) {
+          const [cx, cy] = stack.pop();
+          if (cx === x0 || cx === x1 || cy === 0 || cy === h - 1) touchesEdge = true;
+          for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              const nx = cx + dx, ny = cy + dy;
+              if (nx < x0 || nx > x1 || ny < 0 || ny >= h) continue;
+              const ni = ny * w + nx;
+              if (!seen[ni] && !inkAt(data, w, nx, ny, threshold)) {
+                seen[ni] = 1;
+                stack.push([nx, ny]);
+              }
+            }
+          }
+        }
+        if (!touchesEdge) count++;
+      }
+    }
+    return count;
+  }
+
+  function waist(data, w, h, threshold, box) {
+    const y0 = Math.floor(box.minY + (box.maxY - box.minY) * 0.35);
+    const profile = [];
+    for (let x = box.minX; x <= box.maxX; x++) {
+      let n = 0;
+      for (let y = y0; y <= box.maxY; y++) {
+        if (inkAt(data, w, x, y, threshold)) n++;
+      }
+      profile.push(n);
+    }
+    let leftPeak = 0, rightPeak = 0, leftIdx = 0, rightIdx = profile.length - 1;
+    for (let i = 0; i < Math.floor(profile.length / 2); i++) {
+      if (profile[i] > leftPeak) { leftPeak = profile[i]; leftIdx = i; }
+    }
+    for (let i = Math.floor(profile.length / 2); i < profile.length; i++) {
+      if (profile[i] > rightPeak) { rightPeak = profile[i]; rightIdx = i; }
+    }
+    let valley = Infinity;
+    if (leftIdx < rightIdx) {
+      for (let i = leftIdx; i <= rightIdx; i++) {
+        if (profile[i] < valley) valley = profile[i];
+      }
+    }
+    const lowerPeak = Math.min(leftPeak, rightPeak);
+    return { valley, leftPeak, rightPeak, ratio: lowerPeak ? valley / lowerPeak : null };
+  }
+
+  function analyzeWord(size, dpr, threshold, font) {
+    const { canvas, ctx, w, h } = render(WORD, size, dpr, font);
+    const data = ctx.getImageData(0, 0, w, h).data;
+    const box = bbox(data, w, h, threshold);
+    const comps = components(data, w, h, threshold);
+    const main = comps[0] || null;
+    const candidates = comps.filter(c => c !== main && main && c.maxY < main.minY + 2 && c.minX >= main.minX - 2 && c.maxX <= main.maxX + 2);
+    candidates.sort((a, b) => a.minY - b.minY || b.area - a.area);
+    return { canvas, size, dpr, threshold, device: `${w}×${h}`, box, main, dot: candidates[0] || null, dotCount: candidates.length };
+  }
+
+  function analyzeConjunctInWord(size, dpr, threshold, font) {
+    const { canvas, ctx, w, h } = render(WORD, size, dpr, font);
+    const x0 = 40 + ctx.measureText('सां').width;
+    const x1 = 40 + ctx.measureText('सांत्व').width;
+    const X0 = Math.max(0, Math.round(x0 * dpr) - 1);
+    const X1 = Math.min(w - 1, Math.round(x1 * dpr) + 1);
+    const data = ctx.getImageData(0, 0, w, h).data;
+    const box = bbox(data, w, h, threshold, X0, X1);
+    if (!box) return { canvas, size, dpr, threshold, region: { X0, X1 }, empty: true };
+    const hcount = holes(data, w, h, threshold, X0, X1);
+    const wst = waist(data, w, h, threshold, box);
+    return {
+      canvas, size, dpr, threshold, region: { X0, X1 }, box,
+      holes: hcount, waist: wst,
+      pass: hcount >= 1 && wst.ratio !== null && wst.ratio <= 0.5
+    };
+  }
+
+  function formatDot(dot) {
+    if (!dot) return 'none';
+    return `${dot.width}×${dot.height} (${dot.area} px)`;
+  }
+
+  function renderDotTable(rows, conjunctRows) {
+    const conjunctMap = new Map();
+    for (const row of conjunctRows) {
+      if (row.threshold === 128) conjunctMap.set(`${row.size}-${row.dpr}`, row.pass);
+    }
+    const table = document.createElement('table');
+    table.innerHTML = `<thead><tr>
+      <th>CSS size</th><th>DPR</th><th>Canvas</th>
+      <th>Dot at 40/255</th><th>Dot at 128/255</th>
+      <th>Separate at 128?</th><th>Dot verdict</th><th>Overall screen verdict</th>
+    </tr></thead><tbody></tbody>`;
+    const tbody = table.querySelector('tbody');
+    for (const row of rows) {
+      const r40 = row.find(x => x.threshold === 40);
+      const r128 = row.find(x => x.threshold === 128);
+      const dot40 = r40.dot;
+      const dot128 = r128.dot;
+      const separate = !!(dot128 && r128.main && dot128.maxY < r128.main.minY);
+      const belowFloor = r128.size < 20;
+      const dotPass = dot128 && dot128.width >= 2 && dot128.height >= 2 && dot128.area >= 4;
+      let dotReading = 'pass';
+      let dotCls = 'pass';
+      if (belowFloor) { dotReading = 'below CSS floor'; dotCls = 'fail'; }
+      else if (!separate) { dotReading = 'dot merged'; dotCls = 'fail'; }
+      else if (!dotPass) { dotReading = 'dot too small'; dotCls = 'fail'; }
+      const conjunctPass = conjunctMap.get(`${r128.size}-${r128.dpr}`);
+      let overall = 'pass';
+      let overallCls = 'pass';
+      if (belowFloor) { overall = 'fail — below floor'; overallCls = 'fail'; }
+      else if (!dotPass || !separate) { overall = 'fail — dot'; overallCls = 'fail'; }
+      else if (conjunctPass === false) { overall = 'marginal — conjunct closes at 1×'; overallCls = 'warn'; }
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="num">${r128.size} px</td><td class="num">${r128.dpr}×</td><td class="num">${r128.device}</td>
+        <td class="num">${formatDot(dot40)}</td><td class="num">${formatDot(dot128)}</td>
+        <td class="num">${separate ? 'yes' : 'no'}</td><td class="${dotCls}">${dotReading}</td><td class="${overallCls}">${overall}</td>`;
+      tbody.appendChild(tr);
+    }
+    $('#dot-table').replaceChildren(table);
+  }
+
+  function renderConjunctTable(rows, target = '#conjunct-table') {
+    const table = document.createElement('table');
+    table.innerHTML = `<thead><tr>
+      <th>CSS size</th><th>DPR</th><th>Threshold</th>
+      <th>Counter</th><th>Waist ratio</th><th>Result</th>
+    </tr></thead><tbody></tbody>`;
+    const tbody = table.querySelector('tbody');
+    for (const row of rows) {
+      const tr = document.createElement('tr');
+      const ratio = row.waist && row.waist.ratio !== null ? row.waist.ratio.toFixed(2) : '—';
+      tr.innerHTML = `<td class="num">${row.size} px</td><td class="num">${row.dpr}×</td><td class="num">${row.threshold}/255</td>
+        <td class="num">${row.holes}</td><td class="num">${ratio}</td>
+        <td class="${row.pass ? 'pass' : 'fail'}">${row.pass ? 'pass' : 'fail'}</td>`;
+      tbody.appendChild(tr);
+    }
+    $(target).replaceChildren(table);
+  }
+
+  function renderSpecimens(font) {
+    const wrap = $('#specimens');
+    wrap.replaceChildren();
+    for (const size of [20, 24]) {
+      for (const dpr of [1, 1.5, 2]) {
+        const { canvas } = render(WORD, size, dpr, font);
+        canvas.style.width = `${CSS_W}px`;
+        canvas.style.height = `${CSS_H}px`;
+        const card = document.createElement('div');
+        card.className = 'specimen';
+        const label = document.createElement('div');
+        label.className = 'label';
+        label.textContent = `${size} px CSS · ${dpr}× DPR · ${canvas.width}×${canvas.height} device px`;
+        card.append(label, canvas);
+        wrap.appendChild(card);
+      }
+    }
+  }
+
+  function renderZoomProof(font) {
+    const wrap = $('#zoom-proof');
+    wrap.replaceChildren();
+    for (const size of [20, 24, 28, 32]) {
+      const row = analyzeConjunctInWord(size, 1, 128, font);
+      if (!row.box) continue;
+      const pad = 2;
+      const sx = Math.max(0, row.box.minX - pad);
+      const sy = Math.max(0, row.box.minY - pad);
+      const sw = Math.min(row.canvas.width - sx, row.box.width + pad * 2);
+      const sh = Math.min(row.canvas.height - sy, row.box.height + pad * 2);
+      const scale = 10;
+      const zoom = document.createElement('canvas');
+      zoom.width = sw * scale;
+      zoom.height = sh * scale;
+      const zctx = zoom.getContext('2d');
+      zctx.imageSmoothingEnabled = false;
+      zctx.drawImage(row.canvas, sx, sy, sw, sh, 0, 0, zoom.width, zoom.height);
+      zoom.style.width = `${zoom.width}px`;
+      zoom.style.height = `${zoom.height}px`;
+      zoom.style.imageRendering = 'pixelated';
+      const card = document.createElement('div');
+      card.className = 'specimen';
+      const label = document.createElement('div');
+      label.className = 'label';
+      const waistText = row.waist && row.waist.ratio !== null ? row.waist.ratio.toFixed(2) : '—';
+      label.textContent = `${size} px · 1× · ${row.holes} counter · ${scale}× zoom · waist ${waistText}`;
+      card.append(label, zoom);
+      wrap.appendChild(card);
+    }
+  }
+
+  async function run() {
+    const font = ($('#font').value || 'Noto Sans Devanagari').replace(/"/g, '');
+    $('#status').textContent = `Loading ${font}…`;
+    await document.fonts.load(`600 20px "${font}"`);
+    await document.fonts.ready;
+    $('#status').textContent = `Running ${font}…`;
+    const wordRows = [];
+    for (const size of SIZES) {
+      for (const dpr of DPRS) {
+        const row = [];
+        for (const threshold of THRESHOLDS) row.push(analyzeWord(size, dpr, threshold, font));
+        wordRows.push(row);
+      }
+    }
+    const conjunctRows = [];
+    for (const size of [20, 24]) {
+      for (const dpr of DPRS) {
+        for (const threshold of THRESHOLDS) conjunctRows.push(analyzeConjunctInWord(size, dpr, threshold, font));
+      }
+    }
+    const sweepRows = [];
+    for (const size of [20, 24, 28, 32]) sweepRows.push(analyzeConjunctInWord(size, 1, 128, font));
+    renderDotTable(wordRows, conjunctRows);
+    renderConjunctTable(conjunctRows, '#conjunct-table');
+    renderConjunctTable(sweepRows, '#sweep-table');
+    renderSpecimens(font);
+    renderZoomProof(font);
+    $('#status').textContent = `Done: ${font}. ${wordRows.length * 2} dot measurements, ${conjunctRows.length} conjunct measurements, ${sweepRows.length} 1× sweep measurements.`;
+  }
+
+  $('#run').addEventListener('click', run);
+  run();
+})();
+</script>
+</body>
+</html>

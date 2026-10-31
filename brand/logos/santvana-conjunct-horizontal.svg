@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Sāntvana bilingual lockup — conjunct न्त्व</title>
+  <desc id="desc">Horizontal lockup: tread mark, Latin wordmark Sāntvana, Devanagari wordmark सान्त्वना.</desc>
+  <g fill="#1F1D1A">
+    <rect x="260" y="100" width="112" height="112" rx="30" fill="none" stroke="#1F1D1A" stroke-width="3"/>
+    <path d="M286 132h60M286 156h60M286 180h60" fill="none" stroke="#1F1D1A" stroke-width="9" stroke-linecap="round"/>
+    <text x="420" y="170" font-family="'Segoe UI', 'Inter', Arial, sans-serif" font-size="92" font-weight="600" letter-spacing="-2">Sāntvana</text>
+    <text x="424" y="246" font-family="'Nirmala UI', 'Noto Sans Devanagari', sans-serif" font-size="54" font-weight="500">सान्त्वना</text>
+  </g>
+</svg>

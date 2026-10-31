@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sāntvana — type pairing test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light; --ink:#171614; --paper:#F5F1E8; --ground:#2B2722; --clay:#A8452B; --moss:#3E4A3A; --muted:#6B655B; --line:rgba(23,22,20,.16); }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:Inter, sans-serif; }
+  main { max-width: 1240px; margin:0 auto; padding: 56px 32px 96px; }
+  .eyebrow { font: 600 11px/1.2 Inter, sans-serif; letter-spacing:.16em; text-transform:uppercase; color:var(--clay); }
+  h1 { font: 500 clamp(40px, 7vw, 84px)/.98 Newsreader, serif; letter-spacing:-.04em; margin:18px 0 12px; max-width:900px; }
+  .lede { max-width:720px; font-size:17px; line-height:1.6; color:var(--muted); }
+  .notice { margin:28px 0 48px; padding:14px 18px; border:1px solid var(--line); border-left:4px solid var(--clay); font-size:13px; line-height:1.5; }
+  .grid { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:20px; }
+  .card { border:1px solid var(--line); background:#FBF8F1; padding:26px; }
+  .card.dark { background:var(--ground); color:var(--paper); border-color:rgba(245,241,232,.2); }
+  .card h2 { font: 600 12px/1.2 Inter, sans-serif; letter-spacing:.14em; text-transform:uppercase; margin:0 0 6px; }
+  .card .sub { font-size:12px; line-height:1.5; opacity:.7; margin:0 0 24px; }
+  .latin-display { font-size:52px; line-height:1; letter-spacing:-.035em; margin-bottom:14px; }
+  .archivo { font-family:Archivo, sans-serif; font-weight:600; }
+  .newsreader { font-family:Newsreader, serif; font-weight:500; }
+  .deva { font-size:42px; line-height:1.3; margin-bottom:6px; }
+  .sans-deva { font-family:'Noto Sans Devanagari', sans-serif; font-weight:600; }
+  .serif-deva { font-family:'Noto Serif Devanagari', serif; font-weight:600; }
+  .body-sample { font-size:14px; line-height:1.6; margin-top:18px; }
+  .body-sample strong { font-weight:600; }
+  .sizes { display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; margin-top:26px; padding-top:22px; border-top:1px solid currentColor; border-color:rgba(128,128,128,.22); }
+  .sizes span { display:inline-flex; flex-direction:column; gap:6px; }
+  .sizes b { font: 500 9px/1 Inter, sans-serif; letter-spacing:.08em; opacity:.55; }
+  .s16 { font-size:16px; } .s20 { font-size:20px; } .s24 { font-size:24px; } .s28 { font-size:28px; } .s32 { font-size:32px; } .s48 { font-size:48px; }
+  .row { display:flex; gap:30px; flex-wrap:wrap; align-items:baseline; margin-top:20px; }
+  .row > div { display:flex; flex-direction:column; gap:4px; }
+  .label { font: 500 10px/1.2 Inter, sans-serif; letter-spacing:.1em; text-transform:uppercase; opacity:.55; }
+  .verdict { margin-top:20px; font-size:13px; line-height:1.6; }
+  .verdict strong { color:var(--clay); }
+  .dark .verdict strong { color:#D98B6F; }
+  @media (max-width: 820px) { .grid { grid-template-columns:1fr; } main { padding:32px 20px 64px; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Phase 2 · type pairing test · concept</div>
+  <h1>Calm at reading size.<br>Grounded at logo size.</h1>
+  <p class="lede">A side-by-side test of the two open-licence Devanagari candidates against two Latin display directions. The Devanagari decision is made on the anusvara form <strong>सांत्वना</strong>, the <strong>त्व</strong> counter and the <strong>व / न</strong> distinction — not on the largest headline.</p>
+  <div class="notice"><strong>Concept only.</strong> No print, domain or ad spend until the attorney opinion in <code>../naming.md §6</code> is back. The final Devanagari face must be re-tested on the device-pixel harness before the 20 px floor is signed off.</div>
+
+  <div class="grid">
+    <section class="card">
+      <h2>A · Archivo + Inter + Noto Sans Devanagari</h2>
+      <p class="sub">Grotesk display, neutral UI, humanist Devanagari. The most likely pair for a footwear brand that has to read as engineered, not spa.</p>
+      <div class="latin-display archivo">Sāntvana</div>
+      <div class="deva sans-deva">सांत्वना</div>
+      <div class="body-sample"><strong>Fit first.</strong> Every last starts with the foot, not the trend board. Free size exchange twice. 30-day returns from delivery.</div>
+      <div class="sizes sans-deva">
+        <span><b>16</b><span class="s16">सांत्वना</span></span>
+        <span><b>20</b><span class="s20">सांत्वना</span></span>
+        <span><b>24</b><span class="s24">सांत्वना</span></span>
+        <span><b>28</b><span class="s28">सांत्वना</span></span>
+        <span><b>32</b><span class="s32">सांत्वना</span></span>
+        <span><b>48</b><span class="s48">सांत्वना</span></span>
+      </div>
+      <div class="row">
+        <div><span class="label">त्व counter</span><span class="s32 sans-deva">त्व</span></div>
+        <div><span class="label">व / न</span><span class="s32 sans-deva">व न</span></div>
+      </div>
+      <p class="verdict"><strong>Read:</strong> the सांत्वना dot stays separate from the शिरोरेखा at 20 px; the त्व counter remains open at 28 px. The व/न distinction is clear at 20 px. The Devanagari holds the same optical weight as Archivo 600 without looking like a fallback.</p>
+    </section>
+
+    <section class="card">
+      <h2>B · Archivo + Inter + Noto Serif Devanagari</h2>
+      <p class="sub">The serif Devanagari is warmer and more editorial, but the contrast and thin joins get fragile at text sizes.</p>
+      <div class="latin-display archivo">Sāntvana</div>
+      <div class="deva serif-deva">सांत्वना</div>
+      <div class="body-sample"><strong>Fit first.</strong> Every last starts with the foot, not the trend board. Free size exchange twice. 30-day returns from delivery.</div>
+      <div class="sizes serif-deva">
+        <span><b>16</b><span class="s16">सांत्वना</span></span>
+        <span><b>20</b><span class="s20">सांत्वना</span></span>
+        <span><b>24</b><span class="s24">सांत्वना</span></span>
+        <span><b>28</b><span class="s28">सांत्वना</span></span>
+        <span><b>32</b><span class="s32">सांत्वना</span></span>
+        <span><b>48</b><span class="s48">सांत्वना</span></span>
+      </div>
+      <div class="row">
+        <div><span class="label">त्व counter</span><span class="s32 serif-deva">त्व</span></div>
+        <div><span class="label">व / न</span><span class="s32 serif-deva">व न</span></div>
+      </div>
+      <p class="verdict"><strong>Read:</strong> the dot is elegant at display sizes, but the त्व counter narrows earlier and the व/न shapes are less immediate at 20 px. Serif is a possible display-only voice, not the text face.</p>
+    </section>
+
+    <section class="card dark">
+      <h2>C · Newsreader + Inter + Noto Sans Devanagari</h2>
+      <p class="sub">Editorial serif display with a clean Devanagari. Distinctive, but the serif Latin and sans Devanagari fight for the same lockup.</p>
+      <div class="latin-display newsreader">Sāntvana</div>
+      <div class="deva sans-deva">सांत्वना</div>
+      <div class="body-sample"><strong>Fit first.</strong> Every last starts with the foot, not the trend board. Free size exchange twice. 30-day returns from delivery.</div>
+      <div class="sizes sans-deva">
+        <span><b>20</b><span class="s20">सांत्वना</span></span>
+        <span><b>28</b><span class="s28">सांत्वना</span></span>
+        <span><b>32</b><span class="s32">सांत्वना</span></span>
+      </div>
+      <p class="verdict"><strong>Read:</strong> strong for campaign headlines, weak as the primary lockup because the two scripts do not share a stroke logic.</p>
+    </section>
+
+    <section class="card dark">
+      <h2>D · Newsreader + Inter + Noto Serif Devanagari</h2>
+      <p class="sub">The most editorial pairing. Beautiful at 48 px, too delicate for a shoe box that has to survive a warehouse.</p>
+      <div class="latin-display newsreader">Sāntvana</div>
+      <div class="deva serif-deva">सांत्वना</div>
+      <div class="body-sample"><strong>Fit first.</strong> Every last starts with the foot, not the trend board. Free size exchange twice. 30-day returns from delivery.</div>
+      <div class="sizes serif-deva">
+        <span><b>20</b><span class="s20">सांत्वना</span></span>
+        <span><b>28</b><span class="s28">सांत्वना</span></span>
+        <span><b>32</b><span class="s32">सांत्वना</span></span>
+      </div>
+      <p class="verdict"><strong>Read:</strong> the most distinctive display voice, but the Devanagari joins are too fine for the small-size floor and the packaging system.</p>
+    </section>
+  </div>
+
+  <div class="notice" style="margin-top:32px; border-left-color:var(--moss)"><strong>Recommendation for founder review:</strong> A — Archivo 600 / Inter 400–600 / Noto Sans Devanagari 400–700. It is the only pair that keeps the personality (calm, grounded, quietly bold, dependable) without borrowing wellness cues, and it is the strongest at the 20 px floor. The final call is not made until the self-hosted face is re-run through <code>../logos/legibility-harness.html</code>.</div>
+</main>
+</body>
+</html>

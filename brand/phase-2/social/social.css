@@ -1,0 +1,264 @@
+@font-face {
+  font-family: "Archivo";
+  src: url("/fonts/Archivo-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans Devanagari";
+  src: url("/fonts/NotoSansDevanagari-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ink: #171614;
+  --paper: #f5f1e8;
+  --ground: #2b2722;
+  --bone: #eae3d6;
+  --sand: #d9cbb4;
+  --stone: #8c8578;
+  --muted: #6b655b;
+  --clay: #a8452b;
+  --clay-light: #d98b6f;
+  --moss: #3e4a3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--sand);
+  color: var(--ink);
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+.social-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.social-page > div {
+  width: min(1080px, 100%);
+}
+
+.board-wrap {
+  width: 100%;
+}
+
+.board {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--ratio, 1);
+  overflow: hidden;
+  container-type: inline-size;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.board--dark {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.board--ground {
+  background: var(--ground);
+  color: var(--paper);
+}
+
+.board-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--pad-y) var(--pad-x);
+}
+
+.board--square {
+  --ratio: 1;
+  --pad-x: 6.667cqw;
+  --pad-y: 6.667cqw;
+  --headline: 8.889cqw;
+  --body: 3.333cqw;
+  --micro: 1.111cqw;
+  --logo-w: 27.778cqw;
+}
+
+.board--portrait {
+  --ratio: 4 / 5;
+  --pad-x: 6.667cqw;
+  --pad-y: 6.667cqw;
+  --headline: 10.37cqw;
+  --body: 3.704cqw;
+  --micro: 1.111cqw;
+  --logo-w: 31.481cqw;
+}
+
+.board--story {
+  --ratio: 9 / 16;
+  --pad-x: 6.667cqw;
+  --pad-y: 8.889cqw;
+  --headline: 11.85cqw;
+  --body: 4.074cqw;
+  --micro: 1.111cqw;
+  --logo-w: 27.778cqw;
+}
+
+.board--story .board-inner {
+  padding-bottom: 20.37cqw;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 1.2cqw;
+  font-size: var(--micro);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.kicker::before {
+  content: "";
+  width: 0.74cqw;
+  height: 0.74cqw;
+  background: var(--clay);
+  display: inline-block;
+}
+
+.board--dark .kicker,
+.board--ground .kicker {
+  color: var(--clay-light);
+}
+
+.board--dark .kicker::before,
+.board--ground .kicker::before {
+  background: var(--clay-light);
+}
+
+.headline {
+  font-family: "Archivo", "Segoe UI", sans-serif;
+  font-size: var(--headline);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+  margin: auto 0 0;
+  max-width: 10ch;
+  text-wrap: balance;
+}
+
+.headline--wide {
+  max-width: 13ch;
+}
+
+.body {
+  font-size: var(--body);
+  line-height: 1.5;
+  margin: 3.2cqw 0 0;
+  max-width: 32ch;
+}
+
+.deva {
+  font-family: "Noto Sans Devanagari", "Nirmala UI", sans-serif;
+  font-size: var(--body);
+  line-height: 1.7;
+  margin: 2.2cqw 0 0;
+}
+
+.rule {
+  width: 40cqw;
+  height: 0.37cqw;
+  background: var(--clay);
+  margin: 3.2cqw 0 0;
+  flex: none;
+}
+
+.board--dark .rule,
+.board--ground .rule {
+  background: var(--clay-light);
+}
+
+.tread {
+  position: absolute;
+  inset: auto 0 0;
+  height: 34cqw;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='%23171614' fill-opacity='0.08'%3E%3Crect x='15' y='18' width='34' height='7' rx='3.5'/%3E%3Crect x='17' y='29' width='34' height='7' rx='3.5'/%3E%3Crect x='15' y='40' width='34' height='7' rx='3.5'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 5.926cqw 5.926cqw;
+  pointer-events: none;
+}
+
+.board--dark .tread,
+.board--ground .tread {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='%23F5F1E8' fill-opacity='0.09'%3E%3Crect x='15' y='18' width='34' height='7' rx='3.5'/%3E%3Crect x='17' y='29' width='34' height='7' rx='3.5'/%3E%3Crect x='15' y='40' width='34' height='7' rx='3.5'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3cqw;
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.logo {
+  width: var(--logo-w);
+  height: auto;
+  display: block;
+}
+
+.footer-note {
+  font-size: var(--micro);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  text-align: right;
+  max-width: 22ch;
+  opacity: 0.72;
+}
+
+.caption {
+  width: min(1080px, 100%);
+  margin: 16px auto 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.caption strong {
+  font-weight: 600;
+}
+
+.caption span {
+  color: #5f5a50;
+}
+
+@media (max-width: 640px) {
+  .social-page {
+    padding: 12px;
+  }
+
+  .caption {
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,325 @@
+@import "tailwindcss";
+
+/* Sāntvana concept tokens — mirrors brand/phase-2/tokens.css.
+   Status: concept. No print, domain or ad spend until the attorney opinion. */
+
+:root {
+  --ink: #171614;
+  --paper: #f5f1e8;
+  --ground: #2b2722;
+  --bone: #eae3d6;
+  --sand: #d9cbb4;
+  --stone: #8c8578;
+  --muted: #6b655b;
+  --clay: #a8452b;
+  --clay-hover: #8f3a24;
+  --clay-pressed: #7a301d;
+  --clay-light: #d98b6f;
+  --moss: #3e4a3a;
+  --moss-hover: #323c2f;
+  --moss-light: #a8b5a0;
+  --slate: #35424c;
+  --ochre: #946200;
+  --red: #a62b22;
+  --green: #2f6b4f;
+  --blue: #2e5e7e;
+  --white: #ffffff;
+
+  --tracking-display: -0.035em;
+  --tracking-body: 0;
+  --tracking-micro: 0.14em;
+  --deva-optical-factor-display: 0.64;
+  --deva-optical-factor-body: 1.05;
+
+  --layout-max: 80rem;
+  --gutter-mobile: 1.25rem;
+  --gutter-desktop: 2.5rem;
+  --section-space-mobile: 4rem;
+  --section-space-desktop: 7rem;
+
+  --logo-devanagari-floor: 20px;
+  --logo-devanagari-practical-1x: 28px;
+  --logo-devanagari-print-floor: 6mm;
+  --logo-clear-space: 24px;
+  --logo-symbol-clear-space: 0.5em;
+
+  --duration-fast: 120ms;
+  --duration-base: 220ms;
+  --ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-ground: var(--ground);
+  --color-bone: var(--bone);
+  --color-sand: var(--sand);
+  --color-stone: var(--stone);
+  --color-muted: var(--muted);
+  --color-clay: var(--clay);
+  --color-clay-hover: var(--clay-hover);
+  --color-clay-pressed: var(--clay-pressed);
+  --color-clay-light: var(--clay-light);
+  --color-moss: var(--moss);
+  --color-moss-hover: var(--moss-hover);
+  --color-moss-light: var(--moss-light);
+  --color-slate: var(--slate);
+  --color-ochre: var(--ochre);
+  --color-red: var(--red);
+  --color-green: var(--green);
+  --color-blue: var(--blue);
+  --color-white: var(--white);
+
+  --font-display: var(--font-archivo);
+  --font-body: var(--font-inter);
+  --font-deva: var(--font-noto-deva);
+  --font-deva-test: var(--font-noto-serif-deva);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-symbol: 1rem;
+  --radius-pill: 999px;
+
+  --text-micro: 0.75rem;
+  --text-small: 0.875rem;
+  --text-body: 1rem;
+  --text-body-large: 1.125rem;
+  --text-heading-small: 1.5rem;
+  --text-heading: 2rem;
+  --text-display-small: clamp(2.5rem, 5vw, 3.5rem);
+  --text-display: clamp(3.5rem, 7vw, 5.5rem);
+  --text-display-large: clamp(4.5rem, 10vw, 8rem);
+
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+  --spacing-32: 8rem;
+}
+
+@layer base {
+  * {
+    border-color: color-mix(in srgb, var(--stone) 45%, transparent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-inter), "Inter", "Segoe UI", sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: var(--font-archivo), "Archivo", "Segoe UI", sans-serif;
+    font-weight: 600;
+    letter-spacing: var(--tracking-display);
+    line-height: 1.05;
+  }
+
+  .font-deva {
+    font-family: var(--font-noto-deva), "Noto Sans Devanagari", "Nirmala UI", sans-serif;
+    letter-spacing: 0;
+    line-height: 1.65;
+  }
+
+  .font-deva-test {
+    font-family: var(--font-noto-serif-deva), "Noto Serif Devanagari", "Nirmala UI", serif;
+    letter-spacing: 0;
+    line-height: 1.65;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  ::selection {
+    background: var(--clay);
+    color: var(--paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--clay);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-brand {
+    width: 100%;
+    max-width: var(--layout-max);
+    margin-inline: auto;
+    padding-inline: var(--gutter-mobile);
+  }
+
+  @media (min-width: 768px) {
+    .container-brand {
+      padding-inline: var(--gutter-desktop);
+    }
+  }
+
+  .section-space {
+    padding-block: var(--section-space-mobile);
+  }
+
+  @media (min-width: 768px) {
+    .section-space {
+      padding-block: var(--section-space-desktop);
+    }
+  }
+
+  .eyebrow {
+    font-family: var(--font-inter), "Inter", sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-micro);
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .rule-long {
+    height: 4px;
+    background: currentColor;
+  }
+
+  .rule-hair {
+    height: 1px;
+    background: color-mix(in srgb, var(--stone) 70%, transparent);
+  }
+
+  .tread-field {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='%23171614' fill-opacity='0.08'%3E%3Crect x='15' y='18' width='34' height='7' rx='3.5'/%3E%3Crect x='17' y='29' width='34' height='7' rx='3.5'/%3E%3Crect x='15' y='40' width='34' height='7' rx='3.5'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 64px 64px;
+  }
+
+  .tread-field-dark {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='%23F5F1E8' fill-opacity='0.09'%3E%3Crect x='15' y='18' width='34' height='7' rx='3.5'/%3E%3Crect x='17' y='29' width='34' height='7' rx='3.5'/%3E%3Crect x='15' y='40' width='34' height='7' rx='3.5'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 64px 64px;
+  }
+
+  .concept-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid color-mix(in srgb, var(--stone) 60%, transparent);
+    padding: 0.35rem 0.65rem;
+    font-family: var(--font-inter), "Inter", sans-serif;
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .concept-badge::before {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    background: var(--clay);
+    display: inline-block;
+  }
+
+  .link-underline {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  }
+
+  .link-underline:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .display-xl {
+    font-family: var(--font-archivo), "Archivo", sans-serif;
+    font-size: var(--text-display-large);
+    font-weight: 600;
+    letter-spacing: var(--tracking-display);
+    line-height: 0.92;
+  }
+
+  .display-lg {
+    font-family: var(--font-archivo), "Archivo", sans-serif;
+    font-size: var(--text-display);
+    font-weight: 600;
+    letter-spacing: var(--tracking-display);
+    line-height: 0.98;
+  }
+
+  .display-md {
+    font-family: var(--font-archivo), "Archivo", sans-serif;
+    font-size: var(--text-display-small);
+    font-weight: 600;
+    letter-spacing: var(--tracking-display);
+    line-height: 1.02;
+  }
+
+  .mono-token {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .paper-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--stone) 22%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--stone) 22%, transparent) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+}
+
+@media print {
+  body::before {
+    content: "CONCEPT — NOT FOR PRINT — AWAITING ATTORNEY OPINION";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    color: rgba(23, 22, 20, 0.18);
+    font-family: var(--font-archivo), "Archivo", sans-serif;
+    font-size: 8vw;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    text-align: center;
+    pointer-events: none;
+    transform: rotate(-24deg);
+  }
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-labelledby="title desc">
+  <title id="title">Sāntvana ground mark</title>
+  <desc id="desc">A rounded square containing three staggered tread bars. Concept mark; not for print.</desc>
+  <g fill="#171614">
+    <rect x="2" y="2" width="60" height="60" rx="16"/>
+    <g fill="#F5F1E8">
+      <rect x="15" y="18" width="34" height="7" rx="3.5"/>
+      <rect x="17" y="29" width="34" height="7" rx="3.5"/>
+      <rect x="15" y="40" width="34" height="7" rx="3.5"/>
+    </g>
+  </g>
+</svg>

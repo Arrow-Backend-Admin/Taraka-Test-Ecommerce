@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sāntvana — bilingual lockup concepts</title>
+  <style>
+    :root {
+      --ink: #1F1D1A;
+      --paper: #F7F2E8;
+      --card: #FFFDF8;
+      --muted: #6B645A;
+      --line: #D8CEBE;
+      --accent: #A44A2A;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Segoe UI", Inter, Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main { max-width: 1180px; margin: 0 auto; padding: 56px 28px 80px; }
+    .kicker {
+      font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 700; margin: 0 0 10px;
+    }
+    h1 { font-size: clamp(30px, 4vw, 46px); line-height: 1.08; margin: 0 0 14px; letter-spacing: -.02em; }
+    .lede { max-width: 760px; font-size: 18px; color: var(--muted); margin: 0 0 18px; }
+    .selected { display: inline-block; margin: 0 0 36px; padding: 8px 14px; border-radius: 999px; background: #E8F0E8; color: #244A36; font-size: 14px; font-weight: 700; }
+    .badge { display: inline-block; margin-left: 8px; padding: 3px 8px; border-radius: 999px; background: #E8F0E8; color: #244A36; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; vertical-align: middle; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+      padding: 22px 22px 24px; box-shadow: 0 1px 0 rgba(31,29,26,.04);
+    }
+    .card h2 { font-size: 20px; margin: 0 0 2px; letter-spacing: -.01em; }
+    .card .tag { font-size: 13px; color: var(--accent); font-weight: 700; margin: 0 0 18px; }
+    .lockup { background: #fff; border: 1px solid #EEE7DA; border-radius: 12px; padding: 10px 8px; }
+    .lockup img { display: block; width: 100%; height: auto; }
+    .note { font-size: 14px; color: var(--muted); margin: 16px 0 0; }
+    .note strong { color: var(--ink); }
+    .stacked { margin-top: 28px; }
+    .stacked .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stacked .lockup { display: flex; justify-content: center; padding: 16px; }
+    .stacked img { width: 190px; }
+    .test { margin-top: 44px; }
+    .test h2 { font-size: 26px; margin: 0 0 8px; letter-spacing: -.01em; }
+    .test p { color: var(--muted); max-width: 780px; }
+    table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 18px; }
+    th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+    th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: #F2EBDD; }
+    tr:last-child td { border-bottom: 0; }
+    .dev { font-family: "Nirmala UI", "Noto Sans Devanagari", sans-serif; font-weight: 500; white-space: nowrap; }
+    .s16 { font-size: 16px; } .s20 { font-size: 20px; } .s24 { font-size: 24px; } .s28 { font-size: 28px; } .s32 { font-size: 32px; }
+    .callout {
+      margin-top: 28px; padding: 18px 20px; border-left: 4px solid var(--accent);
+      background: #FBF4EA; border-radius: 0 12px 12px 0; font-size: 15px;
+    }
+    .callout strong { color: var(--ink); }
+    footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    @media (max-width: 820px) {
+      .grid, .stacked .grid { grid-template-columns: 1fr; }
+      main { padding: 36px 18px 60px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <p class="kicker">Phase 2 · step 1 · decision record · 30 October 2026</p>
+  <div class="callout" style="margin:0 0 28px"><strong>Decision record, not production artwork.</strong> The final Phase 2 concept suite is in <code>../phase-2/logos/</code>, outlined from Archivo 600 and Noto Sans Devanagari 600. The final-face re-run is in <code>legibility-test-anusvara.md</code> §5; it passes at 20 px on 1×, while the conservative 28 px 1× rule remains parked for founder decision.</div>
+  <h1>One wordmark, two Devanagari spellings.</h1>
+  <p class="lede">The Latin wordmark and the tread mark are identical in both concepts. Only the Devanagari changes: <strong>सान्त्वना</strong> keeps the conjunct <strong>न्त्व</strong>; <strong>सांत्वना</strong> uses the anusvara dot. Pick the one that still reads at 20 px, not the one that looks best at 120 px.</p>
+  <p class="selected">Selected: B — सांत्वना (anusvara), 30 October 2026</p>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Concept A — Conjunct</h2>
+      <p class="tag">सान्त्वना · न्त्व joined</p>
+      <div class="lockup">
+        <img src="santvana-conjunct-horizontal.svg" alt="Sāntvana lockup with the Devanagari spelling सान्त्वना">
+      </div>
+      <p class="note"><strong>What it is:</strong> the n and t are joined in the conjunct न्त्व, with the v following. This is the more literal Sanskrit form and the one in the name you supplied. <strong>Risk:</strong> the conjunct is the first shape to collapse when the mark shrinks.</p>
+    </section>
+
+    <section class="card">
+      <h2>Concept B — Anusvara <span class="badge">Selected</span></h2>
+      <p class="tag">सांत्वना · nasal dot</p>
+      <div class="lockup">
+        <img src="santvana-anusvara-horizontal.svg" alt="Sāntvana lockup with the Devanagari spelling सांत्वना">
+      </div>
+      <p class="note"><strong>What it is:</strong> the nasal is written as the anusvara dot above the line, and the त and व stay separate. Dictionaries use both spellings. <strong>Trade-off:</strong> simpler at small sizes, but the dot can read as a decoration if the type is too light.</p>
+    </section>
+  </div>
+
+  <section class="stacked">
+    <div class="grid">
+      <section class="card">
+        <h2>Stacked — A</h2>
+        <p class="tag">सान्त्वना</p>
+        <div class="lockup"><img src="santvana-conjunct-stacked.svg" alt="Stacked Sāntvana lockup with सान्त्वना"></div>
+      </section>
+      <section class="card">
+        <h2>Stacked — B</h2>
+        <p class="tag">सांत्वना</p>
+        <div class="lockup"><img src="santvana-anusvara-stacked.svg" alt="Stacked Sāntvana lockup with सांत्वना"></div>
+      </section>
+    </div>
+  </section>
+
+  <section class="test">
+    <h2>Legibility test</h2>
+    <p>The chosen form (B) was tested at 16, 20, 24, 28 and 32 px, at 1×, 1.5× and 2× device-pixel ratios, against 40/255 and 128/255 alpha. At 16 px on 1× the solid dot is only 1 × 2 px, so 16 px is below the floor. At 20 and 24 px the dot passes, but the <strong>full-word त्व counter closes at 1×/50% alpha</strong>; both pass at DPR ≥ 1.5. On 1×, use 28 px. Full method and measurements: <strong>legibility-test-anusvara.md</strong>.</p>
+    <table>
+      <thead>
+        <tr><th>Spelling</th><th>16 px</th><th>20 px</th><th>24 px</th><th>28 px</th><th>32 px</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A · conjunct</strong></td>
+          <td><span class="dev s16">सान्त्वना</span></td>
+          <td><span class="dev s20">सान्त्वना</span></td>
+          <td><span class="dev s24">सान्त्वना</span></td>
+          <td><span class="dev s28">सान्त्वना</span></td>
+          <td><span class="dev s32">सान्त्वना</span></td>
+        </tr>
+        <tr>
+          <td><strong>B · anusvara</strong> <span class="badge">Selected</span></td>
+          <td><span class="dev s16">सांत्वना</span></td>
+          <td><span class="dev s20">सांत्वना</span></td>
+          <td><span class="dev s24">सांत्वना</span></td>
+          <td><span class="dev s28">सांत्वना</span></td>
+          <td><span class="dev s32">सांत्वना</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <strong>Result:</strong> 28 px is the first tested 1× size where the full-word त्व counter passes. 20 and 24 px pass at DPR ≥ 1.5, but on 1×/50% alpha the full-word त्व counter closes. 20 px is the absolute floor, not the safe 1× size. Below 20 px, use the Latin monogram or symbol, never the Devanagari wordmark. The 6 mm measured wordmark height print proof is still pending. The final Devanagari face will be a self-hosted Google font (Noto Sans or Noto Serif Devanagari), not Nirmala UI; re-run the test after the typeface is chosen.
+    </div>
+  </section>
+
+  <footer>
+    Decision: <strong>B — सांत्वना (anusvara)</strong>. Below 20 px, use the Latin monogram or symbol, never the Devanagari wordmark. Concept work only. No print, domain or ad spend until the attorney opinion is back. The Latin display form is fixed as <strong>Sāntvana</strong>; the final long ā is not marked in Latin. Harness: <strong>legibility-harness.html</strong>.
+  </footer>
+</main>
+</body>
+</html>

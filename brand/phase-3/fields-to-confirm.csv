@@ -1,0 +1,1086 @@
+scope,product_id,field,current_value,owner,blocking,notes
+catalogue,,gst_rule.discount_flip,[TO CONFIRM: CA],CA,tax / pricing,"Confirm the GST rate when a discount moves the invoice across ₹2,500."
+catalogue,,gst_rule.headings,[TO CONFIRM: CA],CA,tax / pricing,Confirm the HSN heading for each product after materials are known.
+catalogue,,gst_rule.threshold_basis,[TO CONFIRM: CA],CA,tax / pricing,"Confirm whether the ₹2,500 threshold is measured before or after tax."
+catalogue,,target_landed_cost_inr,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,All 30 target landed costs are planning assumptions; get supplier quotes.
+cost_model,,resale_recovery,[TO CONFIRM: ops],ops,cost model,No resale recovery is assumed for returned pairs.
+cost_model,,reverse_logistics_per_exchange,[TO CONFIRM: 3PL],3PL,cost model,₹300 per exchange is a planning assumption; get a 3PL quote.
+image_convention,,image_convention.credit,[TO CONFIRM: photography],photography,assets,Photographer credit is not set.
+image_convention,,image_convention.release,[TO CONFIRM: legal],legal,policy / label,Model and location releases are not recorded.
+legal,,name_clearance,[TO CONFIRM: attorney],attorney,name clearance,"Sāntvana is not cleared; no print, domain or ad spend."
+merchandising,,founder_story_facts,[TO CONFIRM: founder],founder,launch / policy,Founder-supplied story facts are still required before public use.
+merchandising,,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+merchandising,,size_curve,[TO CONFIRM: founder],founder,launch / policy,Do not set a size curve before fit-trial or pre-order data.
+policy,,exchange_limit_basis,[TO CONFIRM: founder],founder,launch / policy,Confirm whether 'twice' is per order or per customer.
+policy,,exchange_window,[TO CONFIRM: founder],founder,launch / policy,"The 30-day window is confirmed for returns, not exchanges."
+policy,,fair_use_conditions,[TO CONFIRM: legal],legal,policy / label,Conditions for worn or damaged pairs need legal review.
+policy,,post_30_day_defects,[TO CONFIRM: legal],legal,policy / label,No warranty in v1; confirm the post-30-day defect route.
+policy,,return_shipping,[TO CONFIRM: founder],founder,launch / policy,The founder has not said who pays return shipping.
+product,BT-FLD-SND,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,BT-FLD-SND,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,BT-FLD-SND,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,BT-FLD-SND,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,BT-FLD-SND,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,BT-FLD-SND,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,BT-FLD-SND,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,BT-FLD-SND,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,BT-FLD-SND,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,BT-FLD-SND,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-FLD-SND,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,BT-FLD-SND,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,BT-FLD-SND,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,BT-FLD-SND,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-FLD-SND,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,BT-FLD-SND,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,BT-FLD-SND,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-FLD-SND,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-FLD-SND,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,BT-FLD-SND,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,BT-FLD-SND,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,BT-FLD-SND,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,BT-FLD-SND,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,BT-FLD-SND,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,BT-FRG-INK,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,BT-FRG-INK,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,BT-FRG-INK,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,BT-FRG-INK,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,BT-FRG-INK,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,BT-FRG-INK,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,BT-FRG-INK,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,BT-FRG-INK,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,BT-FRG-INK,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,BT-FRG-INK,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-FRG-INK,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,BT-FRG-INK,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,BT-FRG-INK,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,BT-FRG-INK,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-FRG-INK,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,BT-FRG-INK,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,BT-FRG-INK,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-FRG-INK,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-FRG-INK,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,BT-FRG-INK,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,BT-FRG-INK,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,BT-FRG-INK,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,BT-FRG-INK,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,BT-FRG-INK,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,BT-HLT-CLY,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,BT-HLT-CLY,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,BT-HLT-CLY,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,BT-HLT-CLY,discount_flip_note,"A discount of about 49.99% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,BT-HLT-CLY,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,BT-HLT-CLY,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,BT-HLT-CLY,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,BT-HLT-CLY,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,BT-HLT-CLY,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,BT-HLT-CLY,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,BT-HLT-CLY,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-HLT-CLY,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,BT-HLT-CLY,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,BT-HLT-CLY,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,BT-HLT-CLY,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-HLT-CLY,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,BT-HLT-CLY,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,BT-HLT-CLY,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-HLT-CLY,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-HLT-CLY,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,BT-HLT-CLY,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,BT-HLT-CLY,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,BT-HLT-CLY,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,BT-HLT-CLY,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,BT-HLT-CLY,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,BT-QRY-SLT,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,BT-QRY-SLT,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,BT-QRY-SLT,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,BT-QRY-SLT,discount_flip_note,"A discount of about 37.48% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,BT-QRY-SLT,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,BT-QRY-SLT,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,BT-QRY-SLT,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,BT-QRY-SLT,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,BT-QRY-SLT,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,BT-QRY-SLT,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,BT-QRY-SLT,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-QRY-SLT,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,BT-QRY-SLT,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,BT-QRY-SLT,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,BT-QRY-SLT,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-QRY-SLT,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,BT-QRY-SLT,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,BT-QRY-SLT,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-QRY-SLT,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-QRY-SLT,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,BT-QRY-SLT,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,BT-QRY-SLT,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,BT-QRY-SLT,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,BT-QRY-SLT,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,BT-QRY-SLT,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,BT-RDG-MOS,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,BT-RDG-MOS,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,BT-RDG-MOS,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,BT-RDG-MOS,discount_flip_note,"A discount of about 28.55% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,BT-RDG-MOS,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,BT-RDG-MOS,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,BT-RDG-MOS,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,BT-RDG-MOS,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,BT-RDG-MOS,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,BT-RDG-MOS,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,BT-RDG-MOS,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-RDG-MOS,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,BT-RDG-MOS,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,BT-RDG-MOS,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,BT-RDG-MOS,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-RDG-MOS,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,BT-RDG-MOS,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,BT-RDG-MOS,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-RDG-MOS,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-RDG-MOS,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,BT-RDG-MOS,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,BT-RDG-MOS,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,BT-RDG-MOS,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,BT-RDG-MOS,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,BT-RDG-MOS,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,BT-SITE-GRD,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,BT-SITE-GRD,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,BT-SITE-GRD,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,BT-SITE-GRD,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,BT-SITE-GRD,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,BT-SITE-GRD,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,BT-SITE-GRD,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,BT-SITE-GRD,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,BT-SITE-GRD,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,BT-SITE-GRD,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-SITE-GRD,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,BT-SITE-GRD,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,BT-SITE-GRD,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,BT-SITE-GRD,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-SITE-GRD,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,BT-SITE-GRD,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,BT-SITE-GRD,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-SITE-GRD,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,BT-SITE-GRD,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,BT-SITE-GRD,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,BT-SITE-GRD,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,BT-SITE-GRD,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,BT-SITE-GRD,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,BT-SITE-GRD,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,EV-COM-INK,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,EV-COM-INK,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,EV-COM-INK,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,EV-COM-INK,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,EV-COM-INK,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,EV-COM-INK,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,EV-COM-INK,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,EV-COM-INK,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,EV-COM-INK,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,EV-COM-INK,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-COM-INK,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,EV-COM-INK,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,EV-COM-INK,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,EV-COM-INK,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-COM-INK,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,EV-COM-INK,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,EV-COM-INK,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-COM-INK,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-COM-INK,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,EV-COM-INK,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,EV-COM-INK,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,EV-COM-INK,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,EV-COM-INK,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,EV-COM-INK,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,EV-DLY-CHK,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,EV-DLY-CHK,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,EV-DLY-CHK,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,EV-DLY-CHK,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,EV-DLY-CHK,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,EV-DLY-CHK,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,EV-DLY-CHK,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,EV-DLY-CHK,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,EV-DLY-CHK,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,EV-DLY-CHK,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-DLY-CHK,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,EV-DLY-CHK,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,EV-DLY-CHK,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,EV-DLY-CHK,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-DLY-CHK,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,EV-DLY-CHK,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,EV-DLY-CHK,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-DLY-CHK,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-DLY-CHK,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,EV-DLY-CHK,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,EV-DLY-CHK,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,EV-DLY-CHK,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,EV-DLY-CHK,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,EV-DLY-CHK,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,EV-ERR-SND,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,EV-ERR-SND,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,EV-ERR-SND,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,EV-ERR-SND,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,EV-ERR-SND,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,EV-ERR-SND,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,EV-ERR-SND,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,EV-ERR-SND,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,EV-ERR-SND,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,EV-ERR-SND,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-ERR-SND,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,EV-ERR-SND,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,EV-ERR-SND,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,EV-ERR-SND,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-ERR-SND,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,EV-ERR-SND,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,EV-ERR-SND,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-ERR-SND,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-ERR-SND,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,EV-ERR-SND,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,EV-ERR-SND,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,EV-ERR-SND,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,EV-ERR-SND,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,EV-ERR-SND,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,EV-MKT-BON,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,EV-MKT-BON,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,EV-MKT-BON,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,EV-MKT-BON,discount_flip_note,"A discount of about 28.55% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,EV-MKT-BON,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,EV-MKT-BON,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,EV-MKT-BON,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,EV-MKT-BON,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,EV-MKT-BON,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,EV-MKT-BON,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,EV-MKT-BON,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-MKT-BON,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,EV-MKT-BON,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,EV-MKT-BON,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,EV-MKT-BON,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-MKT-BON,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,EV-MKT-BON,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,EV-MKT-BON,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-MKT-BON,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-MKT-BON,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,EV-MKT-BON,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,EV-MKT-BON,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,EV-MKT-BON,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,EV-MKT-BON,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,EV-MKT-BON,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,EV-NBR-MOS,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,EV-NBR-MOS,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,EV-NBR-MOS,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,EV-NBR-MOS,discount_flip_note,"A discount of about 49.99% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,EV-NBR-MOS,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,EV-NBR-MOS,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,EV-NBR-MOS,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,EV-NBR-MOS,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,EV-NBR-MOS,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,EV-NBR-MOS,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,EV-NBR-MOS,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-NBR-MOS,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,EV-NBR-MOS,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,EV-NBR-MOS,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,EV-NBR-MOS,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-NBR-MOS,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,EV-NBR-MOS,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,EV-NBR-MOS,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-NBR-MOS,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-NBR-MOS,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,EV-NBR-MOS,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,EV-NBR-MOS,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,EV-NBR-MOS,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,EV-NBR-MOS,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,EV-NBR-MOS,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,EV-SUN-CLY,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,EV-SUN-CLY,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,EV-SUN-CLY,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,EV-SUN-CLY,discount_flip_note,"A discount of about 37.48% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,EV-SUN-CLY,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,EV-SUN-CLY,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,EV-SUN-CLY,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,EV-SUN-CLY,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,EV-SUN-CLY,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,EV-SUN-CLY,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,EV-SUN-CLY,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-SUN-CLY,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,EV-SUN-CLY,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,EV-SUN-CLY,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,EV-SUN-CLY,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-SUN-CLY,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,EV-SUN-CLY,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,EV-SUN-CLY,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-SUN-CLY,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,EV-SUN-CLY,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,EV-SUN-CLY,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,EV-SUN-CLY,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,EV-SUN-CLY,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,EV-SUN-CLY,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,EV-SUN-CLY,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,RN-LOP-CLY,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,RN-LOP-CLY,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,RN-LOP-CLY,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,RN-LOP-CLY,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,RN-LOP-CLY,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,RN-LOP-CLY,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,RN-LOP-CLY,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,RN-LOP-CLY,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,RN-LOP-CLY,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,RN-LOP-CLY,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-LOP-CLY,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,RN-LOP-CLY,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,RN-LOP-CLY,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,RN-LOP-CLY,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-LOP-CLY,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,RN-LOP-CLY,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,RN-LOP-CLY,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-LOP-CLY,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-LOP-CLY,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,RN-LOP-CLY,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,RN-LOP-CLY,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,RN-LOP-CLY,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,RN-LOP-CLY,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,RN-LOP-CLY,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,RN-MIL-GRD,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,RN-MIL-GRD,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,RN-MIL-GRD,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,RN-MIL-GRD,discount_flip_note,"A discount of about 49.99% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,RN-MIL-GRD,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,RN-MIL-GRD,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,RN-MIL-GRD,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,RN-MIL-GRD,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,RN-MIL-GRD,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,RN-MIL-GRD,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,RN-MIL-GRD,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-MIL-GRD,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,RN-MIL-GRD,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,RN-MIL-GRD,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,RN-MIL-GRD,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-MIL-GRD,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,RN-MIL-GRD,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,RN-MIL-GRD,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-MIL-GRD,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-MIL-GRD,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,RN-MIL-GRD,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,RN-MIL-GRD,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,RN-MIL-GRD,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,RN-MIL-GRD,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,RN-MIL-GRD,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,RN-PAC-SLT,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,RN-PAC-SLT,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,RN-PAC-SLT,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,RN-PAC-SLT,discount_flip_note,"A discount of about 37.48% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,RN-PAC-SLT,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,RN-PAC-SLT,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,RN-PAC-SLT,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,RN-PAC-SLT,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,RN-PAC-SLT,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,RN-PAC-SLT,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,RN-PAC-SLT,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-PAC-SLT,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,RN-PAC-SLT,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,RN-PAC-SLT,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,RN-PAC-SLT,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-PAC-SLT,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,RN-PAC-SLT,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,RN-PAC-SLT,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-PAC-SLT,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-PAC-SLT,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,RN-PAC-SLT,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,RN-PAC-SLT,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,RN-PAC-SLT,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,RN-PAC-SLT,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,RN-PAC-SLT,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,RN-RLY-MOS,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,RN-RLY-MOS,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,RN-RLY-MOS,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,RN-RLY-MOS,discount_flip_note,"A discount of about 28.55% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,RN-RLY-MOS,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,RN-RLY-MOS,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,RN-RLY-MOS,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,RN-RLY-MOS,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,RN-RLY-MOS,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,RN-RLY-MOS,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,RN-RLY-MOS,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-RLY-MOS,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,RN-RLY-MOS,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,RN-RLY-MOS,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,RN-RLY-MOS,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-RLY-MOS,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,RN-RLY-MOS,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,RN-RLY-MOS,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-RLY-MOS,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-RLY-MOS,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,RN-RLY-MOS,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,RN-RLY-MOS,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,RN-RLY-MOS,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,RN-RLY-MOS,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,RN-RLY-MOS,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,RN-STR-CHK,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,RN-STR-CHK,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,RN-STR-CHK,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,RN-STR-CHK,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,RN-STR-CHK,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,RN-STR-CHK,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,RN-STR-CHK,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,RN-STR-CHK,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,RN-STR-CHK,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,RN-STR-CHK,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-STR-CHK,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,RN-STR-CHK,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,RN-STR-CHK,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,RN-STR-CHK,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-STR-CHK,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,RN-STR-CHK,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,RN-STR-CHK,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-STR-CHK,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-STR-CHK,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,RN-STR-CHK,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,RN-STR-CHK,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,RN-STR-CHK,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,RN-STR-CHK,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,RN-STR-CHK,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,RN-TMP-INK,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,RN-TMP-INK,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,RN-TMP-INK,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,RN-TMP-INK,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,RN-TMP-INK,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,RN-TMP-INK,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,RN-TMP-INK,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,RN-TMP-INK,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,RN-TMP-INK,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,RN-TMP-INK,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-TMP-INK,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,RN-TMP-INK,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,RN-TMP-INK,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,RN-TMP-INK,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-TMP-INK,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,RN-TMP-INK,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,RN-TMP-INK,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-TMP-INK,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,RN-TMP-INK,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,RN-TMP-INK,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,RN-TMP-INK,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,RN-TMP-INK,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,RN-TMP-INK,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,RN-TMP-INK,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,SD-CTYD-SLT,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,SD-CTYD-SLT,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,SD-CTYD-SLT,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,SD-CTYD-SLT,discount_flip_note,"A discount of about 49.99% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,SD-CTYD-SLT,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,SD-CTYD-SLT,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,SD-CTYD-SLT,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,SD-CTYD-SLT,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,SD-CTYD-SLT,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,SD-CTYD-SLT,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,SD-CTYD-SLT,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-CTYD-SLT,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,SD-CTYD-SLT,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,SD-CTYD-SLT,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,SD-CTYD-SLT,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-CTYD-SLT,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,SD-CTYD-SLT,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,SD-CTYD-SLT,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-CTYD-SLT,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-CTYD-SLT,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,SD-CTYD-SLT,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,SD-CTYD-SLT,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,SD-CTYD-SLT,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,SD-CTYD-SLT,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,SD-CTYD-SLT,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,SD-DUST-MOS,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,SD-DUST-MOS,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,SD-DUST-MOS,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,SD-DUST-MOS,discount_flip_note,"A discount of about 37.48% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,SD-DUST-MOS,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,SD-DUST-MOS,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,SD-DUST-MOS,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,SD-DUST-MOS,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,SD-DUST-MOS,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,SD-DUST-MOS,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,SD-DUST-MOS,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-DUST-MOS,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,SD-DUST-MOS,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,SD-DUST-MOS,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,SD-DUST-MOS,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-DUST-MOS,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,SD-DUST-MOS,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,SD-DUST-MOS,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-DUST-MOS,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-DUST-MOS,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,SD-DUST-MOS,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,SD-DUST-MOS,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,SD-DUST-MOS,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,SD-DUST-MOS,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,SD-DUST-MOS,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,SD-SHOR-BON,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,SD-SHOR-BON,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,SD-SHOR-BON,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,SD-SHOR-BON,discount_flip_note,"A discount of about 28.55% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,SD-SHOR-BON,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,SD-SHOR-BON,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,SD-SHOR-BON,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,SD-SHOR-BON,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,SD-SHOR-BON,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,SD-SHOR-BON,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,SD-SHOR-BON,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-SHOR-BON,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,SD-SHOR-BON,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,SD-SHOR-BON,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,SD-SHOR-BON,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-SHOR-BON,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,SD-SHOR-BON,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,SD-SHOR-BON,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-SHOR-BON,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-SHOR-BON,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,SD-SHOR-BON,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,SD-SHOR-BON,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,SD-SHOR-BON,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,SD-SHOR-BON,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,SD-SHOR-BON,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,SD-SLID-INK,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,SD-SLID-INK,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,SD-SLID-INK,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,SD-SLID-INK,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,SD-SLID-INK,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,SD-SLID-INK,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,SD-SLID-INK,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,SD-SLID-INK,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,SD-SLID-INK,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,SD-SLID-INK,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-SLID-INK,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,SD-SLID-INK,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,SD-SLID-INK,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,SD-SLID-INK,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-SLID-INK,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,SD-SLID-INK,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,SD-SLID-INK,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-SLID-INK,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-SLID-INK,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,SD-SLID-INK,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,SD-SLID-INK,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,SD-SLID-INK,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,SD-SLID-INK,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,SD-SLID-INK,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,SD-STEP-SND,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,SD-STEP-SND,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,SD-STEP-SND,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,SD-STEP-SND,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,SD-STEP-SND,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,SD-STEP-SND,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,SD-STEP-SND,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,SD-STEP-SND,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,SD-STEP-SND,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,SD-STEP-SND,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-STEP-SND,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,SD-STEP-SND,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,SD-STEP-SND,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,SD-STEP-SND,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-STEP-SND,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,SD-STEP-SND,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,SD-STEP-SND,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-STEP-SND,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-STEP-SND,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,SD-STEP-SND,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,SD-STEP-SND,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,SD-STEP-SND,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,SD-STEP-SND,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,SD-STEP-SND,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,SD-STRP-CLY,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,SD-STRP-CLY,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,SD-STRP-CLY,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,SD-STRP-CLY,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,SD-STRP-CLY,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,SD-STRP-CLY,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,SD-STRP-CLY,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,SD-STRP-CLY,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,SD-STRP-CLY,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,SD-STRP-CLY,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-STRP-CLY,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,SD-STRP-CLY,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,SD-STRP-CLY,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,SD-STRP-CLY,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-STRP-CLY,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,SD-STRP-CLY,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,SD-STRP-CLY,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-STRP-CLY,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SD-STRP-CLY,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,SD-STRP-CLY,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,SD-STRP-CLY,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,SD-STRP-CLY,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,SD-STRP-CLY,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,SD-STRP-CLY,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,SN-ATL-SLT,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,SN-ATL-SLT,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,SN-ATL-SLT,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,SN-ATL-SLT,discount_flip_note,"A discount of about 49.99% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,SN-ATL-SLT,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,SN-ATL-SLT,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,SN-ATL-SLT,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,SN-ATL-SLT,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,SN-ATL-SLT,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,SN-ATL-SLT,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,SN-ATL-SLT,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-ATL-SLT,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,SN-ATL-SLT,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,SN-ATL-SLT,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,SN-ATL-SLT,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-ATL-SLT,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,SN-ATL-SLT,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,SN-ATL-SLT,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-ATL-SLT,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-ATL-SLT,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,SN-ATL-SLT,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,SN-ATL-SLT,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,SN-ATL-SLT,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,SN-ATL-SLT,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,SN-ATL-SLT,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,SN-BAS-INK,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,SN-BAS-INK,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,SN-BAS-INK,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,SN-BAS-INK,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,SN-BAS-INK,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,SN-BAS-INK,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,SN-BAS-INK,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,SN-BAS-INK,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,SN-BAS-INK,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,SN-BAS-INK,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-BAS-INK,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,SN-BAS-INK,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,SN-BAS-INK,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,SN-BAS-INK,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-BAS-INK,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,SN-BAS-INK,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,SN-BAS-INK,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-BAS-INK,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-BAS-INK,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,SN-BAS-INK,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,SN-BAS-INK,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,SN-BAS-INK,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,SN-BAS-INK,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,SN-BAS-INK,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,SN-CRT-BON,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,SN-CRT-BON,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,SN-CRT-BON,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,SN-CRT-BON,discount_flip_note,"A discount of about 28.55% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,SN-CRT-BON,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,SN-CRT-BON,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,SN-CRT-BON,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,SN-CRT-BON,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,SN-CRT-BON,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,SN-CRT-BON,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,SN-CRT-BON,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-CRT-BON,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,SN-CRT-BON,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,SN-CRT-BON,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,SN-CRT-BON,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-CRT-BON,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,SN-CRT-BON,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,SN-CRT-BON,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-CRT-BON,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-CRT-BON,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,SN-CRT-BON,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,SN-CRT-BON,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,SN-CRT-BON,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,SN-CRT-BON,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,SN-CRT-BON,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,SN-DRF-MOS,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,SN-DRF-MOS,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,SN-DRF-MOS,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,SN-DRF-MOS,discount_flip_note,"A discount of about 37.48% or more takes the invoice to ₹2,500 or below; the 5% rate may then apply. The exact treatment is [TO CONFIRM: CA].",CA,tax / pricing,A discount can flip the GST rate; confirm the treatment with the CA.
+product,SN-DRF-MOS,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,SN-DRF-MOS,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,SN-DRF-MOS,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,SN-DRF-MOS,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,SN-DRF-MOS,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,SN-DRF-MOS,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,SN-DRF-MOS,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-DRF-MOS,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,SN-DRF-MOS,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,SN-DRF-MOS,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,SN-DRF-MOS,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-DRF-MOS,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,SN-DRF-MOS,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,SN-DRF-MOS,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-DRF-MOS,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-DRF-MOS,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,SN-DRF-MOS,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,SN-DRF-MOS,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,SN-DRF-MOS,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,SN-DRF-MOS,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,SN-DRF-MOS,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,SN-MER-CHK,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,SN-MER-CHK,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,SN-MER-CHK,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,SN-MER-CHK,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,SN-MER-CHK,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,SN-MER-CHK,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,SN-MER-CHK,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,SN-MER-CHK,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,SN-MER-CHK,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,SN-MER-CHK,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-MER-CHK,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,SN-MER-CHK,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,SN-MER-CHK,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,SN-MER-CHK,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-MER-CHK,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,SN-MER-CHK,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,SN-MER-CHK,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-MER-CHK,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-MER-CHK,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,SN-MER-CHK,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,SN-MER-CHK,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,SN-MER-CHK,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,SN-MER-CHK,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,SN-MER-CHK,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+product,SN-QTR-CLY,care,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Care instructions for the label and PDP.
+product,SN-QTR-CLY,closure,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,"Lace, strap or zip type and hardware."
+product,SN-QTR-CLY,country_of_origin,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal label requirement.
+product,SN-QTR-CLY,drop_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Heel-to-toe drop; confirm the measurement method.
+product,SN-QTR-CLY,fit_note,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish 'true to size' or 'wide fit' until measured.
+product,SN-QTR-CLY,fit_recommendation,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not publish a fit recommendation until the last is checked.
+product,SN-QTR-CLY,grip_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No grip claim without a test protocol and a result.
+product,SN-QTR-CLY,heel_height_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Measured heel height.
+product,SN-QTR-CLY,hsn,[TO CONFIRM: CA],CA,tax / pricing,Candidate headings 6401-6405; confirm material and classification.
+product,SN-QTR-CLY,insole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-QTR-CLY,last_width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Width and last; do not claim wide fit until measured.
+product,SN-QTR-CLY,launch_date,[TO CONFIRM: founder],founder,launch / policy,Drop 01 date is not set.
+product,SN-QTR-CLY,legal_metrology,[TO CONFIRM: legal],legal,policy / label,"MRP, country of origin, manufacturer, net quantity and consumer care."
+product,SN-QTR-CLY,lining_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-QTR-CLY,lug_depth_mm,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 4 mm lugs are a placeholder and are not used.
+product,SN-QTR-CLY,manufacturer,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Legal manufacturer name and address for the label.
+product,SN-QTR-CLY,midsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-QTR-CLY,outsole_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition.
+product,SN-QTR-CLY,sole_compound,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact compound; no grip or durability claim without test data.
+product,SN-QTR-CLY,test_claim,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No test claim without a test protocol and a result.
+product,SN-QTR-CLY,toe_shape,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Last and toe shape; confirm before any fit copy.
+product,SN-QTR-CLY,upper_material,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Exact material and composition; no vegan/recycled claim without a certificate.
+product,SN-QTR-CLY,water_resistance,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,No waterproof claim without test data.
+product,SN-QTR-CLY,weight_g,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,The sample copy's 268 g is a placeholder and is not used.
+size_guide,,size_system.cm_status,[TO CONFIRM: last],last,size guide,Every cm value must be checked against the last.
+size_guide,,size_system.half_sizes,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Half sizes are not in v1; confirm whether they are available.
+size_guide,,size_system.width,[TO CONFIRM: manufacturer],manufacturer,PDP / launch,Do not claim wide fit until the last is measured.
+variant,BT-FLD-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FLD-SND-UK3: cm values are nominal; confirm against the last.
+variant,BT-FLD-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FLD-SND-UK4: cm values are nominal; confirm against the last.
+variant,BT-FLD-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FLD-SND-UK5: cm values are nominal; confirm against the last.
+variant,BT-FLD-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FLD-SND-UK6: cm values are nominal; confirm against the last.
+variant,BT-FLD-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FLD-SND-UK7: cm values are nominal; confirm against the last.
+variant,BT-FLD-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FLD-SND-UK8: cm values are nominal; confirm against the last.
+variant,BT-FLD-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FLD-SND-UK9: cm values are nominal; confirm against the last.
+variant,BT-FLD-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FLD-SND-UK10: cm values are nominal; confirm against the last.
+variant,BT-FLD-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FLD-SND-UK11: cm values are nominal; confirm against the last.
+variant,BT-FLD-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FLD-SND-UK12: cm values are nominal; confirm against the last.
+variant,BT-FLD-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FLD-SND-UK13: cm values are nominal; confirm against the last.
+variant,BT-FRG-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FRG-INK-UK3: cm values are nominal; confirm against the last.
+variant,BT-FRG-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FRG-INK-UK4: cm values are nominal; confirm against the last.
+variant,BT-FRG-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FRG-INK-UK5: cm values are nominal; confirm against the last.
+variant,BT-FRG-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FRG-INK-UK6: cm values are nominal; confirm against the last.
+variant,BT-FRG-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FRG-INK-UK7: cm values are nominal; confirm against the last.
+variant,BT-FRG-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FRG-INK-UK8: cm values are nominal; confirm against the last.
+variant,BT-FRG-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FRG-INK-UK9: cm values are nominal; confirm against the last.
+variant,BT-FRG-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FRG-INK-UK10: cm values are nominal; confirm against the last.
+variant,BT-FRG-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FRG-INK-UK11: cm values are nominal; confirm against the last.
+variant,BT-FRG-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FRG-INK-UK12: cm values are nominal; confirm against the last.
+variant,BT-FRG-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-FRG-INK-UK13: cm values are nominal; confirm against the last.
+variant,BT-HLT-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-HLT-CLY-UK3: cm values are nominal; confirm against the last.
+variant,BT-HLT-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-HLT-CLY-UK4: cm values are nominal; confirm against the last.
+variant,BT-HLT-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-HLT-CLY-UK5: cm values are nominal; confirm against the last.
+variant,BT-HLT-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-HLT-CLY-UK6: cm values are nominal; confirm against the last.
+variant,BT-HLT-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-HLT-CLY-UK7: cm values are nominal; confirm against the last.
+variant,BT-HLT-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-HLT-CLY-UK8: cm values are nominal; confirm against the last.
+variant,BT-HLT-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-HLT-CLY-UK9: cm values are nominal; confirm against the last.
+variant,BT-HLT-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-HLT-CLY-UK10: cm values are nominal; confirm against the last.
+variant,BT-HLT-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-HLT-CLY-UK11: cm values are nominal; confirm against the last.
+variant,BT-HLT-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-HLT-CLY-UK12: cm values are nominal; confirm against the last.
+variant,BT-HLT-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-HLT-CLY-UK13: cm values are nominal; confirm against the last.
+variant,BT-QRY-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-QRY-SLT-UK3: cm values are nominal; confirm against the last.
+variant,BT-QRY-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-QRY-SLT-UK4: cm values are nominal; confirm against the last.
+variant,BT-QRY-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-QRY-SLT-UK5: cm values are nominal; confirm against the last.
+variant,BT-QRY-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-QRY-SLT-UK6: cm values are nominal; confirm against the last.
+variant,BT-QRY-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-QRY-SLT-UK7: cm values are nominal; confirm against the last.
+variant,BT-QRY-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-QRY-SLT-UK8: cm values are nominal; confirm against the last.
+variant,BT-QRY-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-QRY-SLT-UK9: cm values are nominal; confirm against the last.
+variant,BT-QRY-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-QRY-SLT-UK10: cm values are nominal; confirm against the last.
+variant,BT-QRY-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-QRY-SLT-UK11: cm values are nominal; confirm against the last.
+variant,BT-QRY-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-QRY-SLT-UK12: cm values are nominal; confirm against the last.
+variant,BT-QRY-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-QRY-SLT-UK13: cm values are nominal; confirm against the last.
+variant,BT-RDG-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-RDG-MOS-UK3: cm values are nominal; confirm against the last.
+variant,BT-RDG-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-RDG-MOS-UK4: cm values are nominal; confirm against the last.
+variant,BT-RDG-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-RDG-MOS-UK5: cm values are nominal; confirm against the last.
+variant,BT-RDG-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-RDG-MOS-UK6: cm values are nominal; confirm against the last.
+variant,BT-RDG-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-RDG-MOS-UK7: cm values are nominal; confirm against the last.
+variant,BT-RDG-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-RDG-MOS-UK8: cm values are nominal; confirm against the last.
+variant,BT-RDG-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-RDG-MOS-UK9: cm values are nominal; confirm against the last.
+variant,BT-RDG-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-RDG-MOS-UK10: cm values are nominal; confirm against the last.
+variant,BT-RDG-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-RDG-MOS-UK11: cm values are nominal; confirm against the last.
+variant,BT-RDG-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-RDG-MOS-UK12: cm values are nominal; confirm against the last.
+variant,BT-RDG-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-RDG-MOS-UK13: cm values are nominal; confirm against the last.
+variant,BT-SITE-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-SITE-GRD-UK3: cm values are nominal; confirm against the last.
+variant,BT-SITE-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-SITE-GRD-UK4: cm values are nominal; confirm against the last.
+variant,BT-SITE-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-SITE-GRD-UK5: cm values are nominal; confirm against the last.
+variant,BT-SITE-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-SITE-GRD-UK6: cm values are nominal; confirm against the last.
+variant,BT-SITE-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-SITE-GRD-UK7: cm values are nominal; confirm against the last.
+variant,BT-SITE-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-SITE-GRD-UK8: cm values are nominal; confirm against the last.
+variant,BT-SITE-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-SITE-GRD-UK9: cm values are nominal; confirm against the last.
+variant,BT-SITE-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-SITE-GRD-UK10: cm values are nominal; confirm against the last.
+variant,BT-SITE-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-SITE-GRD-UK11: cm values are nominal; confirm against the last.
+variant,BT-SITE-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-SITE-GRD-UK12: cm values are nominal; confirm against the last.
+variant,BT-SITE-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,BT-SITE-GRD-UK13: cm values are nominal; confirm against the last.
+variant,EV-COM-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-COM-INK-UK3: cm values are nominal; confirm against the last.
+variant,EV-COM-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-COM-INK-UK4: cm values are nominal; confirm against the last.
+variant,EV-COM-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-COM-INK-UK5: cm values are nominal; confirm against the last.
+variant,EV-COM-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-COM-INK-UK6: cm values are nominal; confirm against the last.
+variant,EV-COM-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-COM-INK-UK7: cm values are nominal; confirm against the last.
+variant,EV-COM-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-COM-INK-UK8: cm values are nominal; confirm against the last.
+variant,EV-COM-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-COM-INK-UK9: cm values are nominal; confirm against the last.
+variant,EV-COM-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-COM-INK-UK10: cm values are nominal; confirm against the last.
+variant,EV-COM-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-COM-INK-UK11: cm values are nominal; confirm against the last.
+variant,EV-COM-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-COM-INK-UK12: cm values are nominal; confirm against the last.
+variant,EV-COM-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-COM-INK-UK13: cm values are nominal; confirm against the last.
+variant,EV-DLY-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-DLY-CHK-UK3: cm values are nominal; confirm against the last.
+variant,EV-DLY-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-DLY-CHK-UK4: cm values are nominal; confirm against the last.
+variant,EV-DLY-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-DLY-CHK-UK5: cm values are nominal; confirm against the last.
+variant,EV-DLY-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-DLY-CHK-UK6: cm values are nominal; confirm against the last.
+variant,EV-DLY-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-DLY-CHK-UK7: cm values are nominal; confirm against the last.
+variant,EV-DLY-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-DLY-CHK-UK8: cm values are nominal; confirm against the last.
+variant,EV-DLY-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-DLY-CHK-UK9: cm values are nominal; confirm against the last.
+variant,EV-DLY-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-DLY-CHK-UK10: cm values are nominal; confirm against the last.
+variant,EV-DLY-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-DLY-CHK-UK11: cm values are nominal; confirm against the last.
+variant,EV-DLY-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-DLY-CHK-UK12: cm values are nominal; confirm against the last.
+variant,EV-DLY-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-DLY-CHK-UK13: cm values are nominal; confirm against the last.
+variant,EV-ERR-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-ERR-SND-UK3: cm values are nominal; confirm against the last.
+variant,EV-ERR-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-ERR-SND-UK4: cm values are nominal; confirm against the last.
+variant,EV-ERR-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-ERR-SND-UK5: cm values are nominal; confirm against the last.
+variant,EV-ERR-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-ERR-SND-UK6: cm values are nominal; confirm against the last.
+variant,EV-ERR-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-ERR-SND-UK7: cm values are nominal; confirm against the last.
+variant,EV-ERR-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-ERR-SND-UK8: cm values are nominal; confirm against the last.
+variant,EV-ERR-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-ERR-SND-UK9: cm values are nominal; confirm against the last.
+variant,EV-ERR-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-ERR-SND-UK10: cm values are nominal; confirm against the last.
+variant,EV-ERR-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-ERR-SND-UK11: cm values are nominal; confirm against the last.
+variant,EV-ERR-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-ERR-SND-UK12: cm values are nominal; confirm against the last.
+variant,EV-ERR-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-ERR-SND-UK13: cm values are nominal; confirm against the last.
+variant,EV-MKT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-MKT-BON-UK3: cm values are nominal; confirm against the last.
+variant,EV-MKT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-MKT-BON-UK4: cm values are nominal; confirm against the last.
+variant,EV-MKT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-MKT-BON-UK5: cm values are nominal; confirm against the last.
+variant,EV-MKT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-MKT-BON-UK6: cm values are nominal; confirm against the last.
+variant,EV-MKT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-MKT-BON-UK7: cm values are nominal; confirm against the last.
+variant,EV-MKT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-MKT-BON-UK8: cm values are nominal; confirm against the last.
+variant,EV-MKT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-MKT-BON-UK9: cm values are nominal; confirm against the last.
+variant,EV-MKT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-MKT-BON-UK10: cm values are nominal; confirm against the last.
+variant,EV-MKT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-MKT-BON-UK11: cm values are nominal; confirm against the last.
+variant,EV-MKT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-MKT-BON-UK12: cm values are nominal; confirm against the last.
+variant,EV-MKT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-MKT-BON-UK13: cm values are nominal; confirm against the last.
+variant,EV-NBR-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-NBR-MOS-UK3: cm values are nominal; confirm against the last.
+variant,EV-NBR-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-NBR-MOS-UK4: cm values are nominal; confirm against the last.
+variant,EV-NBR-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-NBR-MOS-UK5: cm values are nominal; confirm against the last.
+variant,EV-NBR-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-NBR-MOS-UK6: cm values are nominal; confirm against the last.
+variant,EV-NBR-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-NBR-MOS-UK7: cm values are nominal; confirm against the last.
+variant,EV-NBR-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-NBR-MOS-UK8: cm values are nominal; confirm against the last.
+variant,EV-NBR-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-NBR-MOS-UK9: cm values are nominal; confirm against the last.
+variant,EV-NBR-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-NBR-MOS-UK10: cm values are nominal; confirm against the last.
+variant,EV-NBR-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-NBR-MOS-UK11: cm values are nominal; confirm against the last.
+variant,EV-NBR-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-NBR-MOS-UK12: cm values are nominal; confirm against the last.
+variant,EV-NBR-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-NBR-MOS-UK13: cm values are nominal; confirm against the last.
+variant,EV-SUN-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-SUN-CLY-UK3: cm values are nominal; confirm against the last.
+variant,EV-SUN-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-SUN-CLY-UK4: cm values are nominal; confirm against the last.
+variant,EV-SUN-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-SUN-CLY-UK5: cm values are nominal; confirm against the last.
+variant,EV-SUN-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-SUN-CLY-UK6: cm values are nominal; confirm against the last.
+variant,EV-SUN-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-SUN-CLY-UK7: cm values are nominal; confirm against the last.
+variant,EV-SUN-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-SUN-CLY-UK8: cm values are nominal; confirm against the last.
+variant,EV-SUN-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-SUN-CLY-UK9: cm values are nominal; confirm against the last.
+variant,EV-SUN-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-SUN-CLY-UK10: cm values are nominal; confirm against the last.
+variant,EV-SUN-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-SUN-CLY-UK11: cm values are nominal; confirm against the last.
+variant,EV-SUN-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-SUN-CLY-UK12: cm values are nominal; confirm against the last.
+variant,EV-SUN-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,EV-SUN-CLY-UK13: cm values are nominal; confirm against the last.
+variant,RN-LOP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-LOP-CLY-UK3: cm values are nominal; confirm against the last.
+variant,RN-LOP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-LOP-CLY-UK4: cm values are nominal; confirm against the last.
+variant,RN-LOP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-LOP-CLY-UK5: cm values are nominal; confirm against the last.
+variant,RN-LOP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-LOP-CLY-UK6: cm values are nominal; confirm against the last.
+variant,RN-LOP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-LOP-CLY-UK7: cm values are nominal; confirm against the last.
+variant,RN-LOP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-LOP-CLY-UK8: cm values are nominal; confirm against the last.
+variant,RN-LOP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-LOP-CLY-UK9: cm values are nominal; confirm against the last.
+variant,RN-LOP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-LOP-CLY-UK10: cm values are nominal; confirm against the last.
+variant,RN-LOP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-LOP-CLY-UK11: cm values are nominal; confirm against the last.
+variant,RN-LOP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-LOP-CLY-UK12: cm values are nominal; confirm against the last.
+variant,RN-LOP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-LOP-CLY-UK13: cm values are nominal; confirm against the last.
+variant,RN-MIL-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-MIL-GRD-UK3: cm values are nominal; confirm against the last.
+variant,RN-MIL-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-MIL-GRD-UK4: cm values are nominal; confirm against the last.
+variant,RN-MIL-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-MIL-GRD-UK5: cm values are nominal; confirm against the last.
+variant,RN-MIL-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-MIL-GRD-UK6: cm values are nominal; confirm against the last.
+variant,RN-MIL-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-MIL-GRD-UK7: cm values are nominal; confirm against the last.
+variant,RN-MIL-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-MIL-GRD-UK8: cm values are nominal; confirm against the last.
+variant,RN-MIL-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-MIL-GRD-UK9: cm values are nominal; confirm against the last.
+variant,RN-MIL-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-MIL-GRD-UK10: cm values are nominal; confirm against the last.
+variant,RN-MIL-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-MIL-GRD-UK11: cm values are nominal; confirm against the last.
+variant,RN-MIL-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-MIL-GRD-UK12: cm values are nominal; confirm against the last.
+variant,RN-MIL-GRD,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-MIL-GRD-UK13: cm values are nominal; confirm against the last.
+variant,RN-PAC-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-PAC-SLT-UK3: cm values are nominal; confirm against the last.
+variant,RN-PAC-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-PAC-SLT-UK4: cm values are nominal; confirm against the last.
+variant,RN-PAC-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-PAC-SLT-UK5: cm values are nominal; confirm against the last.
+variant,RN-PAC-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-PAC-SLT-UK6: cm values are nominal; confirm against the last.
+variant,RN-PAC-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-PAC-SLT-UK7: cm values are nominal; confirm against the last.
+variant,RN-PAC-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-PAC-SLT-UK8: cm values are nominal; confirm against the last.
+variant,RN-PAC-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-PAC-SLT-UK9: cm values are nominal; confirm against the last.
+variant,RN-PAC-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-PAC-SLT-UK10: cm values are nominal; confirm against the last.
+variant,RN-PAC-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-PAC-SLT-UK11: cm values are nominal; confirm against the last.
+variant,RN-PAC-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-PAC-SLT-UK12: cm values are nominal; confirm against the last.
+variant,RN-PAC-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-PAC-SLT-UK13: cm values are nominal; confirm against the last.
+variant,RN-RLY-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-RLY-MOS-UK3: cm values are nominal; confirm against the last.
+variant,RN-RLY-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-RLY-MOS-UK4: cm values are nominal; confirm against the last.
+variant,RN-RLY-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-RLY-MOS-UK5: cm values are nominal; confirm against the last.
+variant,RN-RLY-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-RLY-MOS-UK6: cm values are nominal; confirm against the last.
+variant,RN-RLY-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-RLY-MOS-UK7: cm values are nominal; confirm against the last.
+variant,RN-RLY-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-RLY-MOS-UK8: cm values are nominal; confirm against the last.
+variant,RN-RLY-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-RLY-MOS-UK9: cm values are nominal; confirm against the last.
+variant,RN-RLY-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-RLY-MOS-UK10: cm values are nominal; confirm against the last.
+variant,RN-RLY-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-RLY-MOS-UK11: cm values are nominal; confirm against the last.
+variant,RN-RLY-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-RLY-MOS-UK12: cm values are nominal; confirm against the last.
+variant,RN-RLY-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-RLY-MOS-UK13: cm values are nominal; confirm against the last.
+variant,RN-STR-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-STR-CHK-UK3: cm values are nominal; confirm against the last.
+variant,RN-STR-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-STR-CHK-UK4: cm values are nominal; confirm against the last.
+variant,RN-STR-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-STR-CHK-UK5: cm values are nominal; confirm against the last.
+variant,RN-STR-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-STR-CHK-UK6: cm values are nominal; confirm against the last.
+variant,RN-STR-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-STR-CHK-UK7: cm values are nominal; confirm against the last.
+variant,RN-STR-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-STR-CHK-UK8: cm values are nominal; confirm against the last.
+variant,RN-STR-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-STR-CHK-UK9: cm values are nominal; confirm against the last.
+variant,RN-STR-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-STR-CHK-UK10: cm values are nominal; confirm against the last.
+variant,RN-STR-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-STR-CHK-UK11: cm values are nominal; confirm against the last.
+variant,RN-STR-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-STR-CHK-UK12: cm values are nominal; confirm against the last.
+variant,RN-STR-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-STR-CHK-UK13: cm values are nominal; confirm against the last.
+variant,RN-TMP-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-TMP-INK-UK3: cm values are nominal; confirm against the last.
+variant,RN-TMP-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-TMP-INK-UK4: cm values are nominal; confirm against the last.
+variant,RN-TMP-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-TMP-INK-UK5: cm values are nominal; confirm against the last.
+variant,RN-TMP-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-TMP-INK-UK6: cm values are nominal; confirm against the last.
+variant,RN-TMP-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-TMP-INK-UK7: cm values are nominal; confirm against the last.
+variant,RN-TMP-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-TMP-INK-UK8: cm values are nominal; confirm against the last.
+variant,RN-TMP-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-TMP-INK-UK9: cm values are nominal; confirm against the last.
+variant,RN-TMP-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-TMP-INK-UK10: cm values are nominal; confirm against the last.
+variant,RN-TMP-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-TMP-INK-UK11: cm values are nominal; confirm against the last.
+variant,RN-TMP-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-TMP-INK-UK12: cm values are nominal; confirm against the last.
+variant,RN-TMP-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,RN-TMP-INK-UK13: cm values are nominal; confirm against the last.
+variant,SD-CTYD-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-CTYD-SLT-UK3: cm values are nominal; confirm against the last.
+variant,SD-CTYD-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-CTYD-SLT-UK4: cm values are nominal; confirm against the last.
+variant,SD-CTYD-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-CTYD-SLT-UK5: cm values are nominal; confirm against the last.
+variant,SD-CTYD-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-CTYD-SLT-UK6: cm values are nominal; confirm against the last.
+variant,SD-CTYD-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-CTYD-SLT-UK7: cm values are nominal; confirm against the last.
+variant,SD-CTYD-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-CTYD-SLT-UK8: cm values are nominal; confirm against the last.
+variant,SD-CTYD-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-CTYD-SLT-UK9: cm values are nominal; confirm against the last.
+variant,SD-CTYD-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-CTYD-SLT-UK10: cm values are nominal; confirm against the last.
+variant,SD-CTYD-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-CTYD-SLT-UK11: cm values are nominal; confirm against the last.
+variant,SD-CTYD-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-CTYD-SLT-UK12: cm values are nominal; confirm against the last.
+variant,SD-CTYD-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-CTYD-SLT-UK13: cm values are nominal; confirm against the last.
+variant,SD-DUST-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-DUST-MOS-UK3: cm values are nominal; confirm against the last.
+variant,SD-DUST-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-DUST-MOS-UK4: cm values are nominal; confirm against the last.
+variant,SD-DUST-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-DUST-MOS-UK5: cm values are nominal; confirm against the last.
+variant,SD-DUST-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-DUST-MOS-UK6: cm values are nominal; confirm against the last.
+variant,SD-DUST-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-DUST-MOS-UK7: cm values are nominal; confirm against the last.
+variant,SD-DUST-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-DUST-MOS-UK8: cm values are nominal; confirm against the last.
+variant,SD-DUST-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-DUST-MOS-UK9: cm values are nominal; confirm against the last.
+variant,SD-DUST-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-DUST-MOS-UK10: cm values are nominal; confirm against the last.
+variant,SD-DUST-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-DUST-MOS-UK11: cm values are nominal; confirm against the last.
+variant,SD-DUST-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-DUST-MOS-UK12: cm values are nominal; confirm against the last.
+variant,SD-DUST-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-DUST-MOS-UK13: cm values are nominal; confirm against the last.
+variant,SD-SHOR-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SHOR-BON-UK3: cm values are nominal; confirm against the last.
+variant,SD-SHOR-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SHOR-BON-UK4: cm values are nominal; confirm against the last.
+variant,SD-SHOR-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SHOR-BON-UK5: cm values are nominal; confirm against the last.
+variant,SD-SHOR-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SHOR-BON-UK6: cm values are nominal; confirm against the last.
+variant,SD-SHOR-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SHOR-BON-UK7: cm values are nominal; confirm against the last.
+variant,SD-SHOR-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SHOR-BON-UK8: cm values are nominal; confirm against the last.
+variant,SD-SHOR-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SHOR-BON-UK9: cm values are nominal; confirm against the last.
+variant,SD-SHOR-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SHOR-BON-UK10: cm values are nominal; confirm against the last.
+variant,SD-SHOR-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SHOR-BON-UK11: cm values are nominal; confirm against the last.
+variant,SD-SHOR-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SHOR-BON-UK12: cm values are nominal; confirm against the last.
+variant,SD-SHOR-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SHOR-BON-UK13: cm values are nominal; confirm against the last.
+variant,SD-SLID-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SLID-INK-UK3: cm values are nominal; confirm against the last.
+variant,SD-SLID-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SLID-INK-UK4: cm values are nominal; confirm against the last.
+variant,SD-SLID-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SLID-INK-UK5: cm values are nominal; confirm against the last.
+variant,SD-SLID-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SLID-INK-UK6: cm values are nominal; confirm against the last.
+variant,SD-SLID-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SLID-INK-UK7: cm values are nominal; confirm against the last.
+variant,SD-SLID-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SLID-INK-UK8: cm values are nominal; confirm against the last.
+variant,SD-SLID-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SLID-INK-UK9: cm values are nominal; confirm against the last.
+variant,SD-SLID-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SLID-INK-UK10: cm values are nominal; confirm against the last.
+variant,SD-SLID-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SLID-INK-UK11: cm values are nominal; confirm against the last.
+variant,SD-SLID-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SLID-INK-UK12: cm values are nominal; confirm against the last.
+variant,SD-SLID-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-SLID-INK-UK13: cm values are nominal; confirm against the last.
+variant,SD-STEP-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STEP-SND-UK3: cm values are nominal; confirm against the last.
+variant,SD-STEP-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STEP-SND-UK4: cm values are nominal; confirm against the last.
+variant,SD-STEP-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STEP-SND-UK5: cm values are nominal; confirm against the last.
+variant,SD-STEP-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STEP-SND-UK6: cm values are nominal; confirm against the last.
+variant,SD-STEP-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STEP-SND-UK7: cm values are nominal; confirm against the last.
+variant,SD-STEP-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STEP-SND-UK8: cm values are nominal; confirm against the last.
+variant,SD-STEP-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STEP-SND-UK9: cm values are nominal; confirm against the last.
+variant,SD-STEP-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STEP-SND-UK10: cm values are nominal; confirm against the last.
+variant,SD-STEP-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STEP-SND-UK11: cm values are nominal; confirm against the last.
+variant,SD-STEP-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STEP-SND-UK12: cm values are nominal; confirm against the last.
+variant,SD-STEP-SND,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STEP-SND-UK13: cm values are nominal; confirm against the last.
+variant,SD-STRP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STRP-CLY-UK3: cm values are nominal; confirm against the last.
+variant,SD-STRP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STRP-CLY-UK4: cm values are nominal; confirm against the last.
+variant,SD-STRP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STRP-CLY-UK5: cm values are nominal; confirm against the last.
+variant,SD-STRP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STRP-CLY-UK6: cm values are nominal; confirm against the last.
+variant,SD-STRP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STRP-CLY-UK7: cm values are nominal; confirm against the last.
+variant,SD-STRP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STRP-CLY-UK8: cm values are nominal; confirm against the last.
+variant,SD-STRP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STRP-CLY-UK9: cm values are nominal; confirm against the last.
+variant,SD-STRP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STRP-CLY-UK10: cm values are nominal; confirm against the last.
+variant,SD-STRP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STRP-CLY-UK11: cm values are nominal; confirm against the last.
+variant,SD-STRP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STRP-CLY-UK12: cm values are nominal; confirm against the last.
+variant,SD-STRP-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SD-STRP-CLY-UK13: cm values are nominal; confirm against the last.
+variant,SN-ATL-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-ATL-SLT-UK3: cm values are nominal; confirm against the last.
+variant,SN-ATL-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-ATL-SLT-UK4: cm values are nominal; confirm against the last.
+variant,SN-ATL-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-ATL-SLT-UK5: cm values are nominal; confirm against the last.
+variant,SN-ATL-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-ATL-SLT-UK6: cm values are nominal; confirm against the last.
+variant,SN-ATL-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-ATL-SLT-UK7: cm values are nominal; confirm against the last.
+variant,SN-ATL-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-ATL-SLT-UK8: cm values are nominal; confirm against the last.
+variant,SN-ATL-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-ATL-SLT-UK9: cm values are nominal; confirm against the last.
+variant,SN-ATL-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-ATL-SLT-UK10: cm values are nominal; confirm against the last.
+variant,SN-ATL-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-ATL-SLT-UK11: cm values are nominal; confirm against the last.
+variant,SN-ATL-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-ATL-SLT-UK12: cm values are nominal; confirm against the last.
+variant,SN-ATL-SLT,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-ATL-SLT-UK13: cm values are nominal; confirm against the last.
+variant,SN-BAS-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-BAS-INK-UK3: cm values are nominal; confirm against the last.
+variant,SN-BAS-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-BAS-INK-UK4: cm values are nominal; confirm against the last.
+variant,SN-BAS-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-BAS-INK-UK5: cm values are nominal; confirm against the last.
+variant,SN-BAS-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-BAS-INK-UK6: cm values are nominal; confirm against the last.
+variant,SN-BAS-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-BAS-INK-UK7: cm values are nominal; confirm against the last.
+variant,SN-BAS-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-BAS-INK-UK8: cm values are nominal; confirm against the last.
+variant,SN-BAS-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-BAS-INK-UK9: cm values are nominal; confirm against the last.
+variant,SN-BAS-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-BAS-INK-UK10: cm values are nominal; confirm against the last.
+variant,SN-BAS-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-BAS-INK-UK11: cm values are nominal; confirm against the last.
+variant,SN-BAS-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-BAS-INK-UK12: cm values are nominal; confirm against the last.
+variant,SN-BAS-INK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-BAS-INK-UK13: cm values are nominal; confirm against the last.
+variant,SN-CRT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-CRT-BON-UK3: cm values are nominal; confirm against the last.
+variant,SN-CRT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-CRT-BON-UK4: cm values are nominal; confirm against the last.
+variant,SN-CRT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-CRT-BON-UK5: cm values are nominal; confirm against the last.
+variant,SN-CRT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-CRT-BON-UK6: cm values are nominal; confirm against the last.
+variant,SN-CRT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-CRT-BON-UK7: cm values are nominal; confirm against the last.
+variant,SN-CRT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-CRT-BON-UK8: cm values are nominal; confirm against the last.
+variant,SN-CRT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-CRT-BON-UK9: cm values are nominal; confirm against the last.
+variant,SN-CRT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-CRT-BON-UK10: cm values are nominal; confirm against the last.
+variant,SN-CRT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-CRT-BON-UK11: cm values are nominal; confirm against the last.
+variant,SN-CRT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-CRT-BON-UK12: cm values are nominal; confirm against the last.
+variant,SN-CRT-BON,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-CRT-BON-UK13: cm values are nominal; confirm against the last.
+variant,SN-DRF-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-DRF-MOS-UK3: cm values are nominal; confirm against the last.
+variant,SN-DRF-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-DRF-MOS-UK4: cm values are nominal; confirm against the last.
+variant,SN-DRF-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-DRF-MOS-UK5: cm values are nominal; confirm against the last.
+variant,SN-DRF-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-DRF-MOS-UK6: cm values are nominal; confirm against the last.
+variant,SN-DRF-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-DRF-MOS-UK7: cm values are nominal; confirm against the last.
+variant,SN-DRF-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-DRF-MOS-UK8: cm values are nominal; confirm against the last.
+variant,SN-DRF-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-DRF-MOS-UK9: cm values are nominal; confirm against the last.
+variant,SN-DRF-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-DRF-MOS-UK10: cm values are nominal; confirm against the last.
+variant,SN-DRF-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-DRF-MOS-UK11: cm values are nominal; confirm against the last.
+variant,SN-DRF-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-DRF-MOS-UK12: cm values are nominal; confirm against the last.
+variant,SN-DRF-MOS,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-DRF-MOS-UK13: cm values are nominal; confirm against the last.
+variant,SN-MER-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-MER-CHK-UK3: cm values are nominal; confirm against the last.
+variant,SN-MER-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-MER-CHK-UK4: cm values are nominal; confirm against the last.
+variant,SN-MER-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-MER-CHK-UK5: cm values are nominal; confirm against the last.
+variant,SN-MER-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-MER-CHK-UK6: cm values are nominal; confirm against the last.
+variant,SN-MER-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-MER-CHK-UK7: cm values are nominal; confirm against the last.
+variant,SN-MER-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-MER-CHK-UK8: cm values are nominal; confirm against the last.
+variant,SN-MER-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-MER-CHK-UK9: cm values are nominal; confirm against the last.
+variant,SN-MER-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-MER-CHK-UK10: cm values are nominal; confirm against the last.
+variant,SN-MER-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-MER-CHK-UK11: cm values are nominal; confirm against the last.
+variant,SN-MER-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-MER-CHK-UK12: cm values are nominal; confirm against the last.
+variant,SN-MER-CHK,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-MER-CHK-UK13: cm values are nominal; confirm against the last.
+variant,SN-QTR-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-QTR-CLY-UK3: cm values are nominal; confirm against the last.
+variant,SN-QTR-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-QTR-CLY-UK4: cm values are nominal; confirm against the last.
+variant,SN-QTR-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-QTR-CLY-UK5: cm values are nominal; confirm against the last.
+variant,SN-QTR-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-QTR-CLY-UK6: cm values are nominal; confirm against the last.
+variant,SN-QTR-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-QTR-CLY-UK7: cm values are nominal; confirm against the last.
+variant,SN-QTR-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-QTR-CLY-UK8: cm values are nominal; confirm against the last.
+variant,SN-QTR-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-QTR-CLY-UK9: cm values are nominal; confirm against the last.
+variant,SN-QTR-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-QTR-CLY-UK10: cm values are nominal; confirm against the last.
+variant,SN-QTR-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-QTR-CLY-UK11: cm values are nominal; confirm against the last.
+variant,SN-QTR-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-QTR-CLY-UK12: cm values are nominal; confirm against the last.
+variant,SN-QTR-CLY,variants.foot_length_cm_status,[TO CONFIRM: last],last,size guide,SN-QTR-CLY-UK13: cm values are nominal; confirm against the last.
