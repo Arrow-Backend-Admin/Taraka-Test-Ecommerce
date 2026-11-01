@@ -136,6 +136,16 @@ class AdminProductSummary(BaseModel):
     unresolved_count: int
 
 
+class PublicImageOut(BaseModel):
+    role: str
+    filename: str
+    url: str | None
+    alt: str
+    is_placeholder: bool
+    aspect: str = "4:5"
+    placeholder_notice: str | None = None
+
+
 class PublicVariantOut(BaseModel):
     sku: str
     size_uk: str
@@ -143,6 +153,7 @@ class PublicVariantOut(BaseModel):
     size_us_men: str | None
     size_us_women: str | None
     foot_length_cm: float | None
+    foot_length_note: str | None = None
     price_inr: float
     available: int
 
@@ -163,7 +174,11 @@ class PublicProductOut(BaseModel):
     summary: str | None
     hero: bool
     image: str | None
+    images: list[PublicImageOut] = Field(default_factory=list)
+    status: str
+    preview: bool = False
     features: list[str] = Field(default_factory=list)
+    unresolved_fields: list[str] = Field(default_factory=list)
 
 
 class PublicProductDetailOut(PublicProductOut):

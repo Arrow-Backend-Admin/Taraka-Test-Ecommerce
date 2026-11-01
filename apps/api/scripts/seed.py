@@ -13,6 +13,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Load the Phase 3 catalogue into the API database.")
     parser.add_argument("--catalogue", type=Path, default=None, help="Path to products.json")
     parser.add_argument(
+        "--placeholders",
+        type=Path,
+        default=None,
+        help="Path to placeholder-images.json (defaults to the Phase 4 set).",
+    )
+    parser.add_argument(
         "--database-url",
         default=None,
         help="Override DATABASE_URL. Prefer the environment variable for real credentials.",
@@ -38,7 +44,7 @@ def main() -> None:
         Base.metadata.create_all(engine)
 
     with SessionLocal() as session:
-        counts = seed_catalogue(session, args.catalogue)
+        counts = seed_catalogue(session, args.catalogue, args.placeholders)
         products = session.scalars(select(Product)).all()
         unresolved = sum(1 for product in products if product_unresolved_fields(product))
 

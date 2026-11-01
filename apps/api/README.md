@@ -27,8 +27,9 @@ uvicorn app.main:app --reload --port 8000
 ```
 
 The seed reads `brand/phase-3/products.json` and loads 30 products, 330 variants,
-5 categories and 330 inventory rows. Every product stays `draft` because the
-Phase 3 facts still contain `[TO CONFIRM]` fields.
+5 categories and 330 inventory rows. It also attaches the six placeholder images
+per product from `brand/phase-4/placeholder-images.json`. Every product stays
+`draft` because the Phase 3 facts still contain `[TO CONFIRM]` fields.
 
 For a throwaway SQLite database:
 
@@ -44,6 +45,7 @@ python scripts/seed.py \
 
 | Variable | Purpose |
 |---|---|
+| `APP_ENV` | `development` by default. Set `production` to enforce the placeholder publish guard and disable preview responses. `ENVIRONMENT` is accepted as an alias. |
 | `DATABASE_URL` | SQLAlchemy URL. Defaults to `sqlite:///./santvana-dev.db`. |
 | `ADMIN_API_TOKEN` | Bearer token for `/admin/*`. If unset, admin routes return `503`. |
 | `CORS_ORIGINS` | Comma-separated storefront origins. Default `http://localhost:3000`. |
@@ -52,7 +54,10 @@ python scripts/seed.py \
 | `OTEL_EXPORTER_OTLP_ENDPOINT` | OTLP/HTTP endpoint, e.g. `http://localhost:4318/v1/traces`. |
 | `OTEL_EXPORTER_OTLP_HEADERS` | Optional `key=value,key2=value2` exporter headers. |
 
-No credentials are committed. `.env.example` contains placeholders only.
+No credentials are committed. `.env.example` contains placeholders only. Optional
+`UNSPLASH_ACCESS_KEY`, `PEXELS_API_KEY`, `PIXABAY_API_KEY`, `OPENVERSE_CLIENT_ID`
+and `OPENVERSE_CLIENT_SECRET` entries are blank and are only for a future
+placeholder refresh; the committed set uses Wikimedia Commons.
 
 ## Endpoints
 
@@ -62,7 +67,9 @@ No credentials are committed. `.env.example` contains placeholders only.
 |---|---|---|
 | `GET` | `/health` | Liveness and telemetry state. |
 | `GET` | `/catalogue` | Published, storefront-safe products only. |
-| `GET` | `/catalogue/{slug}` | Published product detail, sizes and safe materials. |
+| `GET` | `/catalogue/{slug}` | Published product detail, sizes, materials and images. |
+| `GET` | `/catalogue?preview_drafts=true` | Development-only draft preview. Ignored when `APP_ENV=production`. |
+| `GET` | `/catalogue/{slug}?preview_drafts=true` | Development-only draft detail. Ignored when `APP_ENV=production`. |
 
 ### Admin — `Authorization: Bearer <ADMIN_API_TOKEN>`
 
@@ -95,6 +102,29 @@ lists and dictionaries, looking for `[TO CONFIRM` (case-insensitive).
   defence in depth: bad data is hidden, not rendered.
 - Public serialisation also filters individual strings, so a flag cannot leak
   through a nested feature, material, image name or SEO field.
+- When `APP_ENV=production`, publishing a product with any
+  `images[].is_placeholder=true` returns `409` with
+  `reason: "placeholder_images"`. A published product also cannot be edited to
+  add a placeholder image in production.
+- In production, the public catalogue skips a forced-published product that
+  still has a placeholder image.
+- `GET /catalogue?preview_drafts=true` is ignored in production. In development
+  it returns all products, replaces unresolved values with “To be confirmed”
+  and marks each payload with `preview: true`. It never returns a raw
+  `[TO CONFIRM]` value.
+
+## Launch check
+
+Run this against the production database before launch:
+
+```bash
+cd apps/api
+python scripts/launch_check.py
+```
+
+It exits non-zero if any published product still has a placeholder image or an
+unresolved `[TO CONFIRM]` field. It is a separate check from the API guard so a
+forced database edit cannot slip through unnoticed.
 
 ## Inventory concurrency
 
@@ -127,9 +157,13 @@ Coverage includes:
 - public catalogue and detail serialisation;
 - publish guard on product fields and variant fields;
 - forced-published unresolved data hidden from the storefront;
+- production placeholder publish guard and public filtering;
+- development draft preview with “To be confirmed” and placeholder notices;
 - parallel last-unit reservation;
 - seed counts and idempotency;
 - telemetry disabled by default.
+
+The suite currently reports **14 passed**.
 
 ## Database model
 

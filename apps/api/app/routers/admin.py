@@ -35,6 +35,7 @@ from ..services.inventory import (
 from ..services.publish import (
     PublishBlocked,
     admin_product_payload,
+    placeholder_image_fields,
     product_unresolved_fields,
     publish_product,
     unpublish_product,
@@ -247,7 +248,10 @@ def get_product(product_id: str, db: Session = Depends(get_db)) -> dict[str, Any
 
 @router.patch("/products/{product_id}")
 def update_product(
-    product_id: str, payload: ProductUpdate, db: Session = Depends(get_db)
+    product_id: str,
+    payload: ProductUpdate,
+    db: Session = Depends(get_db),
+    settings: Settings = Depends(get_settings),
 ) -> dict[str, Any]:
     product = _get_product(db, product_id)
     data = payload.model_dump(exclude_unset=True)
@@ -277,6 +281,20 @@ def update_product(
                     "unresolved_fields": unresolved,
                 },
             )
+        if settings.environment.strip().lower() == "production":
+            placeholders = placeholder_image_fields(product)
+            if placeholders:
+                db.rollback()
+                raise HTTPException(
+                    status_code=409,
+                    detail={
+                        "message": (
+                            "Published products cannot use placeholder images "
+                            "in production"
+                        ),
+                        "placeholder_images": placeholders,
+                    },
+                )
 
     _commit(db)
     db.refresh(product)
@@ -293,16 +311,27 @@ def delete_product(product_id: str, db: Session = Depends(get_db)) -> None:
 
 
 @router.post("/products/{product_id}/publish", response_model=PublishResult)
-def publish(product_id: str, db: Session = Depends(get_db)) -> PublishResult:
+def publish(
+    product_id: str,
+    db: Session = Depends(get_db),
+    settings: Settings = Depends(get_settings),
+) -> PublishResult:
     product = _get_product(db, product_id)
     try:
-        publish_product(db, product)
+        publish_product(db, product, environment=settings.environment)
     except PublishBlocked as exc:
         raise HTTPException(
             status_code=409,
             detail={
-                "message": "Product has unresolved fields",
-                "unresolved_fields": exc.fields,
+                "message": str(exc),
+                "reason": exc.reason,
+                "blocking_fields": exc.fields,
+                "unresolved_fields": (
+                    exc.fields if exc.reason == "unresolved_fields" else []
+                ),
+                "placeholder_images": (
+                    exc.fields if exc.reason == "placeholder_images" else []
+                ),
             },
         ) from exc
     return PublishResult(

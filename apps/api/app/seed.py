@@ -13,6 +13,12 @@ from .models import Category, Inventory, InventoryEvent, Product, ProductVariant
 from .services.publish import UNRESOLVED_RE
 
 DEFAULT_CATALOGUE = Path(__file__).resolve().parents[3] / "brand" / "phase-3" / "products.json"
+DEFAULT_PLACEHOLDERS = (
+    Path(__file__).resolve().parents[3]
+    / "brand"
+    / "phase-4"
+    / "placeholder-images.json"
+)
 DEFAULT_AUDIENCE = "Urban India, 22–34, unisex"
 
 
@@ -61,6 +67,21 @@ def _safe_feature_bullets(features: Any) -> list[str]:
     ][:5]
 
 
+def _placeholder_images(path: Path) -> dict[str, list[dict[str, Any]]]:
+    if not path.exists():
+        return {}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    products = payload.get("products")
+    if not isinstance(products, dict):
+        return {}
+    result: dict[str, list[dict[str, Any]]] = {}
+    for slug, item in products.items():
+        images = item.get("images") if isinstance(item, dict) else None
+        if isinstance(images, list):
+            result[slug] = [image for image in images if isinstance(image, dict)]
+    return result
+
+
 def _upsert_category(
     session: Session, slug: str, name: str, code: str, sort_order: int
 ) -> Category:
@@ -76,7 +97,12 @@ def _upsert_category(
     return category
 
 
-def _product_values(item: dict[str, Any], category_id: int) -> dict[str, Any]:
+def _product_values(
+    item: dict[str, Any],
+    category_id: int,
+    *,
+    images: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     launch_date, launch_date_note = _launch_date(item.get("launch_date"))
     features = item.get("features") or []
     colourways = item.get("colourways")
@@ -169,7 +195,7 @@ def _product_values(item: dict[str, Any], category_id: int) -> dict[str, Any]:
         "care": item.get("care"),
         "performance_claims": item.get("performance_claims") or [],
         "claims": item.get("claims") or [],
-        "images": item.get("images") or [],
+        "images": images if images is not None else item.get("images") or [],
     }
 
 
@@ -197,12 +223,19 @@ def _variant_values(item: dict[str, Any], *, creating: bool) -> dict[str, Any]:
     return values
 
 
-def seed_catalogue(session: Session, catalogue_path: str | Path | None = None) -> dict[str, int]:
+def seed_catalogue(
+    session: Session,
+    catalogue_path: str | Path | None = None,
+    placeholder_path: str | Path | None = None,
+) -> dict[str, int]:
     path = Path(catalogue_path) if catalogue_path else DEFAULT_CATALOGUE
     payload = json.loads(path.read_text(encoding="utf-8"))
     products = payload.get("products")
     if not isinstance(products, list) or not products:
         raise ValueError(f"No products found in {path}")
+    placeholder_images = _placeholder_images(
+        Path(placeholder_path) if placeholder_path else DEFAULT_PLACEHOLDERS
+    )
 
     category_order: dict[str, int] = {}
     for item in products:
@@ -229,7 +262,15 @@ def seed_catalogue(session: Session, catalogue_path: str | Path | None = None) -
             if product is None:
                 product = Product(id=item["product_id"], status="draft")
                 session.add(product)
-            for key, value in _product_values(item, category.id).items():
+            for key, value in _product_values(
+                item,
+                category.id,
+                images=(
+                    placeholder_images.get(item["slug"], [])
+                    if placeholder_images
+                    else None
+                ),
+            ).items():
                 setattr(product, key, value)
             session.flush()
             counts["products"] += 1

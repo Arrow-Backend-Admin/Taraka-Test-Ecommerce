@@ -29,3 +29,9 @@ def test_seed_loads_phase_3_catalogue_and_is_idempotent(db_session) -> None:
     products = db_session.scalars(select(Product)).all()
     assert all(product.status == "draft" for product in products)
     assert all(product_unresolved_fields(product) for product in products)
+    assert all(len(product.images or []) == 6 for product in products)
+    assert all(
+        image.get("is_placeholder") is True
+        for product in products
+        for image in (product.images or [])
+    )

@@ -8,16 +8,24 @@ from typing import Any
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from ..config import get_settings
 from ..models import Product, ProductVariant
 
 UNRESOLVED_MARKER = "[TO CONFIRM"
 UNRESOLVED_RE = re.compile(r"\[TO CONFIRM", re.IGNORECASE)
+TO_BE_CONFIRMED = "To be confirmed"
+PLACEHOLDER_NOTICE = "Placeholder image, not the actual product"
 
 
 class PublishBlocked(Exception):
-    def __init__(self, fields: list[str]) -> None:
+    def __init__(self, fields: list[str], *, reason: str = "unresolved_fields") -> None:
         self.fields = fields
-        super().__init__("Product has unresolved fields: " + ", ".join(fields))
+        self.reason = reason
+        if reason == "placeholder_images":
+            message = "Product has placeholder images and cannot be published to production: "
+        else:
+            message = "Product has unresolved fields: "
+        super().__init__(message + ", ".join(fields))
 
 
 def is_unresolved(value: Any) -> bool:
@@ -30,6 +38,49 @@ def safe_text(value: Any) -> str | None:
     if not isinstance(value, str):
         return str(value)
     return None if is_unresolved(value) else value
+
+
+def preview_text(value: Any) -> str:
+    """Return a display-safe preview value.
+
+    Missing and unresolved values become the literal string ``To be confirmed``.
+    This is only used by the development-only draft preview.
+    """
+
+    if value is None:
+        return TO_BE_CONFIRMED
+    if isinstance(value, str):
+        return TO_BE_CONFIRMED if is_unresolved(value) else value
+    return str(value)
+
+
+def _preview_list(values: Any) -> list[str]:
+    if not isinstance(values, (list, tuple)):
+        return [TO_BE_CONFIRMED]
+    result = [preview_text(value) for value in values]
+    return result or [TO_BE_CONFIRMED]
+
+
+def _is_placeholder_image(image: Any) -> bool:
+    if not isinstance(image, dict):
+        return False
+    value = image.get("is_placeholder")
+    return value is True or (isinstance(value, str) and value.lower() == "true")
+
+
+def placeholder_image_fields(product: Product) -> list[str]:
+    images = product.images or []
+    if not isinstance(images, list):
+        return []
+    return [
+        f"images[{index}].is_placeholder"
+        for index, image in enumerate(images)
+        if _is_placeholder_image(image)
+    ]
+
+
+def product_has_placeholder_image(product: Product) -> bool:
+    return bool(placeholder_image_fields(product))
 
 
 def _walk_unresolved(value: Any, path: str, out: list[str]) -> None:
@@ -62,14 +113,30 @@ def product_unresolved_fields(product: Product) -> list[str]:
     return sorted(set(fields))
 
 
-def publish_product(db: Session, product: Product) -> Product:
+def publish_product(
+    db: Session, product: Product, *, environment: str | None = None
+) -> Product:
     fields = product_unresolved_fields(product)
     if fields:
         raise PublishBlocked(fields)
+
+    env = (environment or get_settings().environment).strip().lower()
+    if env == "production":
+        placeholder_fields = placeholder_image_fields(product)
+        if placeholder_fields:
+            raise PublishBlocked(placeholder_fields, reason="placeholder_images")
+
     product.status = "published"
     db.commit()
     db.refresh(product)
     return product
+
+
+def published_placeholder_products(db: Session) -> list[Product]:
+    products = db.scalars(
+        select(Product).where(Product.status == "published").order_by(Product.name)
+    ).all()
+    return [product for product in products if product_has_placeholder_image(product)]
 
 
 def unpublish_product(db: Session, product: Product) -> Product:
@@ -102,6 +169,53 @@ def _first_image(product: Product) -> str | None:
     return None
 
 
+def _public_images(product: Product, *, preview: bool = False) -> list[dict[str, Any]]:
+    images = product.images or []
+    if not isinstance(images, list):
+        return []
+    result: list[dict[str, Any]] = []
+    for image in images:
+        if not isinstance(image, dict):
+            continue
+        filename = (
+            preview_text(image.get("filename"))
+            if preview
+            else safe_text(image.get("filename"))
+        )
+        if not filename or filename == TO_BE_CONFIRMED:
+            continue
+        is_placeholder = _is_placeholder_image(image)
+        url = preview_text(image.get("url")) if preview else safe_text(image.get("url"))
+        if url == TO_BE_CONFIRMED:
+            url = None
+        if not url and is_placeholder:
+            url = f"/placeholders/{filename}"
+        alt = (
+            preview_text(image.get("alt"))
+            if preview
+            else safe_text(image.get("alt"))
+        )
+        if not alt:
+            alt = PLACEHOLDER_NOTICE if is_placeholder else "Product image"
+        role = (
+            preview_text(image.get("role"))
+            if preview
+            else safe_text(image.get("role"))
+        )
+        result.append(
+            {
+                "role": role or "image",
+                "filename": filename,
+                "url": url,
+                "alt": alt,
+                "is_placeholder": is_placeholder,
+                "aspect": safe_text(image.get("aspect")) or "4:5",
+                "placeholder_notice": PLACEHOLDER_NOTICE if is_placeholder else None,
+            }
+        )
+    return result
+
+
 def _available(variant: ProductVariant) -> int:
     if variant.inventory is None:
         return 0
@@ -121,6 +235,7 @@ def to_public_product(product: Product, detail: bool = False) -> dict[str, Any] 
     summary = safe_text(product.summary_15w or product.short_description)
     category_name = safe_text(product.category.name) if product.category else None
     features = _safe_list(product.feature_bullets or product.features)[:5]
+    images = _public_images(product)
 
     payload: dict[str, Any] = {
         "id": product.id,
@@ -138,6 +253,9 @@ def to_public_product(product: Product, detail: bool = False) -> dict[str, Any] 
         "summary": summary,
         "hero": product.hero,
         "image": _first_image(product),
+        "images": images,
+        "status": product.status,
+        "preview": False,
         "features": features,
     }
 
@@ -168,6 +286,7 @@ def to_public_product(product: Product, detail: bool = False) -> dict[str, Any] 
                 "foot_length_cm": float(variant.foot_length_cm)
                 if variant.foot_length_cm is not None
                 else None,
+                "foot_length_note": None,
                 "price_inr": float(variant.price_inr),
                 "available": _available(variant),
             }
@@ -187,25 +306,150 @@ def to_public_product(product: Product, detail: bool = False) -> dict[str, Any] 
     return payload
 
 
-def public_products(db: Session) -> list[dict[str, Any]]:
+def _is_production(environment: str | None) -> bool:
+    return (environment or get_settings().environment).strip().lower() == "production"
+
+
+def public_products(
+    db: Session, *, environment: str | None = None
+) -> list[dict[str, Any]]:
     products = db.scalars(
         select(Product).where(Product.status == "published").order_by(Product.name)
     ).all()
     result: list[dict[str, Any]] = []
     for product in products:
+        if _is_production(environment) and product_has_placeholder_image(product):
+            continue
         public = to_public_product(product)
         if public is not None:
             result.append(public)
     return result
 
 
-def public_product(db: Session, slug: str) -> dict[str, Any] | None:
+def public_product(
+    db: Session, slug: str, *, environment: str | None = None
+) -> dict[str, Any] | None:
     product = db.scalar(
         select(Product).where(Product.slug == slug, Product.status == "published")
     )
     if product is None:
         return None
+    if _is_production(environment) and product_has_placeholder_image(product):
+        return None
     return to_public_product(product, detail=True)
+
+
+def to_preview_product(product: Product, detail: bool = False) -> dict[str, Any]:
+    """Return a development-only draft preview with no raw flag values.
+
+    Every unresolved or missing display field becomes ``To be confirmed``. The
+    payload is deliberately separate from the public serializer so a preview can
+    never be mistaken for a publishable product.
+    """
+
+    summary = preview_text(product.summary_15w or product.short_description)
+    category_name = (
+        preview_text(product.category.name) if product.category else TO_BE_CONFIRMED
+    )
+    features = _preview_list(product.feature_bullets or product.features)[:5]
+    images = _public_images(product, preview=True)
+    first_image = next(
+        (image["filename"] for image in images if image.get("filename")),
+        None,
+    )
+
+    payload: dict[str, Any] = {
+        "id": product.id,
+        "name": preview_text(product.name),
+        "slug": preview_text(product.slug),
+        "category": category_name,
+        "sub_category": preview_text(product.sub_category),
+        "audience": preview_text(product.audience),
+        "tier": preview_text(product.tier),
+        "tier_label": preview_text(product.tier_label),
+        "colour": preview_text(product.colour),
+        "colour_hex": safe_text(product.colour_hex) or "#D9CBB4",
+        "price_inr": float(product.price_inr),
+        "mrp_inr": float(product.mrp_inr),
+        "summary": summary,
+        "hero": product.hero,
+        "image": first_image,
+        "images": images,
+        "status": product.status,
+        "preview": True,
+        "features": features,
+        "unresolved_fields": product_unresolved_fields(product),
+    }
+
+    if not detail:
+        return payload
+
+    materials = {
+        label: preview_text(value)
+        for label, value in {
+            "upper": product.upper_material,
+            "lining": product.lining_material,
+            "insole": product.insole_material,
+            "midsole": product.midsole_material,
+            "outsole": product.outsole_material,
+        }.items()
+    }
+
+    sizes = []
+    for variant in sorted(product.variants, key=lambda item: item.id):
+        foot_length_note = preview_text(variant.foot_length_cm_status)
+        if variant.foot_length_cm is not None:
+            foot_length_note = None
+        sizes.append(
+            {
+                "sku": preview_text(variant.sku),
+                "size_uk": preview_text(variant.size_uk),
+                "size_eu": preview_text(variant.size_eu),
+                "size_us_men": preview_text(variant.size_us_men),
+                "size_us_women": preview_text(variant.size_us_women),
+                "foot_length_cm": float(variant.foot_length_cm)
+                if variant.foot_length_cm is not None
+                else None,
+                "foot_length_note": foot_length_note,
+                "price_inr": float(variant.price_inr),
+                "available": _available(variant),
+            }
+        )
+
+    payload.update(
+        {
+            "description": preview_text(
+                product.description_120w or product.long_description
+            ),
+            "sizes": sizes,
+            "materials": materials,
+            "fit_notes": preview_text(product.fit_recommendation or product.fit_note),
+            "care": preview_text(product.care),
+            "seo_title": preview_text(product.seo_title),
+            "seo_description": preview_text(product.seo_description),
+        }
+    )
+    return payload
+
+
+def preview_products(
+    db: Session, *, environment: str | None = None
+) -> list[dict[str, Any]]:
+    if _is_production(environment):
+        return []
+    products = db.scalars(select(Product).order_by(Product.name)).all()
+    return [to_preview_product(product) for product in products]
+
+
+def preview_product(
+    db: Session, slug: str, *, environment: str | None = None
+) -> dict[str, Any] | None:
+    if _is_production(environment):
+        return None
+    product = db.scalar(select(Product).where(Product.slug == slug))
+    if product is None:
+        return None
+    return to_preview_product(product, detail=True)
 
 
 def _json_value(value: Any) -> Any:

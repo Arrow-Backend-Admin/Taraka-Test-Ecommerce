@@ -16,7 +16,7 @@ cleared.
 
 | Path | Contents |
 |---|---|
-| `apps/storefront/` | Next.js 16 app: `/brand` concept route and `/catalogue` storefront route |
+| `apps/storefront/` | Next.js 16 app: `/brand` concept route, `/catalogue` list and detail routes |
 | `apps/api/` | FastAPI + SQLAlchemy + Alembic catalogue and inventory API |
 | `brand/strategy.md` | Phase 1 strategy, v1.1 approvals and open items |
 | `brand/naming.md` | Naming risk memo, spelling policy and clearance status |
@@ -41,6 +41,11 @@ Open `http://localhost:3000` for the concept landing page,
 The catalogue reads `API_URL` (default `http://localhost:8000`). Copy
 `apps/storefront/.env.example` to `apps/storefront/.env` if the API runs
 elsewhere.
+
+The storefront shows published products only by default. For local draft review,
+set `PREVIEW_DRAFTS=true` and keep `APP_ENV=development`; unresolved fields read
+“To be confirmed” and every placeholder is labelled. `PREVIEW_DRAFTS` is ignored
+when `APP_ENV=production`.
 
 Build checks:
 
@@ -84,6 +89,7 @@ python brand/phase-3/validate_catalogue.py
 # API
 cd apps/api
 python -m pytest -q
+python scripts/launch_check.py
 
 # Storefront
 cd ../..
@@ -92,7 +98,8 @@ npm run build
 ```
 
 The API test suite includes the parallel last-unit reservation test: two threads
-reserve the same final unit, and exactly one succeeds.
+reserve the same final unit, and exactly one succeeds. The launch check fails if
+any published product still has a placeholder image or an unresolved field.
 
 ## Guardrails
 
@@ -102,6 +109,11 @@ reserve the same final unit, and exactly one succeeds.
 - A product with any unresolved `[TO CONFIRM]` field cannot be published.
 - The storefront must never render a `[TO CONFIRM]` value, including after a
   forced-published row.
+- A product with any placeholder image cannot be published in production.
+- Placeholder images are temporary, local, CC0/CC BY derivatives. They must never
+  be used in ads, social posts or packaging.
+- `python apps/api/scripts/launch_check.py` must fail if a published product
+  still uses a placeholder image.
 - No cart, checkout or payment work until Phase 4 Milestone 1 is approved.
 - The Devanagari wordmark has a 20 px absolute screen floor and a 6 mm measured
   print floor. Below 20 px, use the monogram or symbol.

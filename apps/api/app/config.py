@@ -1,5 +1,6 @@
 from functools import lru_cache
 
+from pydantic import AliasChoices, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -13,7 +14,10 @@ class Settings(BaseSettings):
     )
 
     app_name: str = "Sāntvana API"
-    environment: str = "development"
+    environment: str = Field(
+        default="development",
+        validation_alias=AliasChoices("APP_ENV", "ENVIRONMENT"),
+    )
     database_url: str = "sqlite:///./santvana-dev.db"
     admin_api_token: str | None = None
     cors_origins: str = "http://localhost:3000"
