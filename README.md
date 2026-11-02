@@ -8,15 +8,16 @@ GST/pricing model, policies, size guide and merchandising plan.
 
 **Status: concept only.** Phase 2 is approved as a concept visual system. Phase 3
 is approved as working data, with its open items kept. Phase 4 Milestone 1 is
-delivered and awaiting founder approval. No print, domain or ad spend until the
-attorney opinion and native-speaker connotation test are back. The name is not
-cleared.
+delivered; Milestone 2 adds catalogue filters, PostgreSQL full-text search, live
+stock size selection and a guest cart with 15-minute reservations. Checkout and
+payments are not started. No print, domain or ad spend until the attorney opinion
+and native-speaker connotation test are back. The name is not cleared.
 
 ## Monorepo
 
 | Path | Contents |
 |---|---|
-| `apps/storefront/` | Next.js 16 app: `/brand` concept route, `/catalogue` list and detail routes |
+| `apps/storefront/` | Next.js 16 app: `/brand` concept route, `/catalogue` list and detail routes, `/credits` image credits |
 | `apps/api/` | FastAPI + SQLAlchemy + Alembic catalogue and inventory API |
 | `brand/strategy.md` | Phase 1 strategy, v1.1 approvals and open items |
 | `brand/naming.md` | Naming risk memo, spelling policy and clearance status |
@@ -35,10 +36,12 @@ npm run dev
 ```
 
 Open `http://localhost:3000` for the concept landing page,
-`http://localhost:3000/catalogue` for the publish-gated catalogue, and
+`http://localhost:3000/catalogue` for the publish-gated catalogue,
+`http://localhost:3000/credits` for placeholder sources and visual QA, and
 `http://localhost:3000/brand` for the concept brand book.
 
-The catalogue reads `API_URL` (default `http://localhost:8000`). Copy
+The catalogue reads `API_URL` (default `http://localhost:8000`) on the server.
+Browser calls for live stock and the guest cart read `NEXT_PUBLIC_API_URL`. Copy
 `apps/storefront/.env.example` to `apps/storefront/.env` if the API runs
 elsewhere.
 
@@ -75,6 +78,11 @@ The seed loads the Phase 3 catalogue: 30 products, 330 variants, 5 categories an
 330 inventory rows. Every product stays `draft` because the product facts still
 contain `[TO CONFIRM]` fields. The publish guard blocks those products, and the
 public catalogue never renders a flagged value.
+
+Outside production the seed also loads a clearly flagged development stock
+fixture so size selectors and the guest cart can be exercised. The fixture never
+writes `launch_stock_qty`, records `dev-fixture:<sku>` inventory events and
+refuses to run when `APP_ENV=production`. Pass `--no-dev-inventory` to skip it.
 
 API docs: `http://localhost:8000/docs`. See `apps/api/README.md` for endpoints,
 configuration, inventory semantics and the OpenTelemetry setup.
@@ -114,6 +122,7 @@ any published product still has a placeholder image or an unresolved field.
   be used in ads, social posts or packaging.
 - `python apps/api/scripts/launch_check.py` must fail if a published product
   still uses a placeholder image.
-- No cart, checkout or payment work until Phase 4 Milestone 1 is approved.
+- Checkout and payments are not implemented. The guest cart only holds a
+  time-boxed reservation; it never takes payment.
 - The Devanagari wordmark has a 20 px absolute screen floor and a 6 mm measured
   print floor. Below 20 px, use the monogram or symbol.

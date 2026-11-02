@@ -1,11 +1,32 @@
-# Phase 4 — Milestone 1
+# Phase 4 — Milestone 2
 
-**Status: delivered 1 November 2026, awaiting founder approval.**
-Phase 3 is approved as working data with its open items kept. Phase 4 Milestone 1
-is the catalogue and inventory foundation only. Cart, checkout and payments are
-not started.
+**Status: delivered 2 November 2026, awaiting founder approval.**
+Phase 3 is approved as working data with its open items kept. Milestone 1 delivered
+the catalogue and inventory foundation. Milestone 2 adds catalogue filters,
+PostgreSQL full-text search, a live stock size selector and a guest cart with
+time-boxed reservations. Checkout and payments are not started.
 
-## What is in this milestone
+## What Milestone 2 adds
+
+- Catalogue filters for category, colour, available size, minimum and maximum
+  price, plus a text query.
+- PostgreSQL full-text search over name, sub-category, colour and descriptions,
+  backed by the GIN index `ix_products_search_tsv`. SQLite uses a
+  case-insensitive substring fallback for tests and local development.
+- Facet counts for categories, colours, available sizes and the price range.
+- `/catalogue/{slug}/stock` returns live per-size availability with an `as_of`
+  timestamp; the product page refreshes it every 30 seconds.
+- Live size selector with unavailable sizes disabled and a quantity cap.
+- Guest cart with a 15-minute reservation, maximum 5 units per size, 10 units and
+  5 lines per cart. Removing a line, changing quantity or expiry releases the
+  hold. The conditional inventory update prevents overselling the last unit.
+- Checkout is explicitly unavailable. No payment, order or shipping flow exists.
+- Customer-copy sanitising removes internal ladder language and unconfirmed
+  return or exchange promises at seed time and again at serialisation.
+- `/credits` page with every placeholder source, licence, change and visual QA
+  result; linked from the storefront footer.
+
+## Milestone 1 foundation
 
 - Monorepo layout: `apps/storefront` (Next.js) and `apps/api` (FastAPI).
 - Alembic models and initial migration for `categories`, `products`,
@@ -18,8 +39,6 @@ not started.
 - Publish guard: any product or variant containing `[TO CONFIRM]` cannot be
   published. The public API also hides a published row if a flag appears, so the
   storefront never renders one.
-- Temporary placeholder photography: six roles per product, local 4:5
-  derivatives, per-image metadata and `image-credits.md`.
 - Production publish guard: a product with any `is_placeholder` image cannot be
   published when `APP_ENV=production`, and a published product cannot be edited
   to add one.
@@ -30,12 +49,12 @@ not started.
   still uses a placeholder image (and also checks for unresolved fields).
 - Parallel-checkout inventory test: two concurrent reservations for the last
   unit; exactly one wins.
-- OpenTelemetry instrumentation for FastAPI and SQLAlchemy, wired from the first
-  Phase 4 commit and disabled by default for local tests.
+- OpenTelemetry instrumentation for FastAPI and SQLAlchemy, disabled by default
+  for local tests.
 
 ## What is deliberately not in this milestone
 
-- Cart, checkout, payments, orders, shipping and returns.
+- Checkout, payments, orders, shipping and returns.
 - Admin UI. CRUD is exposed as a bearer-token API; a UI comes later.
 - Real product photography. Only temporary CC0/CC BY placeholders exist.
 - Real product facts, launch stock, HSN, care, fit, weight or materials.
@@ -53,8 +72,12 @@ not started.
 - Inventory reservations use one conditional SQL `UPDATE`:
   `reserved + qty` only when `on_hand - reserved >= qty`. The database picks the
   winner; the application does not read-then-write.
-- `inventory_events` records `reservation`, `release`, `sale`, `adjustment` and
-  `seed` events. `quantity_delta` is the signed change to available stock.
+- `inventory_events` records `reservation`, `release`, `sale`, `adjustment`,
+  `seed` and `dev_fixture` events. `quantity_delta` is the signed change to
+  available stock.
+- The development stock fixture is clearly flagged, never writes
+  `launch_stock_qty` and refuses to run when `APP_ENV=production`. Launch stock
+  remains `[TO CONFIRM]`.
 
 ## Placeholder photography
 
@@ -68,20 +91,23 @@ working data. Phase 4 does not overwrite that file: the seed replaces the
 approved Phase 3 catalogue auditable while the storefront gets the required
 six-role placeholder set.
 
-- Sources: six Wikimedia Commons photographs, CC0 1.0 or CC BY 4.0 only. No NC,
-  ND or SA licences. No Unsplash, Pexels or Pixabay API keys were available, so
-  the committed set uses Wikimedia Commons. The Unsplash-derived on-foot image
-  is the CC0 review copy hosted on Wikimedia Commons.
+- Sources: Wikimedia Commons only, CC0 1.0 or CC BY 4.0. No NC, ND or SA
+  licences. No Unsplash, Pexels or Pixabay API keys were available, so the
+  committed set uses Wikimedia Commons.
 - Roles: `hero-45`, `lateral`, `heel`, `top-down`, `sole-macro`, `on-foot`.
+- Twelve category/role slots use a reviewed photograph; the other eighteen use a
+  neutral grey 4:5 “Image coming” block because every candidate was branded,
+  wrong-view, an illustration, a museum fragment or carried an identifiable mark
+  or face.
 - Every product gets six local files named
   `placeholder_<model>_<role>_4x5_v00.jpg` under
-  `apps/storefront/public/placeholders/`. The same six source photographs are
-  reused across the 30 concept products so no placeholder implies a unique
-  product shot.
+  `apps/storefront/public/placeholders/`. Sources are reused by category so no
+  placeholder implies a unique product shot.
 - Derivatives are centre-cropped to 4:5, resized to 800 × 1000 and saved as
   progressive JPEG. Nothing is hotlinked.
 - Per-image metadata includes source URL, photographer, licence name and URL,
-  licence version, retrieval date and `is_placeholder=true`.
+  licence version, retrieval date, the change (“cropped and resized”), the QA
+  result and `is_placeholder=true`.
 - Every placeholder is rendered with “Placeholder image, not the actual
   product”. Alt text describes the photograph, never our product.
 - Placeholders must never be used in ads, social posts or packaging.
@@ -90,27 +116,29 @@ Rebuild the set with Pillow installed:
 
 ```bash
 python -m pip install -r brand/phase-4/requirements.txt
+python brand/phase-4/merge_sources.py
 python brand/phase-4/build_placeholders.py
 ```
 
-The script caches downloads in `brand/phase-4/source-images/`, which is ignored
-by git. Delete the cache to force a fresh download.
+The script caches downloads in `brand/phase-4/source-images/`, and candidate
+review material in `brand/phase-4/qa/`; both are ignored by git. Delete the cache
+to force a fresh download.
 
 ## Verification
 
 ```text
-python brand/phase-3/build_catalogue.py
 python brand/phase-3/validate_catalogue.py
 # PASS: 30 products, 330 SKUs, 15/15 GST split
 
 cd apps/api
 alembic upgrade head
 python scripts/seed.py
-# Seeded 30 products, 330 variants, 5 categories, 330 inventory rows.
+# Seeded 30 products, 330 variants, 5 categories, 0 inventory rows.
+# DEV ONLY: seeded 330 preview stock rows.
 # Products with unresolved [TO CONFIRM] fields: 30/30
 
 python -m pytest -q
-# 14 passed
+# 29 passed
 
 python scripts/launch_check.py
 # LAUNCH CHECK PASSED (0 published products)
@@ -120,10 +148,9 @@ npm run typecheck
 npm run build
 ```
 
-The storefront build passes with Next.js 16.4.3. A runtime smoke test rendered
-the empty catalogue, a resolved test product, and the development draft preview
-with placeholders and “To be confirmed”, with no `[TO CONFIRM]` value in any
-response.
+The storefront build passes with Next.js 16.4.3. A runtime smoke test covered
+catalogue filters and facets, live stock, cart add/update/remove with reservation
+release, the product detail page and `/credits`.
 
 ## Open items carried forward
 
@@ -137,11 +164,10 @@ response.
 - Master-prompt schema gaps in `schema-gap-report.md`: sub-category, audience,
   15-word summary, 120-word description, exactly five feature bullets, 2–4
   colourways, launch stock per variant, six image roles, SEO meta length.
-- Human visual QA of the six source photographs for third-party marks,
-  identifiable faces, ground-in-frame and overcast-light compliance. The
-  placeholder guard blocks production use regardless, but the source set must
-  not be used externally before this review.
+- Human visual QA of the twelve retained source photographs. The model QA record
+  is in `image-credits.md`; the placeholder guard blocks production use
+  regardless.
 
 ## Next move
 
-Stop here. Wait for founder approval before cart, checkout or payments.
+Stop here. Checkout and payments start only after explicit founder approval.

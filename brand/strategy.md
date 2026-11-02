@@ -1,7 +1,7 @@
 # Sāntvana — Brand Strategy
 
 **Phase 1 deliverable · v1.1 · 30 October 2026**
-Owner: brand strategy · Status: Phase 2 approved as a concept; Phase 3 approved as working data; Phase 4 Milestone 1 awaiting approval; no print, domain or ad spend until the attorney opinion
+Owner: brand strategy · Status: Phase 2 approved as a concept; Phase 3 approved as working data; Phase 4 Milestone 2 delivered and awaiting approval; checkout and payments not started; no print, domain or ad spend until the attorney opinion
 
 **v1.1 changes:** The previous name is dropped. Sāntvana (सांत्वना; also spelled सान्त्वना) replaces it throughout. Name-dependent wordplay is removed, the origin story is rebuilt around founder-supplied facts rather than an invented anecdote, and Phase 2 now carries a bilingual Devanagari requirement.
 
@@ -362,6 +362,7 @@ Every outward claim that is not yet evidenced. This table is the guardrail for P
 - [x] **Phase 2 approved as a concept visual system** — 31 October 2026; the open items in `phase-2/README.md` are kept
 - [x] **Phase 3 approved as working data** — 31 October 2026; all open items kept; price band reconciled to ₹2,299–₹4,999
 - [ ] **Phase 4 Milestone 1 approved** — monorepo, API, publish guard, inventory test and OpenTelemetry delivered 31 October 2026; awaiting founder review
+- [ ] **Phase 4 Milestone 2 approved** — filters, PostgreSQL full-text search, live stock selector and guest cart reservations delivered 2 November 2026; checkout and payments not started; awaiting founder review
 
 ---
 

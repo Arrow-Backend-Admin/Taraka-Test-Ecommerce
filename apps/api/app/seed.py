@@ -9,7 +9,9 @@ from typing import Any
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from .config import get_settings
 from .models import Category, Inventory, InventoryEvent, Product, ProductVariant
+from .services.copy import sanitise_customer_text, sanitise_features
 from .services.publish import UNRESOLVED_RE
 
 DEFAULT_CATALOGUE = Path(__file__).resolve().parents[3] / "brand" / "phase-3" / "products.json"
@@ -104,7 +106,10 @@ def _product_values(
     images: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     launch_date, launch_date_note = _launch_date(item.get("launch_date"))
-    features = item.get("features") or []
+    features = sanitise_features(item.get("features") or [])
+    feature_bullets = sanitise_features(
+        item.get("feature_bullets") or _safe_feature_bullets(features)
+    )
     colourways = item.get("colourways")
     if not colourways:
         colourways = [{"name": item["colour"], "hex": item["colour_hex"]}]
@@ -159,15 +164,15 @@ def _product_values(
         "hero": bool(item.get("hero")),
         "hero_reason": item.get("hero_reason"),
         "restock_priority": item.get("restock_priority"),
-        "summary_15w": item.get("summary_15w"),
-        "description_120w": item.get("description_120w"),
-        "short_description": item.get("short_description"),
-        "long_description": item.get("long_description"),
+        "summary_15w": sanitise_customer_text(item.get("summary_15w")),
+        "description_120w": sanitise_customer_text(item.get("description_120w")),
+        "short_description": sanitise_customer_text(item.get("short_description")),
+        "long_description": sanitise_customer_text(item.get("long_description")),
         "features": features,
-        "feature_bullets": item.get("feature_bullets") or _safe_feature_bullets(features),
+        "feature_bullets": feature_bullets,
         "tags": item.get("tags") or [],
-        "seo_title": item.get("seo_title"),
-        "seo_description": item.get("seo_description"),
+        "seo_title": sanitise_customer_text(item.get("seo_title")),
+        "seo_description": sanitise_customer_text(item.get("seo_description")),
         "manufacturer": item.get("manufacturer"),
         "country_of_origin": item.get("country_of_origin"),
         "upper_material": item.get("upper_material"),
@@ -223,10 +228,59 @@ def _variant_values(item: dict[str, Any], *, creating: bool) -> dict[str, Any]:
     return values
 
 
+def seed_dev_inventory(session: Session) -> int:
+    """Populate preview stock. Never call this with APP_ENV=production.
+
+    This is a clearly flagged development fixture so size selectors can be
+    exercised. It does not touch ``launch_stock_qty`` and it is not launch
+    stock. The fixture is idempotent: an existing ``dev-fixture:<sku>`` event
+    stops the row being rewritten, so cart reservations survive a reseed.
+    """
+
+    environment = get_settings().environment.strip().lower()
+    if environment == "production":
+        raise RuntimeError("Refusing to seed dev inventory when APP_ENV=production")
+
+    pattern = [8, 5, 0, 12, 3, 6, 4]
+    written = 0
+    variants = session.scalars(select(ProductVariant).order_by(ProductVariant.id)).all()
+    for index, variant in enumerate(variants):
+        reference = f"dev-fixture:{variant.sku}"
+        exists = session.scalar(
+            select(InventoryEvent.id).where(InventoryEvent.reference == reference)
+        )
+        if exists is not None:
+            continue
+        inventory = variant.inventory
+        if inventory is None:
+            continue
+        quantity = pattern[index % len(pattern)]
+        inventory.on_hand = quantity
+        inventory.reserved = 0
+        inventory.version = inventory.version + 1
+        session.add(
+            InventoryEvent(
+                variant=variant,
+                event_type="dev_fixture",
+                quantity_delta=quantity,
+                reference=reference,
+                note=(
+                    "DEV ONLY preview stock fixture; not launch stock. "
+                    "Never seed when APP_ENV=production."
+                ),
+            )
+        )
+        written += 1
+    session.commit()
+    return written
+
+
 def seed_catalogue(
     session: Session,
     catalogue_path: str | Path | None = None,
     placeholder_path: str | Path | None = None,
+    *,
+    dev_inventory: bool = False,
 ) -> dict[str, int]:
     path = Path(catalogue_path) if catalogue_path else DEFAULT_CATALOGUE
     payload = json.loads(path.read_text(encoding="utf-8"))
@@ -243,7 +297,13 @@ def seed_catalogue(
         if slug not in category_order:
             category_order[slug] = len(category_order)
 
-    counts = {"categories": 0, "products": 0, "variants": 0, "inventory": 0}
+    counts = {
+        "categories": 0,
+        "products": 0,
+        "variants": 0,
+        "inventory": 0,
+        "dev_inventory": 0,
+    }
     try:
         for item in products:
             category = _upsert_category(
@@ -320,4 +380,6 @@ def seed_catalogue(
     except Exception:
         session.rollback()
         raise
+    if dev_inventory:
+        counts["dev_inventory"] = seed_dev_inventory(session)
     return counts

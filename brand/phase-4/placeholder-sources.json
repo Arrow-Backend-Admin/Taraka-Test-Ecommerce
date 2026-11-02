@@ -1,123 +1,513 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-10-31",
-  "notice": "Placeholder image, not the actual product.",
-  "usage": "Storefront placeholder only; never use in ads, social posts or packaging.",
-  "source_policy": "Wikimedia Commons, CC0 1.0 or CC BY 4.0 only. No NC, ND or SA. Local derivatives; no hotlinking.",
+  "schema_version": 2,
+  "generated_at": "2026-11-02",
+  "source_policy": "Wikimedia Commons only. CC0 1.0 or CC BY 4.0. No NC, ND or SA. Only sources that passed strict visual QA for third-party marks and identifiable faces are used. Roles without a suitable source use a neutral grey 'Image coming' block instead of a mismatched photo.",
   "sources": [
     {
-      "key": "oxfords-front-angle",
-      "role": "hero-45",
-      "role_label": "Hero, 45 degrees",
-      "source": "Wikimedia Commons",
-      "source_title": "Black Casual Oxfords with Contrast Stitching - from the Front at an Angle.jpg",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Black_Casual_Oxfords_with_Contrast_Stitching_-_from_the_Front_at_an_Angle.jpg",
-      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Black_Casual_Oxfords_with_Contrast_Stitching_-_from_the_Front_at_an_Angle.jpg/1280px-Black_Casual_Oxfords_with_Contrast_Stitching_-_from_the_Front_at_an_Angle.jpg",
-      "source_description": "Photo by Maximilian Kremer – CC BY 4.0 Original image & further photos: www.shoesandart.com A link to the source must be provided when using this image.",
-      "photographer": "Maximilian Kremer",
-      "licence_name": "CC BY 4.0",
-      "licence_url": "https://creativecommons.org/licenses/by/4.0/",
-      "licence_version": "4.0",
-      "retrieved_at": "2026-10-31",
-      "attribution": "\"Black Casual Oxfords with Contrast Stitching - from the Front at an Angle.jpg\" by Maximilian Kremer, CC BY 4.0, via Wikimedia Commons.",
-      "alt": "A pair of plain black leather oxford shoes photographed from the front at a low three-quarter angle on a pale background.",
-      "cache_file": "oxfords-front-angle.jpg",
-      "is_placeholder": true
-    },
-    {
-      "key": "oxfords-side-parallel",
-      "role": "lateral",
-      "role_label": "Lateral",
-      "source": "Wikimedia Commons",
-      "source_title": "Black Casual Oxfords with Contrast Stitching - Side View Parallel.jpg",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Black_Casual_Oxfords_with_Contrast_Stitching_-_Side_View_Parallel.jpg",
-      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Black_Casual_Oxfords_with_Contrast_Stitching_-_Side_View_Parallel.jpg/1280px-Black_Casual_Oxfords_with_Contrast_Stitching_-_Side_View_Parallel.jpg",
-      "source_description": "Photo by Maximilian Kremer – CC BY 4.0 Original image & further photos: www.shoesandart.com A link to the source must be provided when using this image.",
-      "photographer": "Maximilian Kremer",
-      "licence_name": "CC BY 4.0",
-      "licence_url": "https://creativecommons.org/licenses/by/4.0/",
-      "licence_version": "4.0",
-      "retrieved_at": "2026-10-31",
-      "attribution": "\"Black Casual Oxfords with Contrast Stitching - Side View Parallel.jpg\" by Maximilian Kremer, CC BY 4.0, via Wikimedia Commons.",
-      "alt": "Side profile of a pair of plain black leather oxford shoes on a pale background.",
-      "cache_file": "oxfords-side-parallel.jpg",
-      "is_placeholder": true
-    },
-    {
-      "key": "oxfords-back-angle",
-      "role": "heel",
-      "role_label": "Heel",
-      "source": "Wikimedia Commons",
-      "source_title": "Black Casual Oxfords with Contrast Stitching - Back View at an Angle.jpg",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Black_Casual_Oxfords_with_Contrast_Stitching_-_Back_View_at_an_Angle.jpg",
-      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Black_Casual_Oxfords_with_Contrast_Stitching_-_Back_View_at_an_Angle.jpg/1280px-Black_Casual_Oxfords_with_Contrast_Stitching_-_Back_View_at_an_Angle.jpg",
-      "source_description": "Photo by Maximilian Kremer – CC BY 4.0 Original image & further photos: www.shoesandart.com A link to the source must be provided when using this image.",
-      "photographer": "Maximilian Kremer",
-      "licence_name": "CC BY 4.0",
-      "licence_url": "https://creativecommons.org/licenses/by/4.0/",
-      "licence_version": "4.0",
-      "retrieved_at": "2026-10-31",
-      "attribution": "\"Black Casual Oxfords with Contrast Stitching - Back View at an Angle.jpg\" by Maximilian Kremer, CC BY 4.0, via Wikimedia Commons.",
-      "alt": "Rear three-quarter view of plain black leather oxford shoes, showing the heel and contrast stitching.",
-      "cache_file": "oxfords-back-angle.jpg",
-      "is_placeholder": true
-    },
-    {
-      "key": "oxfords-top-view",
-      "role": "top-down",
-      "role_label": "Top-down",
-      "source": "Wikimedia Commons",
-      "source_title": "Black Casual Oxfords with Contrast Stitching - Top View.jpg",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Black_Casual_Oxfords_with_Contrast_Stitching_-_Top_View.jpg",
-      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Black_Casual_Oxfords_with_Contrast_Stitching_-_Top_View.jpg/1280px-Black_Casual_Oxfords_with_Contrast_Stitching_-_Top_View.jpg",
-      "source_description": "Photo by Maximilian Kremer – CC BY 4.0 Original image & further photos: www.shoesandart.com A link to the source must be provided when using this image.",
-      "photographer": "Maximilian Kremer",
-      "licence_name": "CC BY 4.0",
-      "licence_url": "https://creativecommons.org/licenses/by/4.0/",
-      "licence_version": "4.0",
-      "retrieved_at": "2026-10-31",
-      "attribution": "\"Black Casual Oxfords with Contrast Stitching - Top View.jpg\" by Maximilian Kremer, CC BY 4.0, via Wikimedia Commons.",
-      "alt": "Top-down view of a pair of plain black leather oxford shoes on a pale background.",
-      "cache_file": "oxfords-top-view.jpg",
-      "is_placeholder": true
-    },
-    {
-      "key": "oxfords-sole",
-      "role": "sole-macro",
-      "role_label": "Sole macro",
-      "source": "Wikimedia Commons",
-      "source_title": "Schwarze-lockere-oxfords-mit-kontrastnaehten-sohle.jpg",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Schwarze-lockere-oxfords-mit-kontrastnaehten-sohle.jpg",
-      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Schwarze-lockere-oxfords-mit-kontrastnaehten-sohle.jpg/1280px-Schwarze-lockere-oxfords-mit-kontrastnaehten-sohle.jpg",
-      "source_description": "Photo by Maximilian Kremer – CC BY 4.0 Original image & further photos: www.shoesandart.com A link to the source must be provided when using this image.",
-      "photographer": "Maximilian Kremer",
-      "licence_name": "CC BY 4.0",
-      "licence_url": "https://creativecommons.org/licenses/by/4.0/",
-      "licence_version": "4.0",
-      "retrieved_at": "2026-10-31",
-      "attribution": "\"Schwarze-lockere-oxfords-mit-kontrastnaehten-sohle.jpg\" by Maximilian Kremer, CC BY 4.0, via Wikimedia Commons.",
-      "alt": "Close view of the stitched leather sole of a black oxford shoe.",
-      "cache_file": "oxfords-sole.jpg",
-      "is_placeholder": true
-    },
-    {
-      "key": "leather-shoes-creek",
+      "category": "sneakers",
       "role": "on-foot",
-      "role_label": "On foot",
       "source": "Wikimedia Commons",
-      "source_title": "Leather shoes over a creek (Unsplash).jpg",
-      "source_url": "https://commons.wikimedia.org/wiki/File:Leather_shoes_over_a_creek_(Unsplash).jpg",
-      "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Leather_shoes_over_a_creek_%28Unsplash%29.jpg/1280px-Leather_shoes_over_a_creek_%28Unsplash%29.jpg",
-      "source_description": "British Columbia, Canada",
-      "photographer": "Matthew Sleeper mjsleeper",
+      "source_title": "File:White sneakers on asphalt (Unsplash).jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:White_sneakers_on_asphalt_%28Unsplash%29.jpg",
+      "source_description": "Dundas, Hamilton, Canada",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/1/12/White_sneakers_on_asphalt_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "preview_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/White_sneakers_on_asphalt_%28Unsplash%29.jpg/960px-White_sneakers_on_asphalt_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "photographer": "Nadine Shaabana nadineshaabana",
       "licence_name": "CC0 1.0",
-      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "licence_version": "1.0",
-      "retrieved_at": "2026-10-31",
-      "attribution": "\"Leather shoes over a creek (Unsplash).jpg\" by Matthew Sleeper mjsleeper, CC0 1.0, via Wikimedia Commons.",
-      "alt": "A person's feet in brown leather shoes resting above a rocky creek; no face is visible.",
-      "cache_file": "leather-shoes-creek.jpg",
-      "is_placeholder": true
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "retrieved_at": "2026-11-02",
+      "changes": "Cropped and resized",
+      "cache_file": "sneakers-on-foot.jpg",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "pass",
+        "notes": "Plain white canvas sneakers on foot on asphalt; no visible branding or face."
+      },
+      "attribution": "File:White sneakers on asphalt (Unsplash).jpg by Nadine Shaabana nadineshaabana, CC0 1.0, via Wikimedia Commons. Cropped and resized."
+    },
+    {
+      "category": "sandals",
+      "role": "hero-45",
+      "source": "Wikimedia Commons",
+      "source_title": "File:Man in sport sandals front view.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Man_in_sport_sandals_front_view.jpg",
+      "source_description": "Young man wearing sport sandals in brown leather",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Man_in_sport_sandals_front_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "preview_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Man_in_sport_sandals_front_view.jpg/960px-Man_in_sport_sandals_front_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "photographer": "Wyetts",
+      "licence_name": "CC0 1.0",
+      "licence_version": "1.0",
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "retrieved_at": "2026-11-02",
+      "changes": "Cropped and resized",
+      "cache_file": "sandals-hero-45.jpg",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "pass",
+        "notes": "Brown strappy sandals, three-quarter front, wood floor, no marks or faces."
+      },
+      "attribution": "File:Man in sport sandals front view.jpg by Wyetts, CC0 1.0, via Wikimedia Commons. Cropped and resized."
+    },
+    {
+      "category": "sandals",
+      "role": "lateral",
+      "source": "Wikimedia Commons",
+      "source_title": "File:Man in sandals side view.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Man_in_sandals_side_view.jpg",
+      "source_description": "Young man wearing sport sandals in brown leather",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/6/67/Man_in_sandals_side_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "preview_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Man_in_sandals_side_view.jpg/960px-Man_in_sandals_side_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "photographer": "Wyetts",
+      "licence_name": "CC0 1.0",
+      "licence_version": "1.0",
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "retrieved_at": "2026-11-02",
+      "changes": "Cropped and resized",
+      "cache_file": "sandals-lateral.jpg",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "pass",
+        "notes": "Side profile of brown sandals on foot, soft indoor light, no marks or faces."
+      },
+      "attribution": "File:Man in sandals side view.jpg by Wyetts, CC0 1.0, via Wikimedia Commons. Cropped and resized."
+    },
+    {
+      "category": "sandals",
+      "role": "top-down",
+      "source": "Wikimedia Commons",
+      "source_title": "File:Man in sandals top view.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Man_in_sandals_top_view.jpg",
+      "source_description": "Young man wearing sport sandals in brown leather",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Man_in_sandals_top_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "preview_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Man_in_sandals_top_view.jpg/960px-Man_in_sandals_top_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "photographer": "Wyetts",
+      "licence_name": "CC0 1.0",
+      "licence_version": "1.0",
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "retrieved_at": "2026-11-02",
+      "changes": "Cropped and resized",
+      "cache_file": "sandals-top-down.jpg",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "pass",
+        "notes": "Overhead view of sandals on foot, wood floor, no marks or faces."
+      },
+      "attribution": "File:Man in sandals top view.jpg by Wyetts, CC0 1.0, via Wikimedia Commons. Cropped and resized."
+    },
+    {
+      "category": "sandals",
+      "role": "on-foot",
+      "source": "Wikimedia Commons",
+      "source_title": "File:Man in sandals toe view.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Man_in_sandals_toe_view.jpg",
+      "source_description": "Young man wearing sport sandals in brown leather",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/2/27/Man_in_sandals_toe_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "preview_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Man_in_sandals_toe_view.jpg/960px-Man_in_sandals_toe_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "photographer": "Wyetts",
+      "licence_name": "CC0 1.0",
+      "licence_version": "1.0",
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "retrieved_at": "2026-11-02",
+      "changes": "Cropped and resized",
+      "cache_file": "sandals-on-foot.jpg",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "pass",
+        "notes": "Sandals worn on foot, floor visible, no marks or faces."
+      },
+      "attribution": "File:Man in sandals toe view.jpg by Wyetts, CC0 1.0, via Wikimedia Commons. Cropped and resized."
+    },
+    {
+      "category": "boots",
+      "role": "hero-45",
+      "source": "Wikimedia Commons",
+      "source_title": "File:Brown leather boots on a wood floor (Unsplash).jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Brown_leather_boots_on_a_wood_floor_%28Unsplash%29.jpg",
+      "source_description": "Radek Skrzypczak 2015",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Brown_leather_boots_on_a_wood_floor_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "preview_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Brown_leather_boots_on_a_wood_floor_%28Unsplash%29.jpg/960px-Brown_leather_boots_on_a_wood_floor_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "photographer": "Radek Skrzypczak radziu",
+      "licence_name": "CC0 1.0",
+      "licence_version": "1.0",
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "retrieved_at": "2026-11-02",
+      "changes": "Cropped and resized",
+      "cache_file": "boots-hero-45.jpg",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "pass",
+        "notes": "Brown leather lace-up boots, three-quarter front, wood floor, no marks or faces."
+      },
+      "attribution": "File:Brown leather boots on a wood floor (Unsplash).jpg by Radek Skrzypczak radziu, CC0 1.0, via Wikimedia Commons. Cropped and resized."
+    },
+    {
+      "category": "boots",
+      "role": "lateral",
+      "source": "Wikimedia Commons",
+      "source_title": "File:Boots (AM 1979.59-3).jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Boots_%28AM_1979.59-3%29.jpg",
+      "source_description": "Quick release boots - Sergeant - RNZAMC - ANZUK Singapore Forces - 1971-1974 Belonged to Sgt. Colin Whyte, Royal New Zealand Army Medical Corps, 1959-1971",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Boots_%28AM_1979.59-3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "preview_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Boots_%28AM_1979.59-3%29.jpg/960px-Boots_%28AM_1979.59-3%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "photographer": "Unknown",
+      "licence_name": "CC BY 4.0",
+      "licence_version": "4.0",
+      "licence_url": "https://creativecommons.org/licenses/by/4.0",
+      "retrieved_at": "2026-11-02",
+      "changes": "Cropped and resized",
+      "cache_file": "boots-lateral.jpg",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "pass",
+        "notes": "Plain black combat boots in side profile, studio light, no marks or faces."
+      },
+      "attribution": "File:Boots (AM 1979.59-3).jpg by Unknown, CC BY 4.0, via Wikimedia Commons. Cropped and resized."
+    },
+    {
+      "category": "boots",
+      "role": "heel",
+      "source": "Wikimedia Commons",
+      "source_title": "File:Boots on a rock (Unsplash).jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Boots_on_a_rock_%28Unsplash%29.jpg",
+      "source_description": "Chilliwack, Canada",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Boots_on_a_rock_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "preview_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Boots_on_a_rock_%28Unsplash%29.jpg/960px-Boots_on_a_rock_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "photographer": "Megan  Lewis meganlewis",
+      "licence_name": "CC0 1.0",
+      "licence_version": "1.0",
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "retrieved_at": "2026-11-02",
+      "changes": "Cropped and resized",
+      "cache_file": "boots-heel.jpg",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "pass",
+        "notes": "Black boots rear/heel view on rock, soft light, no marks or faces."
+      },
+      "attribution": "File:Boots on a rock (Unsplash).jpg by Megan  Lewis meganlewis, CC0 1.0, via Wikimedia Commons. Cropped and resized."
+    },
+    {
+      "category": "boots",
+      "role": "top-down",
+      "source": "Wikimedia Commons",
+      "source_title": "File:Hiking Boots (Unsplash).jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Hiking_Boots_%28Unsplash%29.jpg",
+      "source_description": "Revelstoke Mountain Resort, Revelstoke, Canada",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Hiking_Boots_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "preview_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Hiking_Boots_%28Unsplash%29.jpg/960px-Hiking_Boots_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "photographer": "Joshua Reddekopp joshuaryanphoto",
+      "licence_name": "CC0 1.0",
+      "licence_version": "1.0",
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "retrieved_at": "2026-11-02",
+      "changes": "Cropped and resized",
+      "cache_file": "boots-top-down.jpg",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "pass",
+        "notes": "Overhead view of boots, plain background, no marks or faces."
+      },
+      "attribution": "File:Hiking Boots (Unsplash).jpg by Joshua Reddekopp joshuaryanphoto, CC0 1.0, via Wikimedia Commons. Cropped and resized."
+    },
+    {
+      "category": "boots",
+      "role": "on-foot",
+      "source": "Wikimedia Commons",
+      "source_title": "File:Wearing boots on the pier (Unsplash).jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Wearing_boots_on_the_pier_%28Unsplash%29.jpg",
+      "source_description": "Portland, United States",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Wearing_boots_on_the_pier_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "preview_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Wearing_boots_on_the_pier_%28Unsplash%29.jpg/960px-Wearing_boots_on_the_pier_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "photographer": "Robert Nelson iambobnelson",
+      "licence_name": "CC0 1.0",
+      "licence_version": "1.0",
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "retrieved_at": "2026-11-02",
+      "changes": "Cropped and resized",
+      "cache_file": "boots-on-foot.jpg",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "pass",
+        "notes": "Boots worn on foot, ground visible, no face or marks."
+      },
+      "attribution": "File:Wearing boots on the pier (Unsplash).jpg by Robert Nelson iambobnelson, CC0 1.0, via Wikimedia Commons. Cropped and resized."
+    },
+    {
+      "category": "everyday",
+      "role": "top-down",
+      "source": "Wikimedia Commons",
+      "source_title": "File:Alpargatas (Espadrilles) 01.jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Alpargatas_%28Espadrilles%29_01.jpg",
+      "source_description": "Alpargatas (Espadrilles) in their traditional herringbone Spanish style.",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Alpargatas_%28Espadrilles%29_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "preview_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Alpargatas_%28Espadrilles%29_01.jpg/960px-Alpargatas_%28Espadrilles%29_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "photographer": "ElArtesano1891",
+      "licence_name": "CC0 1.0",
+      "licence_version": "1.0",
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "retrieved_at": "2026-11-02",
+      "changes": "Cropped and resized",
+      "cache_file": "everyday-top-down.jpg",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "pass",
+        "notes": "Plain maroon espadrille flats, overhead on grass, no marks or faces."
+      },
+      "attribution": "File:Alpargatas (Espadrilles) 01.jpg by ElArtesano1891, CC0 1.0, via Wikimedia Commons. Cropped and resized."
+    },
+    {
+      "category": "everyday",
+      "role": "on-foot",
+      "source": "Wikimedia Commons",
+      "source_title": "File:Boat shoes and jeans (Unsplash).jpg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Boat_shoes_and_jeans_%28Unsplash%29.jpg",
+      "source_description": "Damir Bosnjak 2015",
+      "download_url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Boat_shoes_and_jeans_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "preview_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Boat_shoes_and_jeans_%28Unsplash%29.jpg/960px-Boat_shoes_and_jeans_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "photographer": "Damir Bosnjak damirphoto",
+      "licence_name": "CC0 1.0",
+      "licence_version": "1.0",
+      "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "retrieved_at": "2026-11-02",
+      "changes": "Cropped and resized",
+      "cache_file": "everyday-on-foot.jpg",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "pass",
+        "notes": "Everyday casual shoes worn on feet on pavement, no face or marks."
+      },
+      "attribution": "File:Boat shoes and jeans (Unsplash).jpg by Damir Bosnjak damirphoto, CC0 1.0, via Wikimedia Commons. Cropped and resized."
+    }
+  ],
+  "grey": [
+    {
+      "category": "sneakers",
+      "role": "hero-45",
+      "kind": "image_coming",
+      "reason": "Every reviewed sneaker candidate had a brand mark, branded silhouette, overlay or wrong view.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "Every reviewed sneaker candidate had a brand mark, branded silhouette, overlay or wrong view."
+      }
+    },
+    {
+      "category": "sneakers",
+      "role": "lateral",
+      "kind": "image_coming",
+      "reason": "Every reviewed sneaker candidate had a brand mark, branded silhouette, overlay or wrong view.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "Every reviewed sneaker candidate had a brand mark, branded silhouette, overlay or wrong view."
+      }
+    },
+    {
+      "category": "sneakers",
+      "role": "heel",
+      "kind": "image_coming",
+      "reason": "Every reviewed sneaker candidate had a brand mark, branded silhouette, overlay or wrong view.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "Every reviewed sneaker candidate had a brand mark, branded silhouette, overlay or wrong view."
+      }
+    },
+    {
+      "category": "sneakers",
+      "role": "top-down",
+      "kind": "image_coming",
+      "reason": "Every reviewed sneaker candidate had a brand mark, branded silhouette, overlay or wrong view.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "Every reviewed sneaker candidate had a brand mark, branded silhouette, overlay or wrong view."
+      }
+    },
+    {
+      "category": "sneakers",
+      "role": "sole-macro",
+      "kind": "image_coming",
+      "reason": "No reviewed Commons candidate showed an unbranded sneaker sole close-up.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "No reviewed Commons candidate showed an unbranded sneaker sole close-up."
+      }
+    },
+    {
+      "category": "running",
+      "role": "hero-45",
+      "kind": "image_coming",
+      "reason": "All reviewed running candidates carried a visible Nike, ASICS or Adidas mark.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "All reviewed running candidates carried a visible Nike, ASICS or Adidas mark."
+      }
+    },
+    {
+      "category": "running",
+      "role": "lateral",
+      "kind": "image_coming",
+      "reason": "All reviewed running candidates carried a visible Nike, ASICS or Adidas mark.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "All reviewed running candidates carried a visible Nike, ASICS or Adidas mark."
+      }
+    },
+    {
+      "category": "running",
+      "role": "heel",
+      "kind": "image_coming",
+      "reason": "No reviewed Commons candidate showed an unbranded running-shoe heel.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "No reviewed Commons candidate showed an unbranded running-shoe heel."
+      }
+    },
+    {
+      "category": "running",
+      "role": "top-down",
+      "kind": "image_coming",
+      "reason": "No reviewed Commons candidate showed an unbranded running-shoe top-down view.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "No reviewed Commons candidate showed an unbranded running-shoe top-down view."
+      }
+    },
+    {
+      "category": "running",
+      "role": "sole-macro",
+      "kind": "image_coming",
+      "reason": "No reviewed Commons candidate showed an unbranded running-shoe sole close-up.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "No reviewed Commons candidate showed an unbranded running-shoe sole close-up."
+      }
+    },
+    {
+      "category": "running",
+      "role": "on-foot",
+      "kind": "image_coming",
+      "reason": "All reviewed running candidates carried a visible Nike, ASICS or Adidas mark.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "All reviewed running candidates carried a visible Nike, ASICS or Adidas mark."
+      }
+    },
+    {
+      "category": "sandals",
+      "role": "heel",
+      "kind": "image_coming",
+      "reason": "The only candidate was an overhead view, not a heel view.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "The only candidate was an overhead view, not a heel view."
+      }
+    },
+    {
+      "category": "sandals",
+      "role": "sole-macro",
+      "kind": "image_coming",
+      "reason": "No wearable modern sandal sole close-up was available; museum fragments were rejected.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "No wearable modern sandal sole close-up was available; museum fragments were rejected."
+      }
+    },
+    {
+      "category": "boots",
+      "role": "sole-macro",
+      "kind": "image_coming",
+      "reason": "The only candidate was a front three-quarter view, not a sole close-up.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "The only candidate was a front three-quarter view, not a sole close-up."
+      }
+    },
+    {
+      "category": "everyday",
+      "role": "hero-45",
+      "kind": "image_coming",
+      "reason": "Candidates were branded (Sebago), overhead, or the wrong category.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "Candidates were branded (Sebago), overhead, or the wrong category."
+      }
+    },
+    {
+      "category": "everyday",
+      "role": "lateral",
+      "kind": "image_coming",
+      "reason": "Candidates were overhead, boots, or an illustration rather than a side profile.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "Candidates were overhead, boots, or an illustration rather than a side profile."
+      }
+    },
+    {
+      "category": "everyday",
+      "role": "heel",
+      "kind": "image_coming",
+      "reason": "The only candidate showed boots from the front, not an everyday shoe heel.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "The only candidate showed boots from the front, not an everyday shoe heel."
+      }
+    },
+    {
+      "category": "everyday",
+      "role": "sole-macro",
+      "kind": "image_coming",
+      "reason": "No unbranded everyday-shoe sole close-up was available.",
+      "qa": {
+        "reviewed": true,
+        "method": "model visual QA (opencode/nemotron-3.5-super-vl-free)",
+        "result": "no_suitable_source",
+        "notes": "No unbranded everyday-shoe sole close-up was available."
+      }
     }
   ]
 }

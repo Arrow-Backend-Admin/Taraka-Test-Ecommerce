@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { PlaceholderImage } from "@/components/PlaceholderImage";
+import { ProductPurchase } from "@/components/ProductPurchase";
 import { getProduct, previewDraftsEnabled, safeText } from "@/lib/api";
 
 export const dynamic = "force-dynamic";
@@ -35,13 +36,15 @@ export default async function ProductPage({
   const category = safeText(product.category) ?? "Catalogue";
   const subCategory = safeText(product.sub_category);
   const colourName = safeText(product.colour) ?? "Colour";
-  const tierLabel = safeText(product.tier_label);
   const summary = safeText(product.summary);
   const description = safeText(product.description);
   const materials = Object.entries(product.materials ?? {});
   const sizes = product.sizes ?? [];
   const features = product.features ?? [];
   const images = product.images ?? [];
+  const photoCredits = images.filter(
+    (image) => image.kind === "photo" && image.photographer,
+  );
 
   return (
     <main className="min-h-screen bg-paper text-ink">
@@ -82,7 +85,6 @@ export default async function ProductPage({
               </h1>
               <p className="mt-3 font-body text-base text-muted">
                 {colourName}
-                {tierLabel ? ` · ${tierLabel}` : ""}
               </p>
             </div>
             <p className="font-display text-2xl font-semibold">
@@ -105,7 +107,7 @@ export default async function ProductPage({
               Images
             </h2>
             <p className="font-body text-xs text-muted">
-              Six roles · 4:5 · placeholder photography
+              Six roles · 4:5 · placeholders and “Image coming” blocks
             </p>
           </div>
           {images.length === 0 ? (
@@ -123,12 +125,14 @@ export default async function ProductPage({
                     />
                     <figcaption className="mt-2 font-body text-xs leading-5 text-muted">
                       {image.role}
-                      {image.is_placeholder ? (
-                        <>
-                          {" · "}
-                          Placeholder image, not the actual product
-                        </>
-                      ) : null}
+                      {image.kind === "image_coming"
+                        ? " · Image coming"
+                        : image.photographer
+                          ? ` · Photo: ${image.photographer}`
+                          : ""}
+                      {image.is_placeholder
+                        ? " · Placeholder image, not the actual product"
+                        : ""}
                     </figcaption>
                   </figure>
                 </li>
@@ -170,44 +174,86 @@ export default async function ProductPage({
               <h2 className="font-display text-2xl font-semibold" id="sizes">
                 Sizes
               </h2>
-              {sizes.length === 0 ? (
-                <p className="mt-3 font-body leading-7 text-muted">
-                  To be confirmed
-                </p>
-              ) : (
-                <div className="mt-3 overflow-x-auto">
-                  <table className="w-full border-collapse font-body text-sm">
-                    <thead>
-                      <tr className="border-b border-black/10 text-left">
-                        <th className="py-2 pr-4 font-medium">UK</th>
-                        <th className="py-2 pr-4 font-medium">EU</th>
-                        <th className="py-2 pr-4 font-medium">Foot length</th>
-                        <th className="py-2 font-medium">Available</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {sizes.map((variant) => (
-                        <tr
-                          className="border-b border-black/5"
-                          key={variant.sku}
-                        >
-                          <td className="py-2 pr-4">{variant.size_uk}</td>
-                          <td className="py-2 pr-4">
-                            {variant.size_eu ?? "To be confirmed"}
-                          </td>
-                          <td className="py-2 pr-4">
-                            {variant.foot_length_cm
-                              ? `${variant.foot_length_cm} cm`
-                              : variant.foot_length_note ?? "To be confirmed"}
-                          </td>
-                          <td className="py-2">{variant.available}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
+              <ProductPurchase slug={product.slug} sizes={sizes} />
             </section>
+
+            {photoCredits.length > 0 ? (
+              <section aria-labelledby="image-credits">
+                <h2
+                  className="font-display text-2xl font-semibold"
+                  id="image-credits"
+                >
+                  Image credits
+                </h2>
+                <p className="mt-2 font-body text-sm leading-6 text-muted">
+                  These are placeholder photographs, not the actual product.
+                  Every source is CC0 1.0 or CC BY 4.0, cropped and resized.
+                </p>
+                <ul className="mt-4 space-y-4 font-body text-sm leading-6">
+                  {photoCredits.map((image) => (
+                    <li
+                      className="rounded-md border border-black/10 bg-white/60 p-4"
+                      key={`${image.filename}-credit`}
+                    >
+                      <p className="font-medium">
+                        {image.source_title ?? image.role}
+                      </p>
+                      <p className="text-muted">
+                        Photographer: {image.photographer}
+                      </p>
+                      <p className="text-muted">
+                        Licence:{" "}
+                        {image.licence_url ? (
+                          <a
+                            className="underline decoration-black/20 underline-offset-4"
+                            href={image.licence_url}
+                            rel="license noopener noreferrer"
+                            target="_blank"
+                          >
+                            {image.licence_name}
+                          </a>
+                        ) : (
+                          image.licence_name
+                        )}
+                      </p>
+                      <p className="text-muted">
+                        Source:{" "}
+                        {image.source_url ? (
+                          <a
+                            className="underline decoration-black/20 underline-offset-4"
+                            href={image.source_url}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            {image.source ?? "Wikimedia Commons"}
+                          </a>
+                        ) : (
+                          image.source
+                        )}
+                      </p>
+                      <p className="text-muted">
+                        Changes: {image.changes ?? "Cropped and resized"}
+                      </p>
+                      {image.attribution ? (
+                        <p className="mt-2 text-xs text-muted">
+                          {image.attribution}
+                        </p>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-3 font-body text-xs leading-5 text-muted">
+                  Full source list and visual QA notes:{" "}
+                  <Link
+                    className="underline decoration-black/20 underline-offset-4"
+                    href="/credits"
+                  >
+                    image credits
+                  </Link>
+                  .
+                </p>
+              </section>
+            ) : null}
           </div>
 
           <aside className="space-y-8">
@@ -257,9 +303,19 @@ export default async function ProductPage({
         </div>
 
         <footer className="mt-16 border-t border-black/10 pt-6 font-body text-xs leading-6 text-muted">
-          Concept only. Placeholder photography is not for ads, social posts or
-          packaging. No print, domain or ad spend until the attorney opinion and
-          native-speaker test are back.
+          <p>
+            Concept only. Placeholder photography is not for ads, social posts or
+            packaging. No print, domain or ad spend until the attorney opinion and
+            native-speaker test are back.
+          </p>
+          <p className="mt-2">
+            <Link
+              className="underline decoration-black/20 underline-offset-4"
+              href="/credits"
+            >
+              Placeholder image credits and visual QA
+            </Link>
+          </p>
         </footer>
       </div>
     </main>

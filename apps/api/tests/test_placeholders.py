@@ -179,8 +179,12 @@ def test_placeholder_metadata_and_files_are_complete() -> None:
 
     assert metadata["notice"] == "Placeholder image, not the actual product"
     assert len(metadata["products"]) == 30
-    assert len(metadata["sources"]) == 6
+    assert len(metadata["sources"]) == 12
+    assert len(metadata["grey"]) == 18
+    assert len(metadata["sources"]) + len(metadata["grey"]) == 30
 
+    photos = 0
+    grey = 0
     checked = 0
     for product in metadata["products"].values():
         assert len(product["images"]) == 6
@@ -191,17 +195,55 @@ def test_placeholder_metadata_and_files_are_complete() -> None:
             assert image["filename"].endswith("_4x5_v00.jpg")
             assert image["aspect"] == "4:5"
             assert image["alt"]
-            assert image["source_url"].startswith(
-                "https://commons.wikimedia.org/wiki/File:"
-            )
-            assert image["photographer"]
-            assert image["licence_name"] in {"CC0 1.0", "CC BY 4.0"}
-            assert image["licence_url"].startswith("https://creativecommons.org/")
-            assert image["licence_version"] or image["retrieved_at"]
-            assert image["retrieved_at"]
+            assert image["kind"] in {"photo", "image_coming"}
+            assert image["qa"]["result"] in {"pass", "no_suitable_source"}
             assert "[TO CONFIRM" not in json.dumps(image)
             assert (public_dir / image["filename"]).is_file()
             assert image["filename"] in credits
 
+            if image["kind"] == "photo":
+                photos += 1
+                assert image["source"] == "Wikimedia Commons"
+                assert image["source_url"].startswith(
+                    "https://commons.wikimedia.org/wiki/File:"
+                )
+                assert image["photographer"]
+                assert image["licence_name"] in {"CC0 1.0", "CC BY 4.0"}
+                assert image["licence_url"].startswith("https://creativecommons.org/")
+                assert image["licence_version"] and image["retrieved_at"]
+                assert image["changes"] == "Cropped and resized"
+                assert image["attribution"]
+                assert image["qa"]["result"] == "pass"
+            else:
+                grey += 1
+                assert image["source"] is None
+                assert image["source_url"] is None
+                assert image["photographer"] is None
+                assert image["licence_name"] is None
+                assert image["attribution"] is None
+                assert image["image_coming_reason"]
+                assert image["qa"]["result"] == "no_suitable_source"
+
     assert checked == 180
+    assert photos == 72
+    assert grey == 108
+
+    # Every category/role pair appears exactly once across photos and grey slots.
+    slots = {
+        (item["category"], item["role"]) for item in metadata["sources"]
+    } | {(item["category"], item["role"]) for item in metadata["grey"]}
+    assert len(slots) == 30
+    assert {item["category"] for item in metadata["grey"]} == {
+        "sneakers",
+        "running",
+        "sandals",
+        "boots",
+        "everyday",
+    }
+    assert {item["category"] for item in metadata["sources"]} == {
+        "sneakers",
+        "sandals",
+        "boots",
+        "everyday",
+    }
 

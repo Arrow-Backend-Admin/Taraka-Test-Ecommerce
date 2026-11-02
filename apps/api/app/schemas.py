@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, datetime
 from decimal import Decimal
 from typing import Any
 
@@ -144,6 +144,16 @@ class PublicImageOut(BaseModel):
     is_placeholder: bool
     aspect: str = "4:5"
     placeholder_notice: str | None = None
+    kind: str = "photo"
+    changes: str | None = None
+    source: str | None = None
+    source_title: str | None = None
+    source_url: str | None = None
+    photographer: str | None = None
+    licence_name: str | None = None
+    licence_url: str | None = None
+    attribution: str | None = None
+    qa_result: str | None = None
 
 
 class PublicVariantOut(BaseModel):
@@ -165,8 +175,6 @@ class PublicProductOut(BaseModel):
     category: str
     sub_category: str | None
     audience: str | None
-    tier: str
-    tier_label: str | None
     colour: str
     colour_hex: str
     price_inr: float
@@ -206,3 +214,48 @@ class AdminProductOut(BaseModel):
     tier: str
     unresolved_fields: list[str] = Field(default_factory=list)
     data: dict[str, Any] = Field(default_factory=dict)
+
+
+class StockSizeOut(BaseModel):
+    sku: str
+    size_uk: str
+    available: int
+
+
+class StockOut(BaseModel):
+    slug: str
+    sizes: list[StockSizeOut]
+    as_of: datetime
+
+
+class CartItemAdd(BaseModel):
+    sku: str
+    quantity: int = Field(default=1, ge=1)
+
+
+class CartItemUpdate(BaseModel):
+    quantity: int = Field(ge=0)
+
+
+class CartItemOut(BaseModel):
+    id: int
+    sku: str
+    name: str
+    slug: str
+    size_uk: str
+    quantity: int
+    unit_price: float
+    line_total: float
+    available: int
+    reservation_expires_at: datetime | None
+
+
+class CartOut(BaseModel):
+    token: str
+    status: str
+    expires_at: datetime | None
+    items: list[CartItemOut]
+    subtotal_inr: float
+    total_units: int
+    reservation_minutes: int
+    rules: dict[str, int | str]

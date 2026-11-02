@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Sāntvana — concept storefront",
   description:
-    "Phase 4 Milestone 1 concept storefront. Catalogue publishing is gated until open product fields are resolved.",
+    "Phase 4 Milestone 2 concept storefront. Catalogue publishing is gated until open product fields are resolved.",
   robots: { index: false, follow: false },
 };
 
@@ -22,7 +22,7 @@ export default function HomePage() {
 
         <section className="max-w-3xl py-20">
           <p className="font-body text-[0.75rem] uppercase tracking-[0.14em] text-muted">
-            Phase 4 · Milestone 1
+            Phase 4 · Milestone 2
           </p>
           <h1 className="mt-5 font-display text-5xl font-semibold leading-[0.95] tracking-[-0.045em] sm:text-7xl">
             A catalogue that
@@ -50,8 +50,18 @@ export default function HomePage() {
         </section>
 
         <footer className="border-t border-black/10 pt-6 font-body text-xs leading-6 text-muted">
-          No print, domain or ad spend until the attorney opinion and
-          native-speaker test are back. The name is not cleared.
+          <p>
+            No print, domain or ad spend until the attorney opinion and
+            native-speaker test are back. The name is not cleared.
+          </p>
+          <p className="mt-2">
+            <Link
+              className="underline decoration-black/20 underline-offset-4"
+              href="/credits"
+            >
+              Placeholder image credits and visual QA
+            </Link>
+          </p>
         </footer>
       </div>
     </main>

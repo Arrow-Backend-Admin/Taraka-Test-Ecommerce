@@ -1,10 +1,11 @@
 # Sāntvana API
 
 FastAPI + SQLAlchemy + Alembic catalogue and inventory service for the Phase 4
-Milestone 1 concept storefront.
+Milestone 2 concept storefront.
 
-**Scope:** catalogue, publish guard and inventory only. Cart, checkout, payments,
-orders and shipping are not implemented.
+**Scope:** catalogue filters, full-text search, publish guard, inventory and a
+guest cart with time-boxed reservations. Checkout, payments, orders and shipping
+are not implemented.
 
 ## Local setup
 
@@ -30,6 +31,12 @@ The seed reads `brand/phase-3/products.json` and loads 30 products, 330 variants
 5 categories and 330 inventory rows. It also attaches the six placeholder images
 per product from `brand/phase-4/placeholder-images.json`. Every product stays
 `draft` because the Phase 3 facts still contain `[TO CONFIRM]` fields.
+
+Outside production the seed also loads a flagged development stock fixture so
+the size selector and guest cart can be exercised. It never writes
+`launch_stock_qty`, records `dev-fixture:<sku>` events and refuses to run when
+`APP_ENV=production`. Use `--no-dev-inventory` to skip it, or
+`--dev-inventory` to force it outside production.
 
 For a throwaway SQLite database:
 
@@ -67,9 +74,27 @@ placeholder refresh; the committed set uses Wikimedia Commons.
 |---|---|---|
 | `GET` | `/health` | Liveness and telemetry state. |
 | `GET` | `/catalogue` | Published, storefront-safe products only. |
+| `GET` | `/catalogue?q=&category=&colour=&size=&min_price=&max_price=` | Filtered catalogue. `q` uses PostgreSQL full-text search; SQLite falls back to a case-insensitive substring match. |
+| `GET` | `/catalogue/facets` | Category, colour, available-size and price facets for the same filters. |
 | `GET` | `/catalogue/{slug}` | Published product detail, sizes, materials and images. |
+| `GET` | `/catalogue/{slug}/stock` | Live per-size availability, with an `as_of` timestamp. |
 | `GET` | `/catalogue?preview_drafts=true` | Development-only draft preview. Ignored when `APP_ENV=production`. |
 | `GET` | `/catalogue/{slug}?preview_drafts=true` | Development-only draft detail. Ignored when `APP_ENV=production`. |
+
+### Guest cart — `X-Cart-Token: <token>`
+
+| Method | Path | Purpose |
+|---|---|---|
+| `POST` | `/cart` | Create a guest cart. Returns the opaque token. |
+| `GET` | `/cart` | Read the cart and its reservation expiry. |
+| `POST` | `/cart/items` | Add `{sku, quantity}` and reserve stock. |
+| `PATCH` | `/cart/items/{id}` | Change quantity; `0` removes the line. |
+| `DELETE` | `/cart/items/{id}` | Remove the line and release its reservation. |
+
+Rules: 15-minute reservation, maximum 5 units per size, 10 units and 5 lines per
+cart. Checkout is deliberately unavailable in this milestone. Reservations are
+released when a line is removed, the quantity changes or the cart expires. The
+conditional inventory update prevents two guests reserving the same last unit.
 
 ### Admin — `Authorization: Bearer <ADMIN_API_TOKEN>`
 
@@ -159,11 +184,14 @@ Coverage includes:
 - forced-published unresolved data hidden from the storefront;
 - production placeholder publish guard and public filtering;
 - development draft preview with “To be confirmed” and placeholder notices;
+- catalogue filters, facets, search and live stock;
+- guest cart add/update/remove, line and unit limits, oversell guard and expiry;
+- customer-copy sanitising and the flagged dev inventory fixture;
 - parallel last-unit reservation;
 - seed counts and idempotency;
 - telemetry disabled by default.
 
-The suite currently reports **14 passed**.
+The suite currently reports **29 passed**.
 
 ## Database model
 
@@ -172,8 +200,15 @@ The suite currently reports **14 passed**.
 - `product_variants`
 - `inventory` — one row per variant, `on_hand`, `reserved`, optimistic `version`
 - `inventory_events` — append-only ledger with a unique optional `reference`
+- `carts` — opaque guest token, status and reservation expiry
+- `cart_items` — reserved line with unit price and reservation reference
 
-The migration is `alembic/versions/b137d92f11bf_initial_catalogue_and_inventory.py`.
+Migrations:
+
+- `alembic/versions/b137d92f11bf_initial_catalogue_and_inventory.py`
+- `alembic/versions/c4a1f2d3e5b6_guest_carts_and_search.py` — carts, cart items and
+  the PostgreSQL-only GIN index `ix_products_search_tsv`. SQLite gets no index
+  and uses the fallback search.
 
 ## Open items
 
@@ -184,5 +219,4 @@ stores these as flags or nullable fields; it does not invent values. See
 
 ## Next milestone
 
-Stop here until Milestone 1 is approved. Cart, checkout and payments follow only
-after approval.
+Stop here. Checkout and payments start only after explicit founder approval.

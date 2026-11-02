@@ -3,8 +3,10 @@ import Link from "next/link";
 import { PlaceholderImage } from "@/components/PlaceholderImage";
 import {
   getCatalogue,
+  getFacets,
   previewDraftsEnabled,
   safeText,
+  type CatalogueFilters,
 } from "@/lib/api";
 
 export const dynamic = "force-dynamic";
@@ -26,9 +28,33 @@ function colour(value: string): string {
   return /^#[0-9a-f]{6}$/i.test(value) ? value : "#D9CBB4";
 }
 
-export default async function CataloguePage() {
+function first(
+  value: string | string[] | undefined,
+): string | undefined {
+  if (Array.isArray(value)) return value[0];
+  return value;
+}
+
+export default async function CataloguePage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const params = await searchParams;
   const previewDrafts = previewDraftsEnabled();
-  const products = await getCatalogue({ previewDrafts });
+  const filters: CatalogueFilters = {
+    q: first(params.q)?.trim() || undefined,
+    category: first(params.category) || undefined,
+    colour: first(params.colour) || undefined,
+    size: first(params.size) || undefined,
+    minPrice: first(params.min_price) || undefined,
+    maxPrice: first(params.max_price) || undefined,
+  };
+  const [products, facets] = await Promise.all([
+    getCatalogue({ previewDrafts, filters }),
+    getFacets({ previewDrafts }),
+  ]);
+  const hasFilters = Object.values(filters).some(Boolean);
 
   return (
     <main className="min-h-screen bg-paper text-ink">
@@ -36,7 +62,7 @@ export default async function CataloguePage() {
         <header className="flex flex-wrap items-end justify-between gap-6 border-b border-black/10 pb-8">
           <div>
             <p className="font-body text-[0.75rem] uppercase tracking-[0.14em] text-muted">
-              Phase 4 · Milestone 1
+              Phase 4 · Milestone 2
             </p>
             <h1 className="mt-3 font-display text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">
               Catalogue
@@ -57,6 +83,12 @@ export default async function CataloguePage() {
             >
               Brand system
             </Link>
+            <Link
+              className="underline decoration-black/20 underline-offset-4"
+              href="/credits"
+            >
+              Image credits
+            </Link>
           </nav>
         </header>
 
@@ -70,16 +102,126 @@ export default async function CataloguePage() {
           </div>
         ) : null}
 
+        <form
+          action="/catalogue"
+          method="get"
+          className="mt-8 rounded-lg border border-black/10 bg-white/60 p-5"
+        >
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+            <label className="font-body text-sm text-muted lg:col-span-2">
+              <span className="block pb-1">Search</span>
+              <input
+                type="search"
+                name="q"
+                defaultValue={filters.q ?? ""}
+                placeholder="Name, colour, description"
+                className="w-full rounded-md border border-black/15 bg-white/80 px-3 py-2 text-ink"
+              />
+            </label>
+            <label className="font-body text-sm text-muted">
+              <span className="block pb-1">Category</span>
+              <select
+                name="category"
+                defaultValue={filters.category ?? ""}
+                className="w-full rounded-md border border-black/15 bg-white/80 px-3 py-2 text-ink"
+              >
+                <option value="">All categories</option>
+                {facets?.categories.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label ?? item.value} ({item.count})
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="font-body text-sm text-muted">
+              <span className="block pb-1">Colour</span>
+              <select
+                name="colour"
+                defaultValue={filters.colour ?? ""}
+                className="w-full rounded-md border border-black/15 bg-white/80 px-3 py-2 text-ink"
+              >
+                <option value="">All colours</option>
+                {facets?.colours.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.value} ({item.count})
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="font-body text-sm text-muted">
+              <span className="block pb-1">Size</span>
+              <select
+                name="size"
+                defaultValue={filters.size ?? ""}
+                className="w-full rounded-md border border-black/15 bg-white/80 px-3 py-2 text-ink"
+              >
+                <option value="">All sizes</option>
+                {facets?.sizes.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.value} ({item.count})
+                  </option>
+                ))}
+              </select>
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              <label className="font-body text-sm text-muted">
+                <span className="block pb-1">Min ₹</span>
+                <input
+                  type="number"
+                  name="min_price"
+                  min={0}
+                  step={100}
+                  defaultValue={filters.minPrice ?? ""}
+                  placeholder={facets?.price.min?.toString() ?? ""}
+                  className="w-full rounded-md border border-black/15 bg-white/80 px-3 py-2 text-ink"
+                />
+              </label>
+              <label className="font-body text-sm text-muted">
+                <span className="block pb-1">Max ₹</span>
+                <input
+                  type="number"
+                  name="max_price"
+                  min={0}
+                  step={100}
+                  defaultValue={filters.maxPrice ?? ""}
+                  placeholder={facets?.price.max?.toString() ?? ""}
+                  className="w-full rounded-md border border-black/15 bg-white/80 px-3 py-2 text-ink"
+                />
+              </label>
+            </div>
+          </div>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <button
+              type="submit"
+              className="rounded-full bg-ink px-5 py-2.5 font-body text-sm text-paper transition-colors hover:bg-ground"
+            >
+              Apply filters
+            </button>
+            {hasFilters ? (
+              <Link
+                href="/catalogue"
+                className="font-body text-sm underline decoration-black/20 underline-offset-4"
+              >
+                Clear all
+              </Link>
+            ) : null}
+            <p className="font-body text-xs text-muted" aria-live="polite">
+              {products.length} product{products.length === 1 ? "" : "s"} shown.
+            </p>
+          </div>
+        </form>
+
         {products.length === 0 ? (
           <section className="mt-12 max-w-2xl rounded-lg border border-black/10 bg-white/60 p-8">
             <h2 className="font-display text-2xl font-semibold">
-              No products are published yet
+              {hasFilters
+                ? "No products match these filters"
+                : "No products are published yet"}
             </h2>
             <p className="mt-4 font-body leading-7 text-muted">
-              The Phase 3 catalogue is loaded as draft while manufacturer, tax,
-              legal and launch-stock fields remain open. A product becomes
-              visible only after every open field is resolved and the publish
-              guard passes.
+              {hasFilters
+                ? "Try a broader size, colour or price range, or clear the filters."
+                : "The Phase 3 catalogue is loaded as draft while manufacturer, tax, legal and launch-stock fields remain open. A product becomes visible only after every open field is resolved and the publish guard passes."}
             </p>
           </section>
         ) : (
@@ -89,7 +231,6 @@ export default async function CataloguePage() {
               const summary = safeText(product.summary);
               const category = safeText(product.category) ?? "Catalogue";
               const subCategory = safeText(product.sub_category);
-              const tierLabel = safeText(product.tier_label);
               const colourName = safeText(product.colour) ?? "Colour";
               const image = product.images?.[0];
 
@@ -126,7 +267,7 @@ export default async function CataloguePage() {
                               Draft
                             </span>
                           ) : null}
-                          {product.hero ? (
+                          {product.hero && product.preview ? (
                             <span className="rounded-full border border-black/15 px-2 py-1 font-body text-[0.7rem] uppercase tracking-[0.1em]">
                               Hero
                             </span>
@@ -139,7 +280,6 @@ export default async function CataloguePage() {
                         </h2>
                         <p className="mt-1 font-body text-sm text-muted">
                           {colourName}
-                          {tierLabel ? ` · ${tierLabel}` : ""}
                         </p>
                       </div>
                       {summary ? (
@@ -151,7 +291,6 @@ export default async function CataloguePage() {
                         <p className="font-display text-lg font-semibold">
                           {inr.format(product.price_inr)}
                         </p>
-                        <p className="font-body text-xs text-muted">Incl. GST</p>
                       </div>
                       <p className="font-body text-xs text-muted underline decoration-black/20 underline-offset-4">
                         View product
@@ -165,9 +304,19 @@ export default async function CataloguePage() {
         )}
 
         <footer className="mt-16 border-t border-black/10 pt-6 font-body text-xs leading-6 text-muted">
-          Concept only. No print, domain or ad spend until the attorney opinion
-          and native-speaker test are back. The name is not cleared. Placeholder
-          photography is not for ads, social posts or packaging.
+          <p>
+            Concept only. No print, domain or ad spend until the attorney opinion
+            and native-speaker test are back. The name is not cleared. Placeholder
+            photography is not for ads, social posts or packaging.
+          </p>
+          <p className="mt-2">
+            <Link
+              className="underline decoration-black/20 underline-offset-4"
+              href="/credits"
+            >
+              Placeholder image credits and visual QA
+            </Link>
+          </p>
         </footer>
       </div>
     </main>

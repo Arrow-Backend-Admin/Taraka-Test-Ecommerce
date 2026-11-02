@@ -232,3 +232,44 @@ class InventoryEvent(TimestampMixin, Base):
     note: Mapped[str | None] = mapped_column(Text)
 
     variant: Mapped[ProductVariant] = relationship(back_populates="inventory_events")
+
+
+class Cart(TimestampMixin, Base):
+    __tablename__ = "carts"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    token: Mapped[str] = mapped_column(String(64), unique=True, index=True, nullable=False)
+    status: Mapped[str] = mapped_column(String(20), default="active", nullable=False)
+    expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    last_seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+    items: Mapped[list[CartItem]] = relationship(
+        back_populates="cart", cascade="all, delete-orphan"
+    )
+
+
+class CartItem(TimestampMixin, Base):
+    __tablename__ = "cart_items"
+    __table_args__ = (
+        UniqueConstraint("cart_id", "variant_id", name="uq_cart_items_variant"),
+        CheckConstraint("quantity > 0", name="ck_cart_items_quantity_positive"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    cart_id: Mapped[int] = mapped_column(
+        ForeignKey("carts.id", ondelete="CASCADE"), index=True, nullable=False
+    )
+    variant_id: Mapped[int] = mapped_column(
+        ForeignKey("product_variants.id", ondelete="RESTRICT"), index=True, nullable=False
+    )
+    quantity: Mapped[int] = mapped_column(Integer, nullable=False)
+    unit_price: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
+    reservation_reference: Mapped[str] = mapped_column(
+        String(120), unique=True, nullable=False
+    )
+    reservation_expires_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True)
+    )
+
+    cart: Mapped[Cart] = relationship(back_populates="items")
+    variant: Mapped[ProductVariant] = relationship()

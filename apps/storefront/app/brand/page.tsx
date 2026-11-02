@@ -1497,7 +1497,13 @@ export default function BrandPage() {
             <p className="mt-4 max-w-md text-xs leading-relaxed text-paper/60">
               Concept only. No print, domain or ad spend until the attorney opinion
               in <span className="mono-token">brand/naming.md §6</span>. The name is
-              not cleared.
+              not cleared.{" "}
+              <a
+                className="underline decoration-paper/30 underline-offset-4 hover:text-paper"
+                href="/credits"
+              >
+                Placeholder image credits and visual QA
+              </a>
             </p>
           </div>
           <div className="flex flex-wrap gap-5 text-xs text-paper/60 md:justify-end">

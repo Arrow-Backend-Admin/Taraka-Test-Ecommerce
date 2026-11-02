@@ -30,6 +30,7 @@ coverage.xml
 *.sqlite-wal
 data/
 brand/phase-4/source-images/
+brand/phase-4/qa/
 
 # Local environment and secrets
 .env

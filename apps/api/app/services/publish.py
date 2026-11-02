@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 
 from ..config import get_settings
 from ..models import Product, ProductVariant
+from .copy import sanitise_customer_text, sanitise_features
 
 UNRESOLVED_MARKER = "[TO CONFIRM"
 UNRESOLVED_RE = re.compile(r"\[TO CONFIRM", re.IGNORECASE)
@@ -173,6 +174,12 @@ def _public_images(product: Product, *, preview: bool = False) -> list[dict[str,
     images = product.images or []
     if not isinstance(images, list):
         return []
+
+    def optional_text(value: Any) -> str | None:
+        if value is None:
+            return None
+        return preview_text(value) if preview else safe_text(value)
+
     result: list[dict[str, Any]] = []
     for image in images:
         if not isinstance(image, dict):
@@ -202,6 +209,8 @@ def _public_images(product: Product, *, preview: bool = False) -> list[dict[str,
             if preview
             else safe_text(image.get("role"))
         )
+        kind = safe_text(image.get("kind")) or "photo"
+        qa = image.get("qa") if isinstance(image.get("qa"), dict) else {}
         result.append(
             {
                 "role": role or "image",
@@ -211,6 +220,16 @@ def _public_images(product: Product, *, preview: bool = False) -> list[dict[str,
                 "is_placeholder": is_placeholder,
                 "aspect": safe_text(image.get("aspect")) or "4:5",
                 "placeholder_notice": PLACEHOLDER_NOTICE if is_placeholder else None,
+                "kind": kind,
+                "changes": safe_text(image.get("changes")),
+                "source": optional_text(image.get("source")),
+                "source_title": optional_text(image.get("source_title")),
+                "source_url": optional_text(image.get("source_url")),
+                "photographer": optional_text(image.get("photographer")),
+                "licence_name": optional_text(image.get("licence_name")),
+                "licence_url": optional_text(image.get("licence_url")),
+                "attribution": optional_text(image.get("attribution")),
+                "qa_result": safe_text(qa.get("result")),
             }
         )
     return result
@@ -232,9 +251,11 @@ def to_public_product(product: Product, detail: bool = False) -> dict[str, Any] 
     if product_unresolved_fields(product):
         return None
 
-    summary = safe_text(product.summary_15w or product.short_description)
+    summary = sanitise_customer_text(
+        safe_text(product.summary_15w or product.short_description)
+    )
     category_name = safe_text(product.category.name) if product.category else None
-    features = _safe_list(product.feature_bullets or product.features)[:5]
+    features = sanitise_features(_safe_list(product.feature_bullets or product.features))[:5]
     images = _public_images(product)
 
     payload: dict[str, Any] = {
@@ -244,8 +265,6 @@ def to_public_product(product: Product, detail: bool = False) -> dict[str, Any] 
         "category": category_name or "Catalogue",
         "sub_category": safe_text(product.sub_category),
         "audience": safe_text(product.audience),
-        "tier": product.tier,
-        "tier_label": safe_text(product.tier_label),
         "colour": safe_text(product.colour) or "Colour pending",
         "colour_hex": safe_text(product.colour_hex) or "#D9CBB4",
         "price_inr": float(product.price_inr),
@@ -294,20 +313,26 @@ def to_public_product(product: Product, detail: bool = False) -> dict[str, Any] 
 
     payload.update(
         {
-            "description": safe_text(product.description_120w or product.long_description),
+            "description": sanitise_customer_text(
+                safe_text(product.description_120w or product.long_description)
+            ),
             "sizes": sizes,
             "materials": materials,
             "fit_notes": safe_text(product.fit_recommendation or product.fit_note),
             "care": safe_text(product.care),
             "seo_title": safe_text(product.seo_title),
-            "seo_description": safe_text(product.seo_description),
+            "seo_description": sanitise_customer_text(safe_text(product.seo_description)),
         }
     )
     return payload
 
 
-def _is_production(environment: str | None) -> bool:
+def is_production(environment: str | None = None) -> bool:
     return (environment or get_settings().environment).strip().lower() == "production"
+
+
+def _is_production(environment: str | None) -> bool:
+    return is_production(environment)
 
 
 def public_products(
@@ -347,11 +372,15 @@ def to_preview_product(product: Product, detail: bool = False) -> dict[str, Any]
     never be mistaken for a publishable product.
     """
 
-    summary = preview_text(product.summary_15w or product.short_description)
+    summary = sanitise_customer_text(
+        preview_text(product.summary_15w or product.short_description)
+    )
     category_name = (
         preview_text(product.category.name) if product.category else TO_BE_CONFIRMED
     )
-    features = _preview_list(product.feature_bullets or product.features)[:5]
+    features = sanitise_features(
+        _preview_list(product.feature_bullets or product.features)
+    )[:5]
     images = _public_images(product, preview=True)
     first_image = next(
         (image["filename"] for image in images if image.get("filename")),
@@ -365,8 +394,6 @@ def to_preview_product(product: Product, detail: bool = False) -> dict[str, Any]
         "category": category_name,
         "sub_category": preview_text(product.sub_category),
         "audience": preview_text(product.audience),
-        "tier": preview_text(product.tier),
-        "tier_label": preview_text(product.tier_label),
         "colour": preview_text(product.colour),
         "colour_hex": safe_text(product.colour_hex) or "#D9CBB4",
         "price_inr": float(product.price_inr),
@@ -418,15 +445,17 @@ def to_preview_product(product: Product, detail: bool = False) -> dict[str, Any]
 
     payload.update(
         {
-            "description": preview_text(
-                product.description_120w or product.long_description
+            "description": sanitise_customer_text(
+                preview_text(product.description_120w or product.long_description)
             ),
             "sizes": sizes,
             "materials": materials,
             "fit_notes": preview_text(product.fit_recommendation or product.fit_note),
             "care": preview_text(product.care),
             "seo_title": preview_text(product.seo_title),
-            "seo_description": preview_text(product.seo_description),
+            "seo_description": sanitise_customer_text(
+                preview_text(product.seo_description)
+            ),
         }
     )
     return payload

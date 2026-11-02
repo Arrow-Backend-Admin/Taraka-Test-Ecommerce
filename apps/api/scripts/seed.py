@@ -28,6 +28,19 @@ def main() -> None:
         action="store_true",
         help="Create tables directly for local development. Alembic is the production path.",
     )
+    parser.add_argument(
+        "--dev-inventory",
+        dest="dev_inventory",
+        action="store_true",
+        default=None,
+        help="Seed the flagged dev-only preview stock fixture. Default: on outside production.",
+    )
+    parser.add_argument(
+        "--no-dev-inventory",
+        dest="dev_inventory",
+        action="store_false",
+        help="Skip the dev-only preview stock fixture.",
+    )
     args = parser.parse_args()
 
     if args.database_url:
@@ -35,6 +48,7 @@ def main() -> None:
 
     from sqlalchemy import select
 
+    from app.config import get_settings
     from app.db import Base, SessionLocal, engine
     from app.models import Product
     from app.seed import seed_catalogue
@@ -43,8 +57,18 @@ def main() -> None:
     if args.create_tables:
         Base.metadata.create_all(engine)
 
+    environment = get_settings().environment.strip().lower()
+    dev_inventory = args.dev_inventory
+    if dev_inventory is None:
+        dev_inventory = environment != "production"
+
     with SessionLocal() as session:
-        counts = seed_catalogue(session, args.catalogue, args.placeholders)
+        counts = seed_catalogue(
+            session,
+            args.catalogue,
+            args.placeholders,
+            dev_inventory=dev_inventory,
+        )
         products = session.scalars(select(Product)).all()
         unresolved = sum(1 for product in products if product_unresolved_fields(product))
 
@@ -52,6 +76,11 @@ def main() -> None:
         "Seeded {products} products, {variants} variants, {categories} categories, "
         "{inventory} inventory rows.".format(**counts)
     )
+    if counts["dev_inventory"]:
+        print(
+            "DEV ONLY: seeded {dev_inventory} preview stock rows. These are not "
+            "launch stock and are never seeded when APP_ENV=production.".format(**counts)
+        )
     print(f"Products with unresolved [TO CONFIRM] fields: {unresolved}/{len(products)}")
     print("All seeded products remain draft. Publish is blocked until flags are resolved.")
 
