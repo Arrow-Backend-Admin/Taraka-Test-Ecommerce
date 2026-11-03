@@ -1,11 +1,12 @@
 # Sāntvana API
 
-FastAPI + SQLAlchemy + Alembic catalogue and inventory service for the Phase 4
-Milestone 2 concept storefront.
+FastAPI + SQLAlchemy + Alembic catalogue, inventory, orders and payments service
+for the Phase 4 Milestone 3 concept storefront.
 
-**Scope:** catalogue filters, full-text search, publish guard, inventory and a
-guest cart with time-boxed reservations. Checkout, payments, orders and shipping
-are not implemented.
+**Scope:** catalogue filters, full-text search, publish guard, inventory, guest
+cart with time-boxed reservations, guest checkout, orders, Razorpay test-mode
+payments, confirmation email and webhook verification. Shipping,
+returns/exchanges, coupons and authentication are not implemented.
 
 ## Local setup
 
@@ -56,6 +57,20 @@ python scripts/seed.py \
 | `DATABASE_URL` | SQLAlchemy URL. Defaults to `sqlite:///./santvana-dev.db`. |
 | `ADMIN_API_TOKEN` | Bearer token for `/admin/*`. If unset, admin routes return `503`. |
 | `CORS_ORIGINS` | Comma-separated storefront origins. Default `http://localhost:3000`. |
+| `CART_IP_HASH_SECRET` | Salt for hashing guest IP addresses used by reservation caps. |
+| `RAZORPAY_KEY_ID` | Razorpay key id. Test keys (`rzp_test_`) only in development. |
+| `RAZORPAY_KEY_SECRET` | Razorpay key secret. |
+| `RAZORPAY_WEBHOOK_SECRET` | HMAC secret for verifying `X-Razorpay-Signature` on webhooks. |
+| `RAZORPAY_MOCK` | Set `true` for local review. Refuses to run in production. |
+| `RAZORPAY_API_BASE` | Razorpay API base URL. Default `https://api.razorpay.com/v1`. |
+| `ORDER_PAYMENT_WINDOW_MINUTES` | Minutes before an unpaid order expires. Default 10. |
+| `STOREFRONT_URL` | Used in confirmation emails. Default `http://localhost:3000`. |
+| `MAIL_ENABLED` | Set `true` to send confirmation emails via SMTP. |
+| `SMTP_HOST` | SMTP host. Default `localhost` (Mailpit). |
+| `SMTP_PORT` | SMTP port. Default `1025` (Mailpit). |
+| `MAIL_FROM` | Sender address for transactional email. |
+| `SELLER_STATE` | Seller state for GST. Placeholder: `[TO CONFIRM: founder]`. |
+| `SELLER_GSTIN` | Seller GSTIN. Placeholder: `[TO CONFIRM: founder]`. |
 | `OTEL_ENABLED` | Set `true` to instrument FastAPI and SQLAlchemy. Default `false`. |
 | `OTEL_SERVICE_NAME` | Service name in traces. Default `santvana-api`. |
 | `OTEL_EXPORTER_OTLP_ENDPOINT` | OTLP/HTTP endpoint, e.g. `http://localhost:4318/v1/traces`. |
@@ -81,7 +96,7 @@ placeholder refresh; the committed set uses Wikimedia Commons.
 | `GET` | `/catalogue?preview_drafts=true` | Development-only draft preview. Ignored when `APP_ENV=production`. |
 | `GET` | `/catalogue/{slug}?preview_drafts=true` | Development-only draft detail. Ignored when `APP_ENV=production`. |
 
-### Guest cart — `X-Cart-Token: <token>`
+### Guest cart -- `santvana_cart` httpOnly cookie
 
 | Method | Path | Purpose |
 |---|---|---|
@@ -92,11 +107,34 @@ placeholder refresh; the committed set uses Wikimedia Commons.
 | `DELETE` | `/cart/items/{id}` | Remove the line and release its reservation. |
 
 Rules: 15-minute reservation, maximum 5 units per size, 10 units and 5 lines per
-cart. Checkout is deliberately unavailable in this milestone. Reservations are
-released when a line is removed, the quantity changes or the cart expires. The
-conditional inventory update prevents two guests reserving the same last unit.
+cart. Per-IP cap: max 10 units per IP; per-size cap = max(2, ceil(on_hand * 0.20)).
+Reservations are released when a line is removed, the quantity changes or the
+cart expires. The conditional inventory update prevents two guests reserving the
+same last unit. The cart token is stored as a SHA-256 hash in `carts.token_hash`;
+the raw token lives in an httpOnly `santvana_cart` cookie.
 
-### Admin — `Authorization: Bearer <ADMIN_API_TOKEN>`
+### Orders and payments
+
+| Method | Path | Purpose |
+|---|---|---|
+| `POST` | `/orders` | Create an order from the cart. Prices come from the database; GST is split per line. |
+| `GET` | `/orders/{public_id}` | Read order status, items, GST split, address and seller details. |
+| `POST` | `/orders/{public_id}/payment` | Retry payment (re-reserve if expired, create a new Razorpay order). |
+| `POST` | `/orders/{public_id}/payment-verify` | Browser callback hint. Verifies the signature but never changes order status. |
+| `POST` | `/orders/{public_id}/mock-pay` | Dev-only: sign a fake webhook and run the real confirmation path. Refused in production. |
+| `POST` | `/orders/expire` | Sweep: expire all orders past their reservation window. |
+| `POST` | `/webhooks/razorpay` | Razorpay webhook endpoint. Verifies raw-body HMAC signature. Idempotent and replay-safe. |
+
+Payment is confirmed only by a signed `payment.captured` or `order.paid` webhook.
+The browser callback is a UI hint. Webhooks are idempotent (`X-Razorpay-Event-Id`).
+Late payments after reservation expiry attempt re-reservation; if stock is gone,
+the payment is refunded. Failed/abandoned payments release stock.
+
+Local mock payments use `POST /orders/{public_id}/mock-pay`, which signs a fake
+webhook and runs the real confirmation path. Requires `RAZORPAY_MOCK=true` and
+non-production `APP_ENV`.
+
+### Admin -- `Authorization: Bearer <ADMIN_API_TOKEN>`
 
 | Method | Path | Purpose |
 |---|---|---|
@@ -134,7 +172,7 @@ lists and dictionaries, looking for `[TO CONFIRM` (case-insensitive).
 - In production, the public catalogue skips a forced-published product that
   still has a placeholder image.
 - `GET /catalogue?preview_drafts=true` is ignored in production. In development
-  it returns all products, replaces unresolved values with “To be confirmed”
+  it returns all products, replaces unresolved values with "To be confirmed"
   and marks each payload with `preview: true`. It never returns a raw
   `[TO CONFIRM]` value.
 
@@ -167,8 +205,8 @@ and asserts exactly one reservation succeeds. `inventory_events` records the
 reservation, release, sale, adjustment or seed event.
 
 `reserve_stock`, `release_stock`, `commit_sale` and `adjust_stock` are in
-`app/services/inventory.py`. `commit_sale` exists for the later checkout
-milestone but is not called by any route yet.
+`app/services/inventory.py`. `commit_sale` is called by the webhook handler
+when a payment is confirmed.
 
 ## Tests
 
@@ -183,32 +221,51 @@ Coverage includes:
 - publish guard on product fields and variant fields;
 - forced-published unresolved data hidden from the storefront;
 - production placeholder publish guard and public filtering;
-- development draft preview with “To be confirmed” and placeholder notices;
+- development draft preview with "To be confirmed" and placeholder notices;
 - catalogue filters, facets, search and live stock;
 - guest cart add/update/remove, line and unit limits, oversell guard and expiry;
 - customer-copy sanitising and the flagged dev inventory fixture;
 - parallel last-unit reservation;
 - seed counts and idempotency;
-- telemetry disabled by default.
+- telemetry disabled by default;
+- order creation from database prices with per-line GST split;
+- Indian address and pincode validation;
+- Razorpay signature verification failures;
+- replayed webhook events (idempotent);
+- failed payment release and retry;
+- expired reservation retry and late payment re-reserve/refund;
+- payment amount mismatch refund;
+- browser verify hint (never changes order state);
+- double-submit guard;
+- mock-pay dev-only shortcut;
+- live-key guard, mock guard, webhook-secret guard;
+- concurrent duplicate-capture on PostgreSQL (skipped on SQLite).
 
-The suite currently reports **29 passed**.
+The suite currently reports **52 passed, 1 skipped** (the PostgreSQL-only
+concurrent duplicate-capture test is skipped on SQLite).
 
 ## Database model
 
 - `categories`
 - `products`
 - `product_variants`
-- `inventory` — one row per variant, `on_hand`, `reserved`, optimistic `version`
-- `inventory_events` — append-only ledger with a unique optional `reference`
-- `carts` — opaque guest token, status and reservation expiry
-- `cart_items` — reserved line with unit price and reservation reference
+- `inventory` -- one row per variant, `on_hand`, `reserved`, optimistic `version`
+- `inventory_events` -- append-only ledger with a unique optional `reference`
+- `carts` -- opaque guest token, status and reservation expiry
+- `cart_items` -- reserved line with unit price and reservation reference
+- `orders` -- guest order with address, seller details, GST split, status state machine
+- `order_items` -- price and name snapshots, per-line GST, stock_state (reserved/sold/released)
+- `payments` -- Razorpay order id, payment id, status, refund tracking
+- `webhook_events` -- idempotent event intake keyed by `X-Razorpay-Event-Id`
 
 Migrations:
 
 - `alembic/versions/b137d92f11bf_initial_catalogue_and_inventory.py`
-- `alembic/versions/c4a1f2d3e5b6_guest_carts_and_search.py` — carts, cart items and
+- `alembic/versions/c4a1f2d3e5b6_guest_carts_and_search.py` -- carts, cart items and
   the PostgreSQL-only GIN index `ix_products_search_tsv`. SQLite gets no index
   and uses the fallback search.
+- `alembic/versions/e6c3f9a2b8d1_orders_payments_webhooks.py` -- orders, order items,
+  payments and webhook events.
 
 ## Open items
 
@@ -219,4 +276,6 @@ stores these as flags or nullable fields; it does not invent values. See
 
 ## Next milestone
 
-Stop here. Checkout and payments start only after explicit founder approval.
+Stop here. Shipments, returns/exchanges, coupons and authentication start only
+after explicit founder approval. Cash on delivery is deferred; see
+`../../brand/phase-4/cod-decision-note.md`.

@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import re
 from datetime import date, datetime
 from decimal import Decimal
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class CategoryCreate(BaseModel):
@@ -260,3 +261,223 @@ class CartOut(BaseModel):
     total_units: int
     reservation_minutes: int
     rules: dict[str, int | float | str]
+
+INDIAN_STATES = (
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+    "Andaman and Nicobar Islands",
+    "Chandigarh",
+    "Dadra and Nagar Haveli and Daman and Diu",
+    "Delhi",
+    "Jammu and Kashmir",
+    "Ladakh",
+    "Lakshadweep",
+    "Puducherry",
+)
+STATE_LOOKUP = {state.lower(): state for state in INDIAN_STATES}
+STATE_ALIASES = {
+    "nct of delhi": "Delhi",
+    "new delhi": "Delhi",
+    "orissa": "Odisha",
+    "pondicherry": "Puducherry",
+    "uttaranchal": "Uttarakhand",
+    "jammu & kashmir": "Jammu and Kashmir",
+    "andaman & nicobar islands": "Andaman and Nicobar Islands",
+    "dadra & nagar haveli and daman & diu": "Dadra and Nagar Haveli and Daman and Diu",
+    "dadra and nagar haveli": "Dadra and Nagar Haveli and Daman and Diu",
+    "daman and diu": "Dadra and Nagar Haveli and Daman and Diu",
+}
+
+
+class IndianAddress(BaseModel):
+    line1: str = Field(min_length=5, max_length=200)
+    line2: str | None = Field(default=None, max_length=200)
+    city: str = Field(min_length=2, max_length=80)
+    state: str = Field(min_length=2, max_length=80)
+    pincode: str
+    country: str = "India"
+
+    @field_validator("line1", "line2", "city")
+    @classmethod
+    def _strip_text(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        cleaned = " ".join(value.split())
+        return cleaned or None
+
+    @field_validator("state")
+    @classmethod
+    def _known_state(cls, value: str) -> str:
+        key = " ".join(value.strip().lower().split())
+        canonical = STATE_LOOKUP.get(key) or STATE_ALIASES.get(key)
+        if canonical is None:
+            raise ValueError("Use an Indian state or union territory name")
+        return canonical
+
+    @field_validator("pincode")
+    @classmethod
+    def _indian_pincode(cls, value: str) -> str:
+        cleaned = re.sub(r"\s+", "", value)
+        if not re.fullmatch(r"[1-9][0-9]{5}", cleaned):
+            raise ValueError("Pincode must be six digits and cannot start with 0")
+        return cleaned
+
+    @field_validator("country")
+    @classmethod
+    def _india_only(cls, value: str) -> str:
+        if value.strip().lower() not in {"india", "in", "bharat"}:
+            raise ValueError("Shipping is limited to India")
+        return "India"
+
+
+class CheckoutRequest(BaseModel):
+    customer_name: str = Field(min_length=2, max_length=120)
+    customer_email: str = Field(max_length=254)
+    customer_phone: str
+    address: IndianAddress
+
+    @field_validator("customer_name")
+    @classmethod
+    def _strip_name(cls, value: str) -> str:
+        cleaned = " ".join(value.split())
+        if len(cleaned) < 2:
+            raise ValueError("Enter a full name")
+        return cleaned
+
+    @field_validator("customer_email")
+    @classmethod
+    def _email(cls, value: str) -> str:
+        cleaned = value.strip().lower()
+        if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", cleaned):
+            raise ValueError("Enter a valid email address")
+        return cleaned
+
+    @field_validator("customer_phone")
+    @classmethod
+    def _indian_mobile(cls, value: str) -> str:
+        cleaned = re.sub(r"[\s\-()]", "", value)
+        if cleaned.startswith("+91"):
+            cleaned = cleaned[3:]
+        elif cleaned.startswith("91") and len(cleaned) == 12:
+            cleaned = cleaned[2:]
+        elif cleaned.startswith("0") and len(cleaned) == 11:
+            cleaned = cleaned[1:]
+        if not re.fullmatch(r"[6-9][0-9]{9}", cleaned):
+            raise ValueError("Enter a 10-digit Indian mobile number")
+        return cleaned
+
+
+class OrderAddressOut(BaseModel):
+    line1: str
+    line2: str | None
+    city: str
+    state: str
+    pincode: str
+    country: str
+
+
+class OrderSellerOut(BaseModel):
+    state: str
+    gstin: str
+
+
+class OrderItemOut(BaseModel):
+    product_name: str
+    product_slug: str
+    sku: str
+    size_uk: str
+    quantity: int
+    unit_price_paise: int
+    line_total_paise: int
+    taxable_value_paise: int
+    gst_paise: int
+    gst_rate_pct: int
+
+
+class OrderPaymentOut(BaseModel):
+    provider_order_id: str
+    status: str
+    amount_paise: int
+    method: str | None
+
+
+class OrderOut(BaseModel):
+    public_id: str
+    status: str
+    currency: str
+    created_at: datetime
+    paid_at: datetime | None
+    expired_at: datetime | None
+    reservation_expires_at: datetime | None
+    customer_name: str
+    customer_email: str
+    customer_phone: str
+    address: OrderAddressOut
+    seller: OrderSellerOut
+    items: list[OrderItemOut]
+    subtotal_paise: int
+    gst_paise: int
+    shipping_paise: int
+    total_paise: int
+    latest_payment: OrderPaymentOut | None
+    next_action: str
+    message: str
+
+
+class PaymentCheckoutOut(BaseModel):
+    provider: str
+    key_id: str | None
+    order_id: str
+    amount_paise: int
+    currency: str
+    name: str
+    description: str
+    mock: bool
+    prefill: dict[str, str]
+
+
+class OrderCreatedOut(OrderOut):
+    checkout: PaymentCheckoutOut | None = None
+
+
+class PaymentVerifyRequest(BaseModel):
+    razorpay_order_id: str = Field(min_length=1, max_length=120)
+    razorpay_payment_id: str = Field(min_length=1, max_length=120)
+    razorpay_signature: str = Field(min_length=1, max_length=256)
+
+
+class PaymentVerifyOut(BaseModel):
+    verified: bool
+    order_status: str
+    message: str
+
+
+class WebhookAck(BaseModel):
+    status: str
+    event_id: str | None = None

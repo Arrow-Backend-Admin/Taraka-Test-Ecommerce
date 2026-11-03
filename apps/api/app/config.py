@@ -36,6 +36,7 @@ class Settings(BaseSettings):
     # refused when APP_ENV=production.
     razorpay_mock: bool = False
     order_payment_window_minutes: int = 10
+    storefront_url: str = "http://localhost:3000"
 
     # Transactional email. Mailpit listens on localhost:1025 by default.
     mail_enabled: bool = True

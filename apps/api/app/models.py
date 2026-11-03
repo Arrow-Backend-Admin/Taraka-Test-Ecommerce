@@ -276,3 +276,170 @@ class CartItem(TimestampMixin, Base):
 
     cart: Mapped[Cart] = relationship(back_populates="items")
     variant: Mapped[ProductVariant] = relationship()
+
+
+class Order(TimestampMixin, Base):
+    """A guest order.
+
+    Every money field is an integer number of paise. Product names and prices
+    are copied onto ``order_items`` at checkout so a later catalogue edit cannot
+    change what the customer was charged.
+
+    ``public_id`` is an unguessable capability token used in confirmation URLs.
+    Authentication is out of scope for this milestone, so the order page must
+    not be enumerable by a sequential id.
+    """
+
+    __tablename__ = "orders"
+    __table_args__ = (
+        UniqueConstraint("public_id", name="uq_orders_public_id"),
+        UniqueConstraint("cart_id", name="uq_orders_cart"),
+        CheckConstraint("total_paise >= 0", name="ck_orders_total_non_negative"),
+        CheckConstraint("gst_paise >= 0", name="ck_orders_gst_non_negative"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    public_id: Mapped[str] = mapped_column(String(48), nullable=False)
+    cart_id: Mapped[int | None] = mapped_column(
+        ForeignKey("carts.id", ondelete="SET NULL")
+    )
+    status: Mapped[str] = mapped_column(
+        String(24), default="created", nullable=False, index=True
+    )
+    currency: Mapped[str] = mapped_column(String(3), default="INR", nullable=False)
+
+    customer_name: Mapped[str] = mapped_column(String(120), nullable=False)
+    customer_email: Mapped[str] = mapped_column(String(254), nullable=False)
+    customer_phone: Mapped[str] = mapped_column(String(16), nullable=False)
+
+    address_line1: Mapped[str] = mapped_column(String(200), nullable=False)
+    address_line2: Mapped[str | None] = mapped_column(String(200))
+    city: Mapped[str] = mapped_column(String(80), nullable=False)
+    state: Mapped[str] = mapped_column(String(80), nullable=False)
+    pincode: Mapped[str] = mapped_column(String(6), nullable=False)
+    country: Mapped[str] = mapped_column(String(60), default="India", nullable=False)
+
+    seller_state: Mapped[str] = mapped_column(String(120), nullable=False)
+    seller_gstin: Mapped[str] = mapped_column(String(120), nullable=False)
+
+    # subtotal_paise is the taxable value, gst_paise is the tax inside the
+    # GST-inclusive total. total_paise is what Razorpay charges.
+    subtotal_paise: Mapped[int] = mapped_column(Integer, nullable=False)
+    gst_paise: Mapped[int] = mapped_column(Integer, nullable=False)
+    shipping_paise: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
+    total_paise: Mapped[int] = mapped_column(Integer, nullable=False)
+
+    reservation_expires_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True)
+    )
+    paid_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    expired_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    cancelled_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    confirmation_email_sent_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True)
+    )
+    notes: Mapped[str | None] = mapped_column(Text)
+
+    items: Mapped[list[OrderItem]] = relationship(
+        back_populates="order", cascade="all, delete-orphan", order_by="OrderItem.id"
+    )
+    payments: Mapped[list[Payment]] = relationship(
+        back_populates="order", cascade="all, delete-orphan", order_by="Payment.id"
+    )
+
+
+class OrderItem(TimestampMixin, Base):
+    __tablename__ = "order_items"
+    __table_args__ = (
+        UniqueConstraint(
+            "reservation_reference", name="uq_order_items_reservation_reference"
+        ),
+        CheckConstraint("quantity > 0", name="ck_order_items_quantity_positive"),
+        CheckConstraint("line_total_paise >= 0", name="ck_order_items_total_non_negative"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    order_id: Mapped[int] = mapped_column(
+        ForeignKey("orders.id", ondelete="CASCADE"), index=True, nullable=False
+    )
+    variant_id: Mapped[int] = mapped_column(
+        ForeignKey("product_variants.id", ondelete="RESTRICT"),
+        index=True,
+        nullable=False,
+    )
+    product_id: Mapped[str | None] = mapped_column(String(60))
+    product_name: Mapped[str] = mapped_column(String(200), nullable=False)
+    product_slug: Mapped[str] = mapped_column(String(200), nullable=False)
+    sku: Mapped[str] = mapped_column(String(80), nullable=False)
+    size_uk: Mapped[str] = mapped_column(String(12), nullable=False)
+    hsn: Mapped[str | None] = mapped_column(String(20))
+
+    quantity: Mapped[int] = mapped_column(Integer, nullable=False)
+    unit_price_paise: Mapped[int] = mapped_column(Integer, nullable=False)
+    line_total_paise: Mapped[int] = mapped_column(Integer, nullable=False)
+    taxable_value_paise: Mapped[int] = mapped_column(Integer, nullable=False)
+    gst_paise: Mapped[int] = mapped_column(Integer, nullable=False)
+    gst_rate_pct: Mapped[int] = mapped_column(Integer, nullable=False)
+
+    reservation_reference: Mapped[str] = mapped_column(String(160), nullable=False)
+    # reserved -> sold on payment, or reserved -> released on expiry/failure.
+    stock_state: Mapped[str] = mapped_column(
+        String(16), default="reserved", nullable=False
+    )
+
+    order: Mapped[Order] = relationship(back_populates="items")
+    variant: Mapped[ProductVariant] = relationship()
+
+
+class Payment(TimestampMixin, Base):
+    __tablename__ = "payments"
+    __table_args__ = (
+        UniqueConstraint("provider_order_id", name="uq_payments_provider_order"),
+        UniqueConstraint("provider_payment_id", name="uq_payments_provider_payment"),
+        CheckConstraint("amount_paise >= 0", name="ck_payments_amount_non_negative"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    order_id: Mapped[int] = mapped_column(
+        ForeignKey("orders.id", ondelete="CASCADE"), index=True, nullable=False
+    )
+    provider: Mapped[str] = mapped_column(String(20), default="razorpay", nullable=False)
+    provider_order_id: Mapped[str] = mapped_column(String(80), nullable=False)
+    provider_payment_id: Mapped[str | None] = mapped_column(String(80))
+    status: Mapped[str] = mapped_column(
+        String(24), default="created", nullable=False, index=True
+    )
+    amount_paise: Mapped[int] = mapped_column(Integer, nullable=False)
+    currency: Mapped[str] = mapped_column(String(3), default="INR", nullable=False)
+    method: Mapped[str | None] = mapped_column(String(40))
+    raw_status: Mapped[str | None] = mapped_column(String(40))
+    failure_code: Mapped[str | None] = mapped_column(String(80))
+    failure_reason: Mapped[str | None] = mapped_column(Text)
+    refund_id: Mapped[str | None] = mapped_column(String(80))
+    refunded_paise: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
+
+    order: Mapped[Order] = relationship(back_populates="payments")
+
+
+class WebhookEvent(TimestampMixin, Base):
+    """Signed provider events, stored for idempotency and audit.
+
+    ``event_id`` is unique. A replay is acknowledged without touching stock or
+    payment state. A failed event may be reprocessed on a provider retry.
+    """
+
+    __tablename__ = "webhook_events"
+    __table_args__ = (
+        UniqueConstraint("event_id", name="uq_webhook_events_event_id"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    provider: Mapped[str] = mapped_column(String(20), default="razorpay", nullable=False)
+    event_id: Mapped[str] = mapped_column(String(120), nullable=False)
+    event_type: Mapped[str] = mapped_column(String(80), nullable=False)
+    status: Mapped[str] = mapped_column(
+        String(16), default="received", nullable=False, index=True
+    )
+    payload: Mapped[dict | None] = mapped_column(JSON)
+    error: Mapped[str | None] = mapped_column(Text)
+    processed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

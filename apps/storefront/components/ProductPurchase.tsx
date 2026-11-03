@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
 import { getStock, type PublicVariant } from "@/lib/api";
@@ -374,8 +375,15 @@ export function ProductPurchase({ slug, sizes }: ProductPurchaseProps) {
               {String(cart.rules.max_total_units)} units and{" "}
               {String(cart.rules.max_lines)} lines per cart. One IP can hold at
               most {String(cart.rules.max_units_per_ip)} units, and at most 20%
-              of a size&apos;s on-hand units. Checkout and payment are not
-              available in this milestone.
+              of a size&apos;s on-hand units.
+            </p>
+            <p className="mt-3 font-body text-sm">
+              <Link
+                className="rounded-full bg-ink px-5 py-2.5 text-paper transition-colors hover:bg-ground"
+                href="/checkout"
+              >
+                Checkout
+              </Link>
             </p>
           </>
         )}

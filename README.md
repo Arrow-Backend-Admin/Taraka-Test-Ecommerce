@@ -9,16 +9,17 @@ GST/pricing model, policies, size guide and merchandising plan.
 **Status: concept only.** Phase 2 is approved as a concept visual system. Phase 3
 is approved as working data, with its open items kept. Phase 4 Milestone 1 is
 delivered; Milestone 2 adds catalogue filters, PostgreSQL full-text search, live
-stock size selection and a guest cart with 15-minute reservations. Checkout and
-payments are not started. No print, domain or ad spend until the attorney opinion
-and native-speaker connotation test are back. The name is not cleared.
+stock size selection and a guest cart with 15-minute reservations. Milestone 3
+adds guest checkout, orders, Razorpay test-mode payments and confirmation email.
+No print, domain or ad spend until the attorney opinion and native-speaker
+connotation test are back. The name is not cleared.
 
 ## Monorepo
 
 | Path | Contents |
 |---|---|
-| `apps/storefront/` | Next.js 16 app: `/brand` concept route, `/catalogue` list and detail routes, `/credits` image credits |
-| `apps/api/` | FastAPI + SQLAlchemy + Alembic catalogue and inventory API |
+| `apps/storefront/` | Next.js 16 app: `/brand` concept route, `/catalogue` list and detail routes, `/checkout` guest checkout, `/orders/[publicId]` order confirmation, `/credits` image credits |
+| `apps/api/` | FastAPI + SQLAlchemy + Alembic catalogue, inventory, orders and payments API |
 | `brand/strategy.md` | Phase 1 strategy, v1.1 approvals and open items |
 | `brand/naming.md` | Naming risk memo, spelling policy and clearance status |
 | `brand/logos/` | Legibility test, harness and decision record |
@@ -122,7 +123,6 @@ any published product still has a placeholder image or an unresolved field.
   be used in ads, social posts or packaging.
 - `python apps/api/scripts/launch_check.py` must fail if a published product
   still uses a placeholder image.
-- Checkout and payments are not implemented. The guest cart only holds a
-  time-boxed reservation; it never takes payment.
+- Guest checkout and Razorpay test-mode payments are in Milestone 3. Payment is confirmed only by a signed webhook, not the browser callback. Cash on delivery is deferred; see brand/phase-4/cod-decision-note.md.
 - The Devanagari wordmark has a 20 px absolute screen floor and a 6 mm measured
   print floor. Below 20 px, use the monogram or symbol.

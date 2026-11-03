@@ -26,46 +26,21 @@ def main() -> int:
     if args.database_url:
         os.environ["DATABASE_URL"] = args.database_url
 
-    from sqlalchemy import select
-
     from app.db import SessionLocal
-    from app.models import Product
-    from app.services.publish import (
-        product_unresolved_fields,
-        published_placeholder_products,
-    )
+    from app.services.launch import launch_failures
 
-    failures: list[str] = []
     with SessionLocal() as session:
-        published = session.scalars(
-            select(Product).where(Product.status == "published").order_by(Product.name)
-        ).all()
-        placeholder_products = published_placeholder_products(session)
-        for product in placeholder_products:
-            failures.append(
-                f"placeholder image: {product.id} ({product.name}) — "
-                "replace with real product photography before launch"
-            )
-        for product in published:
-            unresolved = product_unresolved_fields(product)
-            if unresolved:
-                failures.append(
-                    f"unresolved fields: {product.id} ({product.name}) — "
-                    + ", ".join(unresolved)
-                )
+        failures = launch_failures(session)
 
     if failures:
         print("LAUNCH CHECK FAILED")
         for failure in failures:
             print(f"- {failure}")
-        print(
-            f"\nPublished products checked: {len(published)}. "
-            f"Failures: {len(failures)}."
-        )
+        print(f"\nFailures: {len(failures)}.")
         return 1
 
     print("LAUNCH CHECK PASSED")
-    print(f"Published products checked: {len(published)}. No placeholder images.")
+    print("No published product uses a placeholder image.")
     print("No unresolved [TO CONFIRM] fields in published products.")
     return 0
 
