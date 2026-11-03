@@ -5,13 +5,10 @@ import { useCallback, useEffect, useState } from "react";
 import { getStock, type PublicVariant } from "@/lib/api";
 import {
   addCartItem,
-  clearCartToken,
   createCart,
   fetchCart,
-  readCartToken,
   removeCartItem,
   updateCartItem,
-  writeCartToken,
   type Cart,
   type CartItem,
 } from "@/lib/cart";
@@ -36,6 +33,9 @@ export function ProductPurchase({ slug, sizes }: ProductPurchaseProps) {
   const [stock, setStock] = useState<Record<string, number>>(() =>
     Object.fromEntries(sizes.map((size) => [size.sku, size.available])),
   );
+  const [caps, setCaps] = useState<Record<string, number>>(() =>
+    Object.fromEntries(sizes.map((size) => [size.sku, MAX_LINE])),
+  );
   const [asOf, setAsOf] = useState<string | null>(null);
   const [selectedSku, setSelectedSku] = useState<string | null>(
     initialAvailable,
@@ -53,6 +53,11 @@ export function ProductPurchase({ slug, sizes }: ProductPurchaseProps) {
       setStock(
         Object.fromEntries(data.sizes.map((size) => [size.sku, size.available])),
       );
+      setCaps(
+        Object.fromEntries(
+          data.sizes.map((size) => [size.sku, size.max_reservable]),
+        ),
+      );
       setAsOf(data.as_of);
     }
     setRefreshing(false);
@@ -67,15 +72,12 @@ export function ProductPurchase({ slug, sizes }: ProductPurchaseProps) {
   }, [refreshStock]);
 
   useEffect(() => {
-    const token = readCartToken();
-    if (!token) return;
     let cancelled = false;
-    fetchCart(token)
+    fetchCart()
       .then((next) => {
         if (!cancelled) setCart(next);
       })
       .catch(() => {
-        clearCartToken();
         if (!cancelled) setCart(null);
       });
     return () => {
@@ -92,26 +94,28 @@ export function ProductPurchase({ slug, sizes }: ProductPurchaseProps) {
 
   useEffect(() => {
     const available = selectedSku ? stock[selectedSku] ?? 0 : 0;
-    const max = Math.max(Math.min(MAX_LINE, available), 1);
+    const cap = selectedSku ? caps[selectedSku] ?? MAX_LINE : MAX_LINE;
+    const max = Math.max(Math.min(MAX_LINE, available, cap), 1);
     if (quantity > max) setQuantity(max);
-  }, [quantity, selectedSku, stock]);
+  }, [caps, quantity, selectedSku, stock]);
 
   const selected = sizes.find((size) => size.sku === selectedSku) ?? null;
   const selectedAvailable = selectedSku ? stock[selectedSku] ?? 0 : 0;
-  const quantityMax = Math.max(Math.min(MAX_LINE, selectedAvailable), 1);
+  const selectedCap = selectedSku ? caps[selectedSku] ?? MAX_LINE : MAX_LINE;
+  const quantityMax = Math.max(
+    Math.min(MAX_LINE, selectedAvailable, selectedCap),
+    1,
+  );
 
   async function handleAdd() {
     if (!selectedSku || selectedAvailable < 1 || busy) return;
     setBusy(true);
     setMessage(null);
     try {
-      let token = readCartToken();
-      if (!token) {
-        const created = await createCart();
-        token = created.token;
-        writeCartToken(token);
+      if (!cart || cart.status !== "active") {
+        await createCart();
       }
-      const next = await addCartItem(token, selectedSku, quantity);
+      const next = await addCartItem(selectedSku, quantity);
       setCart(next);
       setMessage({
         kind: "info",
@@ -133,7 +137,7 @@ export function ProductPurchase({ slug, sizes }: ProductPurchaseProps) {
     setBusy(true);
     setMessage(null);
     try {
-      const next = await updateCartItem(cart.token, item.id, nextQuantity);
+      const next = await updateCartItem(item.id, nextQuantity);
       setCart(next);
       await refreshStock();
     } catch (error) {
@@ -152,7 +156,7 @@ export function ProductPurchase({ slug, sizes }: ProductPurchaseProps) {
     setBusy(true);
     setMessage(null);
     try {
-      const next = await removeCartItem(cart.token, item.id);
+      const next = await removeCartItem(item.id);
       setCart(next);
       await refreshStock();
     } catch (error) {
@@ -335,7 +339,10 @@ export function ProductPurchase({ slug, sizes }: ProductPurchaseProps) {
                       aria-label={`Increase quantity for ${item.size_uk}`}
                       onClick={() => void handleQuantity(item, item.quantity + 1)}
                       disabled={
-                        busy || item.quantity >= MAX_LINE || item.available < 1
+                        busy ||
+                        item.quantity >= MAX_LINE ||
+                        item.quantity >= item.max_reservable ||
+                        item.available < 1
                       }
                       className="h-8 w-8 rounded-full border border-black/15 disabled:opacity-40"
                     >
@@ -365,8 +372,10 @@ export function ProductPurchase({ slug, sizes }: ProductPurchaseProps) {
               Reservations last {cart.reservation_minutes} minutes. Maximum{" "}
               {String(cart.rules.max_line_quantity)} per size,{" "}
               {String(cart.rules.max_total_units)} units and{" "}
-              {String(cart.rules.max_lines)} lines per cart. Checkout and payment
-              are not available in this milestone.
+              {String(cart.rules.max_lines)} lines per cart. One IP can hold at
+              most {String(cart.rules.max_units_per_ip)} units, and at most 20%
+              of a size&apos;s on-hand units. Checkout and payment are not
+              available in this milestone.
             </p>
           </>
         )}

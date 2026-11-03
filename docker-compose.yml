@@ -1,0 +1,49 @@
+# Local development services for the Sāntvana concept stack.
+#
+# PostgreSQL 16 is the target database. Mailpit catches transactional email
+# (confirmation messages land at http://localhost:8025). The OpenTelemetry
+# collector accepts OTLP/HTTP on 4318 and logs spans to stdout.
+#
+# Start:  docker compose up -d
+# Stop:   docker compose down
+# Reset:  docker compose down -v   (drops the local database volume)
+services:
+  postgres:
+    image: postgres:16
+    container_name: santvana-postgres
+    environment:
+      POSTGRES_USER: santvana
+      POSTGRES_PASSWORD: santvana
+      POSTGRES_DB: santvana
+    ports:
+      - "5432:5432"
+    volumes:
+      - santvana-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U santvana -d santvana"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  mailpit:
+    image: axllent/mailpit:v1.21
+    container_name: santvana-mailpit
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    environment:
+      MP_MAX_MESSAGES: 500
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.115.1
+    container_name: santvana-otel-collector
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes:
+      - ./infra/otel-collector/config.yaml:/etc/otelcol/config.yaml:ro
+    ports:
+      - "4318:4318"
+
+volumes:
+  santvana-postgres:

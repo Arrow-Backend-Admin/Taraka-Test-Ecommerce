@@ -231,7 +231,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 2000,
         "hero": False,
         "silhouette": "low-top sneaker",
-        "description": "The best-tier sneaker in slate. A more considered silhouette for the launch range.",
+        "description": "A low-top sneaker in slate. A more considered silhouette for the launch range.",
         "hero_reason": None,
     },
     # Running
@@ -292,7 +292,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 1500,
         "hero": False,
         "silhouette": "running shoe",
-        "description": "A better-tier running shoe in moss. A more considered shape for weekly mileage.",
+        "description": "A running shoe in moss. A more considered shape for weekly mileage.",
         "hero_reason": None,
     },
     {
@@ -307,7 +307,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 1700,
         "hero": False,
         "silhouette": "running shoe",
-        "description": "A better-tier running shoe in slate. For the run that has a time attached.",
+        "description": "A running shoe in slate. For the run that has a time attached.",
         "hero_reason": None,
     },
     {
@@ -322,7 +322,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 2000,
         "hero": False,
         "silhouette": "running shoe",
-        "description": "The best-tier running shoe in ground. The halo of the running range; no speed, grip or cushioning claim is made until test data exists.",
+        "description": "A running shoe in ground. No speed, grip or cushioning claim is made until test data exists.",
         "hero_reason": None,
     },
     # Everyday
@@ -383,7 +383,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 1400,
         "hero": False,
         "silhouette": "everyday shoe",
-        "description": "A better-tier everyday shoe in bone. For long days that move between indoors and out.",
+        "description": "An everyday shoe in bone. For long days that move between indoors and out.",
         "hero_reason": None,
     },
     {
@@ -398,7 +398,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 1600,
         "hero": False,
         "silhouette": "everyday shoe",
-        "description": "A better-tier everyday shoe in clay. The slower end of the week.",
+        "description": "An everyday shoe in clay. The slower end of the week.",
         "hero_reason": None,
     },
     {
@@ -413,7 +413,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 1900,
         "hero": False,
         "silhouette": "everyday shoe",
-        "description": "The best-tier everyday shoe in moss. A quieter, more considered everyday shape.",
+        "description": "An everyday shoe in moss. A quieter, more considered everyday shape.",
         "hero_reason": None,
     },
     # Sandals
@@ -474,7 +474,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 1350,
         "hero": False,
         "silhouette": "sandal",
-        "description": "A better-tier sandal in bone for the summer weekend.",
+        "description": "A sandal in bone for the summer weekend.",
         "hero_reason": None,
     },
     {
@@ -489,7 +489,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 1550,
         "hero": False,
         "silhouette": "sandal",
-        "description": "A better-tier sandal in moss for city heat.",
+        "description": "A sandal in moss for city heat.",
         "hero_reason": None,
     },
     {
@@ -504,7 +504,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 1900,
         "hero": True,
         "silhouette": "sandal",
-        "description": "The best-tier sandal in slate. A more finished summer shape.",
+        "description": "A sandal in slate. A more finished summer shape.",
         "hero_reason": "Best-tier sandal at Rs 4,999; summer halo and the highest AOV in the category. Planning GM 55.2%.",
     },
     # Boots
@@ -565,7 +565,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 1550,
         "hero": False,
         "silhouette": "boot",
-        "description": "A better-tier boot in moss. A more grounded shape for uneven ground; no grip claim is made until test data exists.",
+        "description": "A boot in moss. A more grounded shape for uneven ground; no grip claim is made until test data exists.",
         "hero_reason": None,
     },
     {
@@ -580,7 +580,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 1750,
         "hero": False,
         "silhouette": "boot",
-        "description": "A better-tier boot in slate. For the long way home.",
+        "description": "A boot in slate. For the long way home.",
         "hero_reason": None,
     },
     {
@@ -595,7 +595,7 @@ PRODUCTS: list[dict[str, Any]] = [
         "cost": 2100,
         "hero": True,
         "silhouette": "boot",
-        "description": "The best-tier boot in clay. The halo of the boot range.",
+        "description": "A boot in clay. A more finished shape for the boot range.",
         "hero_reason": "Best-tier boot at Rs 4,999; the outdoor-and-site halo. Planning GM 50.4%.",
     },
 ]

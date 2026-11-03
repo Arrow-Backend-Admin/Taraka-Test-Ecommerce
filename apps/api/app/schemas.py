@@ -220,6 +220,7 @@ class StockSizeOut(BaseModel):
     sku: str
     size_uk: str
     available: int
+    max_reservable: int = 0
 
 
 class StockOut(BaseModel):
@@ -247,15 +248,15 @@ class CartItemOut(BaseModel):
     unit_price: float
     line_total: float
     available: int
+    max_reservable: int = 0
     reservation_expires_at: datetime | None
 
 
 class CartOut(BaseModel):
-    token: str
     status: str
     expires_at: datetime | None
     items: list[CartItemOut]
     subtotal_inr: float
     total_units: int
     reservation_minutes: int
-    rules: dict[str, int | str]
+    rules: dict[str, int | float | str]

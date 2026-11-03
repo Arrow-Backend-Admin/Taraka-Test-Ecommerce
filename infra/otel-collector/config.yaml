@@ -1,0 +1,22 @@
+# Minimal collector for local development. It accepts OTLP/HTTP traces from
+# the API and writes them to the collector's stdout. Point OTEL_EXPORTER_OTLP_ENDPOINT
+# at http://localhost:4318/v1/traces and set OTEL_ENABLED=true.
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch: {}
+
+exporters:
+  debug:
+    verbosity: detailed
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug]

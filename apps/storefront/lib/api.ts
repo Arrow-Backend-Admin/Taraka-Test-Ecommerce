@@ -80,6 +80,7 @@ export type StockSize = {
   sku: string;
   size_uk: string;
   available: number;
+  max_reservable: number;
 };
 
 export type Stock = {

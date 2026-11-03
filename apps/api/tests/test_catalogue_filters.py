@@ -128,7 +128,12 @@ def test_stock_endpoint_returns_live_availability(
     body = response.json()
     assert body["slug"] == "relay-moss"
     assert body["sizes"] == [
-        {"sku": "TEST-RELAY-UK7", "size_uk": "UK 7", "available": 4}
+        {
+            "sku": "TEST-RELAY-UK7",
+            "size_uk": "UK 7",
+            "available": 4,
+            "max_reservable": 2,
+        }
     ]
     assert body["as_of"]
 

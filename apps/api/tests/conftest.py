@@ -6,18 +6,28 @@ from collections.abc import Generator
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, event
+from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session, sessionmaker
 
-os.environ.setdefault("DATABASE_URL", "sqlite:///:memory:")
+# The suite runs against SQLite by default (fast local fallback) and against
+# PostgreSQL in CI when TEST_DATABASE_URL is set. See POSTGRES-VS-SQLITE.md.
+TEST_DATABASE_URL = os.environ.get("TEST_DATABASE_URL", "").strip() or None
+
+os.environ.setdefault("DATABASE_URL", TEST_DATABASE_URL or "sqlite:///:memory:")
 os.environ.setdefault("ADMIN_API_TOKEN", "test-admin-token")
 os.environ.setdefault("OTEL_ENABLED", "false")
+os.environ.setdefault("MAIL_ENABLED", "false")
+os.environ.setdefault("RAZORPAY_KEY_ID", "")
+os.environ.setdefault("RAZORPAY_KEY_SECRET", "")
+os.environ.setdefault("RAZORPAY_WEBHOOK_SECRET", "test-webhook-secret")
+os.environ.setdefault("RAZORPAY_MOCK", "true")
+os.environ.setdefault("APP_ENV", "development")
 
 from app.db import Base, get_db  # noqa: E402
 from app.main import app  # noqa: E402
 
 
-@pytest.fixture()
-def db_engine(tmp_path):
+def _sqlite_engine(tmp_path) -> Engine:
     engine = create_engine(
         f"sqlite:///{tmp_path / 'test.db'}",
         connect_args={"check_same_thread": False, "timeout": 30},
@@ -31,9 +41,28 @@ def db_engine(tmp_path):
         cursor.execute("PRAGMA busy_timeout=30000")
         cursor.close()
 
+    return engine
+
+
+@pytest.fixture()
+def db_engine(tmp_path):
+    if TEST_DATABASE_URL:
+        engine = create_engine(TEST_DATABASE_URL, pool_pre_ping=True)
+        Base.metadata.drop_all(engine)
+        Base.metadata.create_all(engine)
+        try:
+            yield engine
+        finally:
+            Base.metadata.drop_all(engine)
+            engine.dispose()
+        return
+
+    engine = _sqlite_engine(tmp_path)
     Base.metadata.create_all(engine)
-    yield engine
-    engine.dispose()
+    try:
+        yield engine
+    finally:
+        engine.dispose()
 
 
 @pytest.fixture()

@@ -8,11 +8,11 @@ export type CartItem = {
   unit_price: number;
   line_total: number;
   available: number;
+  max_reservable: number;
   reservation_expires_at: string | null;
 };
 
 export type Cart = {
-  token: string;
   status: string;
   expires_at: string | null;
   items: CartItem[];
@@ -22,35 +22,9 @@ export type Cart = {
   rules: Record<string, string | number>;
 };
 
-const CART_TOKEN_KEY = "santvana.cart.token";
 const CART_BASE = (
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"
 ).replace(/\/$/, "");
-
-export function readCartToken(): string | null {
-  try {
-    return window.localStorage.getItem(CART_TOKEN_KEY);
-  } catch {
-    return null;
-  }
-}
-
-export function writeCartToken(token: string): void {
-  try {
-    window.localStorage.setItem(CART_TOKEN_KEY, token);
-  } catch {
-    // Storage can be unavailable in private modes. The cart still works for
-    // this page view; it just cannot be restored on the next visit.
-  }
-}
-
-export function clearCartToken(): void {
-  try {
-    window.localStorage.removeItem(CART_TOKEN_KEY);
-  } catch {
-    // Ignore storage failures.
-  }
-}
 
 async function parse(response: Response): Promise<Cart> {
   const data: unknown = await response.json().catch(() => null);
@@ -64,20 +38,17 @@ async function parse(response: Response): Promise<Cart> {
   return data as Cart;
 }
 
-async function request(
-  path: string,
-  init: RequestInit,
-  token?: string,
-): Promise<Cart> {
-  const headers: Record<string, string> = {
-    accept: "application/json",
-    "content-type": "application/json",
-  };
-  if (token) headers["X-Cart-Token"] = token;
+async function request(path: string, init: RequestInit): Promise<Cart> {
   const response = await fetch(`${CART_BASE}${path}`, {
     ...init,
     cache: "no-store",
-    headers,
+    // The guest cart token is an httpOnly cookie. It is never exposed to
+    // JavaScript, so every cart call must opt in to sending credentials.
+    credentials: "include",
+    headers: {
+      accept: "application/json",
+      "content-type": "application/json",
+    },
   });
   return parse(response);
 }
@@ -86,34 +57,38 @@ export function createCart(): Promise<Cart> {
   return request("/cart", { method: "POST" });
 }
 
-export function fetchCart(token: string): Promise<Cart> {
-  return request("/cart", { method: "GET" }, token);
+export function fetchCart(): Promise<Cart> {
+  return request("/cart", { method: "GET" });
 }
 
-export function addCartItem(
-  token: string,
-  sku: string,
-  quantity: number,
-): Promise<Cart> {
-  return request(
-    "/cart/items",
-    { method: "POST", body: JSON.stringify({ sku, quantity }) },
-    token,
-  );
+export function addCartItem(sku: string, quantity: number): Promise<Cart> {
+  return request("/cart/items", {
+    method: "POST",
+    body: JSON.stringify({ sku, quantity }),
+  });
 }
 
 export function updateCartItem(
-  token: string,
   itemId: number,
   quantity: number,
 ): Promise<Cart> {
-  return request(
-    `/cart/items/${itemId}`,
-    { method: "PATCH", body: JSON.stringify({ quantity }) },
-    token,
-  );
+  return request(`/cart/items/${itemId}`, {
+    method: "PATCH",
+    body: JSON.stringify({ quantity }),
+  });
 }
 
-export function removeCartItem(token: string, itemId: number): Promise<Cart> {
-  return request(`/cart/items/${itemId}`, { method: "DELETE" }, token);
+export function removeCartItem(itemId: number): Promise<Cart> {
+  return request(`/cart/items/${itemId}`, { method: "DELETE" });
+}
+
+export async function clearCart(): Promise<void> {
+  try {
+    await fetch(`${CART_BASE}/cart`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+  } catch {
+    // The cookie may already be gone. Nothing to recover.
+  }
 }

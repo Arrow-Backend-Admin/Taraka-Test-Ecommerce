@@ -1,11 +1,51 @@
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 from app.services.copy import (
     BANNED_CUSTOMER_TERMS,
     contains_banned_copy,
     sanitise_customer_text,
     sanitise_features,
 )
+
+CATALOGUE = (
+    Path(__file__).resolve().parents[3] / "brand" / "phase-3" / "products.json"
+)
+
+CLEAN_SENTENCES = (
+    "A low-top sneaker in slate.",
+    "A more considered silhouette for the launch range.",
+    "Sizes UK 3 to 13.",
+    "The final last is pending manufacturer confirmation.",
+    "Designed for the walk between transport and desk.",
+    "A boot in moss with a clean, grounded line.",
+)
+
+
+def test_clean_sentences_are_never_altered() -> None:
+    """copy.py is a safety net, not a copy editor.
+
+    A sentence that contains none of the banned phrases must pass through
+    byte-for-byte. This is the guard that stops the sanitiser silently
+    rewriting customer copy at seed time.
+    """
+
+    for sentence in CLEAN_SENTENCES:
+        assert not contains_banned_copy(sentence)
+        assert sanitise_customer_text(sentence) == sentence
+
+
+def test_generated_catalogue_descriptions_need_no_sanitising() -> None:
+    """Descriptions are fixed at source in brand/phase-3/build_catalogue.py."""
+
+    payload = json.loads(CATALOGUE.read_text(encoding="utf-8"))
+    for product in payload["products"]:
+        for field in ("short_description", "long_description"):
+            text = product[field]
+            assert not contains_banned_copy(text), (product["slug"], field, text)
+            assert sanitise_customer_text(text) == text, (product["slug"], field)
 
 
 def test_ladder_language_is_removed() -> None:

@@ -238,7 +238,10 @@ class Cart(TimestampMixin, Base):
     __tablename__ = "carts"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    token: Mapped[str] = mapped_column(String(64), unique=True, index=True, nullable=False)
+    token_hash: Mapped[str] = mapped_column(
+        String(64), unique=True, index=True, nullable=False
+    )
+    ip_hash: Mapped[str | None] = mapped_column(String(64), index=True)
     status: Mapped[str] = mapped_column(String(20), default="active", nullable=False)
     expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     last_seen_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
