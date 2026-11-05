@@ -110,6 +110,24 @@ The API test suite includes the parallel last-unit reservation test: two threads
 reserve the same final unit, and exactly one succeeds. The launch check fails if
 any published product still has a placeholder image or an unresolved field.
 
+## Operations
+
+One-command checks and runbooks:
+
+```bash
+make preflight   # launch gate; exits non-zero on any blocker
+make test        # full API suite
+make reconcile   # nightly order/payment/inventory reconciliation
+make outbox      # send pending confirmation emails
+make expire      # release stock held by orders past their payment window
+make backup      # PostgreSQL dump (or SQLite copy)
+```
+
+Read `docs/known-limitations.md` before describing the system as production
+ready. Runbooks live in `docs/runbooks/` (stuck payments, failing webhooks,
+stock mismatch, backup/restore). The real Razorpay test-mode drill is
+`brand/phase-4/razorpay-test-runbook.md`.
+
 ## Guardrails
 
 - No material, sustainability, grip or fit claim without evidence.

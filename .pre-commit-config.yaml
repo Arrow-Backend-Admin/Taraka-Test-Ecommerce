@@ -1,0 +1,22 @@
+# Local commit gate. Install once with:
+#   pip install pre-commit
+#   pre-commit install
+#
+# CI runs the same secret scan. A secret that reaches a commit must be rotated,
+# not just deleted.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: ["--maxkb=2048"]
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        exclude: ^brand/phase-4/(source-images|qa)/
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.4
+    hooks:
+      - id: gitleaks
+        args: ["--config", ".gitleaks.toml"]

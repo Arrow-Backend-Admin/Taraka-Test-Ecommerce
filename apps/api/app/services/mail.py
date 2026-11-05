@@ -91,22 +91,37 @@ def render_order_confirmation(order: Order) -> str:
     return "\n".join(lines)
 
 
-def send_order_confirmation(order: Order, settings: Settings) -> bool:
+def send_email(
+    *, to_email: str, subject: str, body: str, settings: Settings
+) -> bool:
     if not settings.mail_enabled:
         return False
     message = EmailMessage()
-    message["Subject"] = f"Order {order.public_id} confirmed — Sāntvana"
+    message["Subject"] = subject
     message["From"] = settings.mail_from
-    message["To"] = order.customer_email
-    message.set_content(render_order_confirmation(order))
+    message["To"] = to_email
+    message.set_content(body)
 
-    with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=15) as smtp:
+    with smtplib.SMTP(
+        settings.smtp_host,
+        settings.smtp_port,
+        timeout=settings.smtp_timeout_seconds,
+    ) as smtp:
         if settings.smtp_starttls:
             smtp.starttls()
         if settings.smtp_username:
             smtp.login(settings.smtp_username, settings.smtp_password or "")
         smtp.send_message(message)
     return True
+
+
+def send_order_confirmation(order: Order, settings: Settings) -> bool:
+    return send_email(
+        to_email=order.customer_email,
+        subject=f"Order {order.public_id} confirmed — Sāntvana",
+        body=render_order_confirmation(order),
+        settings=settings,
+    )
 
 
 def money_decimal(paise: int) -> Decimal:

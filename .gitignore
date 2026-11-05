@@ -29,8 +29,15 @@ coverage.xml
 *.sqlite-shm
 *.sqlite-wal
 data/
+backups/
 brand/phase-4/source-images/
 brand/phase-4/qa/
+
+# Test and audit output
+test-results/
+playwright-report/
+blob-report/
+lighthouse-report.json
 
 # Local environment and secrets
 .env

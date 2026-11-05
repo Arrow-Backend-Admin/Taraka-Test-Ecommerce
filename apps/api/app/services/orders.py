@@ -12,6 +12,7 @@ Rules enforced here, not in the browser:
 
 from __future__ import annotations
 
+import logging
 import secrets
 import uuid
 from datetime import datetime, timedelta, timezone
@@ -38,9 +39,12 @@ from .inventory import (
     release_stock,
     reserve_stock,
 )
-from .mail import send_order_confirmation
 from .money import gst_rate_pct, rupees_to_paise, split_gst
+from .masking import mask_email, mask_phone
+from .outbox import dispatch_pending, enqueue_confirmation
 from .razorpay import PaymentConfigurationError, RazorpayError, RazorpayGateway
+
+logger = logging.getLogger("santvana.orders")
 
 
 class OrderError(Exception):
@@ -260,7 +264,7 @@ def checkout_options(order: Order, payment: Payment, settings: Settings) -> dict
     }
 
 
-def order_payload(order: Order) -> dict[str, Any]:
+def order_payload(order: Order, *, mask_contact: bool = False) -> dict[str, Any]:
     latest_payment = order.payments[-1] if order.payments else None
     if order.status == "paid":
         next_action = "none"
@@ -290,8 +294,12 @@ def order_payload(order: Order) -> dict[str, Any]:
         "expired_at": order.expired_at,
         "reservation_expires_at": order.reservation_expires_at,
         "customer_name": order.customer_name,
-        "customer_email": order.customer_email,
-        "customer_phone": order.customer_phone,
+        "customer_email": (
+            mask_email(order.customer_email) if mask_contact else order.customer_email
+        ),
+        "customer_phone": (
+            mask_phone(order.customer_phone) if mask_contact else order.customer_phone
+        ),
         "address": {
             "line1": order.address_line1,
             "line2": order.address_line2,
@@ -371,11 +379,20 @@ def expire_orders(db: Session, *, now: datetime | None = None) -> int:
             Order.reservation_expires_at.is_not(None),
             Order.reservation_expires_at <= moment,
         )
+        .order_by(Order.id)
     ).unique().all()
     expired = 0
     for order in orders:
-        if expire_order(db, order, now=moment):
-            expired += 1
+        try:
+            if expire_order(db, order, now=moment):
+                expired += 1
+        except (OutOfStock, InventoryNotFound) as exc:
+            # One inconsistent order must not stop the rest of the sweep. The
+            # order stays unpaid and is logged for the stock-mismatch runbook.
+            db.rollback()
+            logger.warning(
+                "Could not expire order %s: %s", order.public_id, exc
+            )
     return expired
 
 
@@ -383,81 +400,73 @@ def reserve_order_stock(db: Session, order: Order) -> None:
     """Re-reserve every line whose stock was released.
 
     Used when a payment arrives after the order expired, or when a failed
-    payment is retried. If any line cannot be reserved, the lines reserved in
-    this call are released again.
+    payment is retried. The lines are reserved in one transaction: a failure
+    leaves no partial re-reservation behind.
     """
 
-    reserved_here: list[OrderItem] = []
-    for item in order.items:
-        if item.stock_state == "sold":
-            continue
-        if item.stock_state == "reserved":
-            continue
-        reference = f"order:{order.id}:{item.variant_id}:{uuid.uuid4().hex[:12]}"
-        try:
+    try:
+        for item in order.items:
+            if item.stock_state in {"sold", "reserved"}:
+                continue
+            reference = f"order:{order.id}:{item.variant_id}:{uuid.uuid4().hex[:12]}"
             reserve_stock(
                 db,
                 item.variant_id,
                 item.quantity,
                 reference=reference,
                 note=f"Order {order.public_id} retry reservation.",
+                commit=False,
             )
-        except (OutOfStock, InventoryNotFound):
-            for previous in reserved_here:
-                try:
-                    release_stock(
-                        db,
-                        previous.variant_id,
-                        previous.quantity,
-                        reference=f"{previous.reservation_reference}:compensate",
-                        note="Compensating release after a failed re-reservation.",
-                    )
-                except (OutOfStock, InventoryNotFound):
-                    pass
-                previous.stock_state = "released"
-            db.commit()
-            raise
-        item.reservation_reference = reference
-        item.stock_state = "reserved"
-        reserved_here.append(item)
-    db.commit()
+            item.reservation_reference = reference
+            item.stock_state = "reserved"
+        db.commit()
+    except (OutOfStock, InventoryNotFound):
+        db.rollback()
+        raise
 
 
 def release_order_stock(db: Session, order: Order, *, reason: str) -> None:
-    for item in order.items:
-        if item.stock_state != "reserved":
-            continue
-        try:
+    try:
+        for item in order.items:
+            if item.stock_state != "reserved":
+                continue
             release_stock(
                 db,
                 item.variant_id,
                 item.quantity,
                 reference=f"{item.reservation_reference}:{reason}",
                 note=f"Order {order.public_id}: reservation released ({reason}).",
+                commit=False,
             )
-        except (OutOfStock, InventoryNotFound):
-            pass
-        item.stock_state = "released"
-    db.commit()
+            item.stock_state = "released"
+        db.commit()
+    except (OutOfStock, InventoryNotFound):
+        db.rollback()
+        raise
 
 
 def commit_order_sale(db: Session, order: Order) -> None:
-    for item in order.items:
-        if item.stock_state == "sold":
-            continue
-        if item.stock_state != "reserved":
-            raise OrderStateError(
-                f"Order line {item.sku} has no active reservation to sell"
+    try:
+        for item in order.items:
+            if item.stock_state == "sold":
+                continue
+            if item.stock_state != "reserved":
+                raise OrderStateError(
+                    f"Order line {item.sku} has no active reservation to sell"
+                )
+            commit_sale(
+                db,
+                item.variant_id,
+                item.quantity,
+                reference=f"{item.reservation_reference}:sale",
+                note=f"Order {order.public_id}: payment confirmed.",
+                commit=False,
             )
-        commit_sale(
-            db,
-            item.variant_id,
-            item.quantity,
-            reference=f"{item.reservation_reference}:sale",
-            note=f"Order {order.public_id}: payment confirmed.",
-        )
-        item.stock_state = "sold"
-    db.commit()
+            item.stock_state = "sold"
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
 
 
 def refund_payment(
@@ -502,15 +511,27 @@ def refund_payment(
     return "refunded"
 
 
+def _flag_review(
+    db: Session, order: Order, payment: Payment, reason: str
+) -> None:
+    payment.needs_review = True
+    payment.review_reason = reason
+    order.notes = f"FLAGGED FOR REVIEW: {reason}"
+    db.commit()
+
+
 def _send_confirmation(db: Session, order: Order, settings: Settings) -> None:
+    """Make one best-effort send attempt for an already-queued outbox row.
+
+    The row was written in the paid transaction, so a dead SMTP server leaves it
+    pending for the dispatcher and never touches the payment.
+    """
+
     try:
-        sent = send_order_confirmation(order, settings)
+        dispatch_pending(db, settings, order_id=order.id, limit=1)
     except Exception as exc:  # noqa: BLE001 - email must not undo a payment
-        order.notes = f"Confirmation email failed: {exc}"
-        db.commit()
-        return
-    if sent:
-        order.confirmation_email_sent_at = _now()
+        db.rollback()
+        order.notes = f"Confirmation email dispatch failed: {exc}"
         db.commit()
 
 
@@ -521,6 +542,7 @@ def mark_paid(
     *,
     provider_payment_id: str,
     amount_paise: int,
+    currency: str | None,
     method: str | None,
     raw_status: str | None,
     settings: Settings,
@@ -532,15 +554,48 @@ def mark_paid(
             db.commit()
         return "already_paid"
 
+    if currency and currency != order.currency:
+        payment.provider_payment_id = provider_payment_id
+        payment.currency = currency[:3]
+        payment.amount_paise = amount_paise
+        payment.raw_status = raw_status
+        payment.failure_code = "currency_mismatch"
+        payment.failure_reason = (
+            f"Webhook currency {currency} does not match order currency "
+            f"{order.currency}"
+        )
+        _flag_review(
+            db,
+            order,
+            payment,
+            f"payment currency mismatch ({currency} vs {order.currency})",
+        )
+        # A refund must be issued in the captured currency, which this gateway
+        # call cannot express. Leave it for a human instead of refunding the
+        # wrong amount in the wrong currency.
+        order.status = "refund_pending"
+        order.notes = (
+            f"FLAGGED FOR REVIEW: captured in {currency}, order in "
+            f"{order.currency}; manual refund required."
+        )
+        db.commit()
+        return "refund_pending"
+
     if amount_paise != order.total_paise:
         payment.provider_payment_id = provider_payment_id
+        payment.amount_paise = amount_paise
         payment.raw_status = raw_status
         payment.failure_code = "amount_mismatch"
         payment.failure_reason = (
             f"Webhook amount {amount_paise} does not match order total "
             f"{order.total_paise}"
         )
-        db.commit()
+        _flag_review(
+            db,
+            order,
+            payment,
+            f"payment amount mismatch ({amount_paise} vs {order.total_paise})",
+        )
         return refund_payment(
             db, order, payment, reason="payment amount mismatch", settings=settings
         )
@@ -573,10 +628,14 @@ def mark_paid(
     payment.raw_status = raw_status
     payment.failure_code = None
     payment.failure_reason = None
+    payment.needs_review = False
+    payment.review_reason = None
     order.status = "paid"
     order.paid_at = _now()
     order.reservation_expires_at = None
     order.notes = None
+    # Queue the email in the same transaction as the paid status.
+    enqueue_confirmation(db, order)
     db.commit()
     db.refresh(order)
     _send_confirmation(db, order, settings)
@@ -613,6 +672,29 @@ def _payment_entity(payload: dict[str, Any]) -> dict[str, Any]:
     return (payload.get("payload") or {}).get("payment", {}).get("entity") or {}
 
 
+def _captured_values(
+    entity: dict[str, Any],
+) -> tuple[str, str, int, str] | None:
+    """Validate the fields needed to confirm a capture.
+
+    A partial delivery (missing amount, currency or ids) is ignored rather than
+    treated as a zero-rupee payment, so it can never trigger a refund or a
+    silent confirmation.
+    """
+
+    provider_order_id = str(entity.get("order_id") or "").strip()
+    provider_payment_id = str(entity.get("id") or "").strip()
+    amount = entity.get("amount")
+    currency = entity.get("currency")
+    if not provider_order_id or not provider_payment_id:
+        return None
+    if isinstance(amount, bool) or not isinstance(amount, int) or amount <= 0:
+        return None
+    if not isinstance(currency, str) or len(currency.strip()) != 3:
+        return None
+    return provider_order_id, provider_payment_id, amount, currency.strip().upper()
+
+
 def _locked_payment(
     db: Session, provider_order_id: str
 ) -> tuple[Payment | None, Order | None]:
@@ -639,10 +721,10 @@ def handle_payment_captured(
     db: Session, payload: dict[str, Any], settings: Settings
 ) -> str:
     entity = _payment_entity(payload)
-    provider_order_id = str(entity.get("order_id") or "").strip()
-    provider_payment_id = str(entity.get("id") or "").strip()
-    if not provider_order_id or not provider_payment_id:
+    values = _captured_values(entity)
+    if values is None:
         return "ignored"
+    provider_order_id, provider_payment_id, amount_paise, currency = values
     payment, order = _locked_payment(db, provider_order_id)
     if payment is None or order is None:
         return "ignored"
@@ -651,7 +733,8 @@ def handle_payment_captured(
         order,
         payment,
         provider_payment_id=provider_payment_id,
-        amount_paise=int(entity.get("amount") or 0),
+        amount_paise=amount_paise,
+        currency=currency,
         method=entity.get("method"),
         raw_status=entity.get("status"),
         settings=settings,
@@ -659,14 +742,14 @@ def handle_payment_captured(
 
 
 def handle_order_paid(db: Session, payload: dict[str, Any], settings: Settings) -> str:
-    entity = _payment_entity(payload)
-    provider_order_id = str(entity.get("order_id") or "").strip()
-    if not provider_order_id:
+    entity = dict(_payment_entity(payload))
+    if not entity.get("order_id"):
         order_entity = (payload.get("payload") or {}).get("order", {}).get("entity") or {}
-        provider_order_id = str(order_entity.get("id") or "").strip()
-    provider_payment_id = str(entity.get("id") or "").strip()
-    if not provider_order_id or not provider_payment_id:
+        entity["order_id"] = order_entity.get("id")
+    values = _captured_values(entity)
+    if values is None:
         return "ignored"
+    provider_order_id, provider_payment_id, amount_paise, currency = values
     payment, order = _locked_payment(db, provider_order_id)
     if payment is None or order is None:
         return "ignored"
@@ -675,7 +758,8 @@ def handle_order_paid(db: Session, payload: dict[str, Any], settings: Settings) 
         order,
         payment,
         provider_payment_id=provider_payment_id,
-        amount_paise=int(entity.get("amount") or 0),
+        amount_paise=amount_paise,
+        currency=currency,
         method=entity.get("method"),
         raw_status=entity.get("status"),
         settings=settings,

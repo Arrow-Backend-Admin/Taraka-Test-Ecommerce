@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { getStock, type PublicVariant } from "@/lib/api";
 import {
@@ -46,21 +46,47 @@ export function ProductPurchase({ slug, sizes }: ProductPurchaseProps) {
   const [message, setMessage] = useState<Message>(null);
   const [busy, setBusy] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [stockError, setStockError] = useState<string | null>(null);
+  const refreshingRef = useRef(false);
 
   const refreshStock = useCallback(async () => {
+    if (refreshingRef.current) return;
+    refreshingRef.current = true;
     setRefreshing(true);
-    const data = await getStock(slug);
-    if (data) {
-      setStock(
-        Object.fromEntries(data.sizes.map((size) => [size.sku, size.available])),
-      );
-      setCaps(
-        Object.fromEntries(
-          data.sizes.map((size) => [size.sku, size.max_reservable]),
-        ),
-      );
-      setAsOf(data.as_of);
+    let failed = false;
+    // Stock is advisory: retry a couple of times with a short backoff instead
+    // of silently leaving stale counts on screen after one dropped request.
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      const data = await getStock(slug);
+      if (data) {
+        setStock(
+          Object.fromEntries(
+            data.sizes.map((size) => [size.sku, size.available]),
+          ),
+        );
+        setCaps(
+          Object.fromEntries(
+            data.sizes.map((size) => [size.sku, size.max_reservable]),
+          ),
+        );
+        setAsOf(data.as_of);
+        setStockError(null);
+        failed = false;
+        break;
+      }
+      failed = true;
+      if (attempt < 2) {
+        await new Promise((resolve) =>
+          window.setTimeout(resolve, 400 * (attempt + 1)),
+        );
+      }
     }
+    if (failed) {
+      setStockError(
+        "Stock could not be refreshed. Showing the last known counts; the page will retry automatically.",
+      );
+    }
+    refreshingRef.current = false;
     setRefreshing(false);
   }, [slug]);
 
@@ -70,6 +96,14 @@ export function ProductPurchase({ slug, sizes }: ProductPurchaseProps) {
       void refreshStock();
     }, 30_000);
     return () => window.clearInterval(timer);
+  }, [refreshStock]);
+
+  useEffect(() => {
+    const onOnline = () => {
+      void refreshStock();
+    };
+    window.addEventListener("online", onOnline);
+    return () => window.removeEventListener("online", onOnline);
   }, [refreshStock]);
 
   useEffect(() => {
@@ -214,6 +248,16 @@ export function ProductPurchase({ slug, sizes }: ProductPurchaseProps) {
           })}
         </div>
       </fieldset>
+
+      {stockError ? (
+        <p
+          role="status"
+          aria-live="polite"
+          className="rounded-md border border-[#b9892f]/40 bg-[#fff4d6] p-3 font-body text-sm leading-6 text-[#5c4317]"
+        >
+          {stockError}
+        </p>
+      ) : null}
 
       {selected ? (
         <div className="rounded-md border border-black/10 bg-white/60 p-4 font-body text-sm leading-6 text-muted">

@@ -21,6 +21,7 @@ from urllib import error as urlerror
 from urllib import request as urlrequest
 
 from ..config import Settings
+from .resilience import CircuitBreaker, CircuitOpenError, retry_with_backoff
 
 
 class PaymentConfigurationError(RuntimeError):
@@ -29,6 +30,19 @@ class PaymentConfigurationError(RuntimeError):
 
 class RazorpayError(RuntimeError):
     pass
+
+
+class RazorpayTransientError(RazorpayError):
+    """A timeout, connection failure, 429 or 5xx. Safe to retry."""
+
+
+_BREAKERS: dict[str, CircuitBreaker] = {}
+
+
+def reset_circuit_breakers() -> None:
+    """Test helper. Production never resets a breaker through the API."""
+
+    _BREAKERS.clear()
 
 
 def assert_payment_config(settings: Settings) -> None:
@@ -45,6 +59,10 @@ def assert_payment_config(settings: Settings) -> None:
     if settings.uses_live_razorpay_keys and not settings.is_production:
         raise PaymentConfigurationError(
             "Live Razorpay keys (rzp_live_) are refused unless APP_ENV=production"
+        )
+    if settings.is_production and settings.uses_test_razorpay_keys:
+        raise PaymentConfigurationError(
+            "Razorpay test keys (rzp_test_) are refused when APP_ENV=production"
         )
     if bool(key_id) != bool(key_secret):
         raise PaymentConfigurationError(
@@ -84,6 +102,35 @@ class RazorpayGateway:
         return "Basic " + base64.b64encode(raw).decode("ascii")
 
     def _post(self, path: str, payload: dict[str, Any]) -> dict[str, Any]:
+        breaker = _BREAKERS.setdefault(
+            self.settings.razorpay_api_base,
+            CircuitBreaker(name="razorpay"),
+        )
+
+        def call() -> dict[str, Any]:
+            try:
+                breaker.before_call()
+            except CircuitOpenError as exc:
+                raise RazorpayError(
+                    "Razorpay is temporarily unavailable. Try again shortly."
+                ) from exc
+            try:
+                result = self._post_once(path, payload)
+            except RazorpayTransientError:
+                breaker.record_failure()
+                raise
+            breaker.record_success()
+            return result
+
+        return retry_with_backoff(
+            call,
+            attempts=3,
+            base_delay=0.2,
+            max_delay=1.0,
+            retry_on=RazorpayTransientError,
+        )
+
+    def _post_once(self, path: str, payload: dict[str, Any]) -> dict[str, Any]:
         url = self.settings.razorpay_api_base.rstrip("/") + path
         body = json.dumps(payload).encode("utf-8")
         request = urlrequest.Request(
@@ -97,15 +144,19 @@ class RazorpayGateway:
             },
         )
         try:
-            with urlrequest.urlopen(request, timeout=20) as response:  # noqa: S310
+            with urlrequest.urlopen(  # noqa: S310
+                request, timeout=self.settings.razorpay_timeout_seconds
+            ) as response:
                 return json.loads(response.read().decode("utf-8"))
         except urlerror.HTTPError as exc:
             detail = exc.read().decode("utf-8", errors="replace")
-            raise RazorpayError(
-                f"Razorpay returned {exc.code}: {detail[:500]}"
-            ) from exc
-        except urlerror.URLError as exc:
-            raise RazorpayError(f"Could not reach Razorpay: {exc.reason}") from exc
+            message = f"Razorpay returned {exc.code}: {detail[:500]}"
+            if exc.code == 429 or exc.code >= 500:
+                raise RazorpayTransientError(message) from exc
+            raise RazorpayError(message) from exc
+        except (TimeoutError, urlerror.URLError) as exc:
+            reason = getattr(exc, "reason", exc)
+            raise RazorpayTransientError(f"Could not reach Razorpay: {reason}") from exc
         except json.JSONDecodeError as exc:
             raise RazorpayError("Razorpay returned an unreadable response") from exc
 

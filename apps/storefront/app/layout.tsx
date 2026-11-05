@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
+import { OfflineNotice } from "@/components/OfflineNotice";
+
 import "./globals.css";
 
 const archivo = localFont({
@@ -58,7 +60,10 @@ export default function RootLayout({
       lang="en"
       className={`${archivo.variable} ${inter.variable} ${notoSansDevanagari.variable} ${notoSerifDevanagari.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <OfflineNotice />
+        {children}
+      </body>
     </html>
   );
 }

@@ -66,11 +66,16 @@ def reserve_stock(
     quantity: int,
     reference: str | None = None,
     note: str | None = None,
+    *,
+    commit: bool = True,
 ) -> Inventory:
     """Atomically reserve available units.
 
     The conditional UPDATE is the oversell guard. It is safe under concurrent
     requests because the database decides the winner, not the application.
+
+    ``commit=False`` lets an order-level operation group several lines into one
+    transaction, so a crash mid-order cannot sell half a pair set.
     """
 
     if quantity <= 0:
@@ -91,17 +96,21 @@ def reserve_stock(
         )
     )
     if result.rowcount != 1:
-        db.rollback()
+        if commit:
+            db.rollback()
         if db.scalar(select(Inventory.id).where(Inventory.variant_id == variant_id)) is None:
             raise InventoryNotFound(f"No inventory row for variant {variant_id}")
         raise OutOfStock(f"Variant {variant_id} does not have {quantity} available")
 
     _event(db, variant_id, "reservation", -quantity, reference, note)
-    try:
-        db.commit()
-    except Exception:
-        db.rollback()
-        raise
+    if commit:
+        try:
+            db.commit()
+        except Exception:
+            db.rollback()
+            raise
+    else:
+        db.flush()
     return get_inventory(db, variant_id)
 
 
@@ -111,6 +120,8 @@ def release_stock(
     quantity: int,
     reference: str | None = None,
     note: str | None = None,
+    *,
+    commit: bool = True,
 ) -> Inventory:
     if quantity <= 0:
         raise ValueError("quantity must be positive")
@@ -130,15 +141,19 @@ def release_stock(
         )
     )
     if result.rowcount != 1:
-        db.rollback()
+        if commit:
+            db.rollback()
         raise OutOfStock(f"Variant {variant_id} does not have {quantity} reserved")
 
     _event(db, variant_id, "release", quantity, reference, note)
-    try:
-        db.commit()
-    except Exception:
-        db.rollback()
-        raise
+    if commit:
+        try:
+            db.commit()
+        except Exception:
+            db.rollback()
+            raise
+    else:
+        db.flush()
     return get_inventory(db, variant_id)
 
 
@@ -148,8 +163,10 @@ def commit_sale(
     quantity: int,
     reference: str | None = None,
     note: str | None = None,
+    *,
+    commit: bool = True,
 ) -> Inventory:
-    """Convert a reservation into a sale. Checkout is out of scope for M1."""
+    """Convert a reservation into a sale."""
 
     if quantity <= 0:
         raise ValueError("quantity must be positive")
@@ -171,15 +188,19 @@ def commit_sale(
         )
     )
     if result.rowcount != 1:
-        db.rollback()
+        if commit:
+            db.rollback()
         raise OutOfStock(f"Variant {variant_id} cannot complete {quantity} sale")
 
     _event(db, variant_id, "sale", -quantity, reference, note)
-    try:
-        db.commit()
-    except Exception:
-        db.rollback()
-        raise
+    if commit:
+        try:
+            db.commit()
+        except Exception:
+            db.rollback()
+            raise
+    else:
+        db.flush()
     return get_inventory(db, variant_id)
 
 
@@ -189,6 +210,8 @@ def adjust_stock(
     quantity_delta: int,
     reference: str | None = None,
     note: str | None = None,
+    *,
+    commit: bool = True,
 ) -> Inventory:
     if quantity_delta == 0:
         raise ValueError("quantity_delta must not be zero")
@@ -209,17 +232,21 @@ def adjust_stock(
         )
     )
     if result.rowcount != 1:
-        db.rollback()
+        if commit:
+            db.rollback()
         if db.scalar(select(Inventory.id).where(Inventory.variant_id == variant_id)) is None:
             raise InventoryNotFound(f"No inventory row for variant {variant_id}")
         raise OutOfStock(f"Adjustment would make variant {variant_id} negative or below reserved")
 
     _event(db, variant_id, "adjustment", quantity_delta, reference, note)
-    try:
-        db.commit()
-    except Exception:
-        db.rollback()
-        raise
+    if commit:
+        try:
+            db.commit()
+        except Exception:
+            db.rollback()
+            raise
+    else:
+        db.flush()
     return get_inventory(db, variant_id)
 
 

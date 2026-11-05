@@ -92,7 +92,9 @@ def read_order(
     db: Session = Depends(get_db),
 ) -> dict:
     order = _load_order(db, public_id)
-    return order_payload(order)
+    # The URL is a capability token until authentication ships. Contact details
+    # are masked so a shared link or screenshot does not expose them.
+    return order_payload(order, mask_contact=True)
 
 
 @router.post("/orders/{public_id}/payment", response_model=OrderCreatedOut)

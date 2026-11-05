@@ -1,0 +1,23 @@
+[extend]
+useDefault = true
+
+# Test fixtures use deliberately fake credentials. They must still be scanned
+# for anything else, so only the test tree and documented placeholders are
+# exempted, not the whole repository.
+[allowlist]
+description = "Deliberately fake credentials in tests, examples and docs"
+paths = [
+  '''(^|/)tests/''',
+  '''(^|/)\.env\.example$''',
+  '''(^|/)\.env\.[a-z]+\.example$''',
+]
+regexes = [
+  '''test-key-secret''',
+  '''test-webhook-secret''',
+  '''test-admin-token''',
+  '''e2e-admin-token''',
+  '''rzp_test_mock''',
+  '''rzp_test_realish''',
+  '''replace-with-a-long-random-token''',
+  '''change-me''',
+]

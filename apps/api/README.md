@@ -88,6 +88,8 @@ placeholder refresh; the committed set uses Wikimedia Commons.
 | Method | Path | Purpose |
 |---|---|---|
 | `GET` | `/health` | Liveness and telemetry state. |
+| `GET` | `/health/live` | Liveness only; does not touch external services. |
+| `GET` | `/health/ready` | Readiness; fails with `503` when the database is unreachable. |
 | `GET` | `/catalogue` | Published, storefront-safe products only. |
 | `GET` | `/catalogue?q=&category=&colour=&size=&min_price=&max_price=` | Filtered catalogue. `q` uses PostgreSQL full-text search; SQLite falls back to a case-insensitive substring match. |
 | `GET` | `/catalogue/facets` | Category, colour, available-size and price facets for the same filters. |
@@ -189,6 +191,28 @@ It exits non-zero if any published product still has a placeholder image or an
 unresolved `[TO CONFIRM]` field. It is a separate check from the API guard so a
 forced database edit cannot slip through unnoticed.
 
+## Operations
+
+Run these from the repository root (or see the `Makefile`):
+
+| Command | Purpose |
+|---|---|
+| `make preflight` | One launch gate: mock payments, wrong-environment keys, dev fixture, placeholder images, unresolved fields, seller GSTIN/state, static admin token, migrations at head. Exits non-zero on any failure. |
+| `make reconcile` | Nightly read-only reconciliation of orders, payments, inventory and inventory events. Exits non-zero on mismatch. |
+| `make outbox` | Send pending confirmation emails from the durable outbox. Run on a schedule. |
+| `make expire` | Release stock held by orders past their payment window. Run on a schedule (cron or the platform scheduler). |
+| `make backup` | PostgreSQL custom-format dump (or SQLite copy). |
+| `make restore DUMP=...` | Destructive restore. Read the runbook first. |
+
+Runbooks: `../../docs/runbooks/` covers stuck payments, failing webhooks,
+stock mismatch and backup/restore. Known gaps are in
+`../../docs/known-limitations.md`. The real Razorpay test-mode drill is
+`../../brand/phase-4/razorpay-test-runbook.md`.
+
+Health endpoints: `/health/live` is process liveness; `/health/ready` returns
+`503` when the database cannot answer a trivial query. The API disposes its
+connection pool on shutdown.
+
 ## Inventory concurrency
 
 Reservations use a single conditional `UPDATE`:
@@ -241,8 +265,9 @@ Coverage includes:
 - live-key guard, mock guard, webhook-secret guard;
 - concurrent duplicate-capture on PostgreSQL (skipped on SQLite).
 
-The suite currently reports **52 passed, 1 skipped** (the PostgreSQL-only
-concurrent duplicate-capture test is skipped on SQLite).
+The suite currently reports **141 passed, 4 skipped** locally (PostgreSQL-only,
+Mailpit-only and PostgreSQL restore tests skip without those services; CI runs
+them).
 
 ## Database model
 
@@ -257,6 +282,7 @@ concurrent duplicate-capture test is skipped on SQLite).
 - `order_items` -- price and name snapshots, per-line GST, stock_state (reserved/sold/released)
 - `payments` -- Razorpay order id, payment id, status, refund tracking
 - `webhook_events` -- idempotent event intake keyed by `X-Razorpay-Event-Id`
+- `email_outbox` -- durable confirmation-email queue with attempt count and last error
 
 Migrations:
 
@@ -266,6 +292,10 @@ Migrations:
   and uses the fallback search.
 - `alembic/versions/e6c3f9a2b8d1_orders_payments_webhooks.py` -- orders, order items,
   payments and webhook events.
+- `alembic/versions/f7d4a1c9e2b3_hardening_outbox_and_checks.py` -- payment review
+  fields, the email outbox, extra CHECK constraints and outbox indexes. Webhook
+  idempotency is the unique `webhook_events.event_id` added in the previous
+  migration.
 
 ## Open items
 

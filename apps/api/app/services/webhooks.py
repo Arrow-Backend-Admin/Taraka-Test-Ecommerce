@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from sqlalchemy import select
@@ -22,6 +22,7 @@ from ..config import Settings
 from ..models import WebhookEvent
 from .orders import process_event
 from .razorpay import RazorpayGateway
+from .resilience import run_with_db_retry
 
 
 class WebhookSignatureError(Exception):
@@ -32,8 +33,24 @@ class WebhookPayloadError(Exception):
     pass
 
 
+# A worker that dies after storing the event but before finishing leaves the row
+# at ``received``. The provider retry must be allowed to finish the job, so a
+# ``received`` row older than this lease is reclaimed instead of being called a
+# duplicate. The window is long enough that a live worker is never raced.
+RECEIVED_LEASE = timedelta(minutes=5)
+
+
 def _now() -> datetime:
     return datetime.now(timezone.utc)
+
+
+def _is_stale_received(event: WebhookEvent) -> bool:
+    created_at = event.created_at
+    if created_at is None:
+        return True
+    if created_at.tzinfo is None:
+        created_at = created_at.replace(tzinfo=timezone.utc)
+    return _now() - created_at > RECEIVED_LEASE
 
 
 def process_webhook(
@@ -81,16 +98,22 @@ def process_webhook(
             raise
         if existing.status == "processed":
             return {"status": "duplicate", "event_id": event_id}
-        if existing.status == "received":
+        if existing.status == "received" and not _is_stale_received(existing):
             # Another worker is handling this delivery. Treat it as a replay.
             return {"status": "duplicate", "event_id": event_id}
+        # ``failed``, or a ``received`` row whose worker died: reclaim and retry.
         existing.status = "received"
         existing.error = None
         db.commit()
         event = existing
 
     try:
-        outcome = process_event(db, event.event_type, payload, settings)
+        # The event row is already committed, so the provider gets a 2xx only
+        # after the delivery is durably stored. Retrying here covers transient
+        # PostgreSQL serialization failures, not a logical failure.
+        outcome = run_with_db_retry(
+            db, lambda: process_event(db, event.event_type, payload, settings)
+        )
     except Exception as exc:  # noqa: BLE001 - provider retries failed events
         db.rollback()
         failed = db.scalar(select(WebhookEvent).where(WebhookEvent.event_id == event_id))

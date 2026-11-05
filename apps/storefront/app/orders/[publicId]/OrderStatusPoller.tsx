@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import {
   getOrder,
@@ -29,13 +29,19 @@ export function OrderStatusPoller({
   const [orderMessage, setOrderMessage] = useState(initialMessage);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<Message>(null);
+  const [pollError, setPollError] = useState(false);
+  const actionRef = useRef(false);
 
   const shouldPoll =
     status === "awaiting_payment" || status === "created";
 
   const poll = useCallback(async () => {
     const order = await getOrder(publicId);
-    if (!order) return;
+    if (!order) {
+      setPollError(true);
+      return;
+    }
+    setPollError(false);
     setStatus(order.status);
     setNextAction(order.next_action);
     setOrderMessage(order.message);
@@ -58,7 +64,8 @@ export function OrderStatusPoller({
   }, []);
 
   async function handleRetry() {
-    if (busy) return;
+    if (actionRef.current) return;
+    actionRef.current = true;
     setBusy(true);
     setMessage(null);
     try {
@@ -92,6 +99,7 @@ export function OrderStatusPoller({
               });
             },
             onFailed: () => {
+              setBusy(false);
               setMessage({
                 kind: "error",
                 text: "The payment did not complete.",
@@ -120,11 +128,14 @@ export function OrderStatusPoller({
             ? error.message
             : "Could not retry the payment.",
       });
+    } finally {
+      actionRef.current = false;
     }
   }
 
   async function handleMockPay() {
-    if (busy) return;
+    if (actionRef.current) return;
+    actionRef.current = true;
     setBusy(true);
     setMessage(null);
     try {
@@ -140,6 +151,8 @@ export function OrderStatusPoller({
             ? error.message
             : "Could not simulate the payment.",
       });
+    } finally {
+      actionRef.current = false;
     }
   }
 
@@ -149,6 +162,17 @@ export function OrderStatusPoller({
       {shouldPoll ? (
         <p className="font-body text-xs text-muted">
           Refreshing status every few seconds…
+        </p>
+      ) : null}
+
+      {pollError ? (
+        <p
+          role="status"
+          aria-live="polite"
+          className="rounded-md border border-[#b9892f]/40 bg-[#fff4d6] p-3 font-body text-sm leading-6 text-[#5c4317]"
+        >
+          Could not refresh the order status. The page will retry
+          automatically; check your connection before paying again.
         </p>
       ) : null}
 

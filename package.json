@@ -10,6 +10,13 @@
     "dev": "npm run dev --workspace @santvana/storefront",
     "dev:storefront": "npm run dev --workspace @santvana/storefront",
     "build": "npm run build --workspace @santvana/storefront",
-    "typecheck": "npm run typecheck --workspace @santvana/storefront"
+    "typecheck": "npm run typecheck --workspace @santvana/storefront",
+    "e2e": "playwright test",
+    "e2e:report": "playwright show-report",
+    "lighthouse": "npx --yes lighthouse@13 http://127.0.0.1:3000/catalogue --chrome-flags=\"--headless=new --no-sandbox --disable-dev-shm-usage\" --output=json --output-path=lighthouse-report.json && node scripts/check-lighthouse-budget.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10",
+    "@playwright/test": "1.64"
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { fetchCart, type Cart } from "@/lib/cart";
@@ -56,29 +56,36 @@ export function CheckoutForm() {
   const [message, setMessage] = useState<Message>(null);
   const [created, setCreated] = useState<OrderCreated | null>(null);
   const [failedOrderId, setFailedOrderId] = useState<string | null>(null);
+  const submitRef = useRef(false);
+  const payRef = useRef(false);
+  const mountedRef = useRef(true);
+
+  const loadCart = useCallback(async () => {
+    setLoading(true);
+    setLoadError(null);
+    try {
+      const next = await fetchCart();
+      if (mountedRef.current) setCart(next);
+    } catch (error: unknown) {
+      if (mountedRef.current) {
+        setLoadError(
+          error instanceof Error
+            ? error.message
+            : "Could not read your cart reservation.",
+        );
+      }
+    } finally {
+      if (mountedRef.current) setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    let cancelled = false;
-    fetchCart()
-      .then((next) => {
-        if (!cancelled) setCart(next);
-      })
-      .catch((error: unknown) => {
-        if (!cancelled) {
-          setLoadError(
-            error instanceof Error
-              ? error.message
-              : "Could not read your cart reservation.",
-          );
-        }
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
+    mountedRef.current = true;
+    void loadCart();
     return () => {
-      cancelled = true;
+      mountedRef.current = false;
     };
-  }, []);
+  }, [loadCart]);
 
   const totalUnits = useMemo(
     () => cart?.items.reduce((sum, item) => sum + item.quantity, 0) ?? 0,
@@ -90,6 +97,7 @@ export function CheckoutForm() {
   }
 
   async function openRazorpay(order: OrderCreated) {
+    if (payRef.current) return;
     const checkout: CheckoutOptions | null = order.checkout;
     if (!checkout || !checkout.key_id) {
       setMessage({
@@ -98,6 +106,7 @@ export function CheckoutForm() {
       });
       return;
     }
+    payRef.current = true;
     setBusy(true);
     setMessage(null);
     try {
@@ -121,6 +130,7 @@ export function CheckoutForm() {
           });
         },
         onFailed: () => {
+          setBusy(false);
           setMessage({
             kind: "error",
             text: "The payment did not complete. The reservation is held until it expires.",
@@ -136,12 +146,17 @@ export function CheckoutForm() {
             ? error.message
             : "Could not open Razorpay checkout.",
       });
+    } finally {
+      payRef.current = false;
     }
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (busy) return;
+    // A ref closes the gap between the click and React re-rendering the
+    // disabled button, so a double-click cannot create two orders.
+    if (submitRef.current) return;
+    submitRef.current = true;
     setBusy(true);
     setMessage(null);
     setFailedOrderId(null);
@@ -181,11 +196,14 @@ export function CheckoutForm() {
             ? error.message
             : "Could not place the order. Try again.",
       });
+    } finally {
+      submitRef.current = false;
     }
   }
 
   async function handleMockPay() {
-    if (!created || busy) return;
+    if (!created || payRef.current) return;
+    payRef.current = true;
     setBusy(true);
     setMessage(null);
     try {
@@ -200,6 +218,8 @@ export function CheckoutForm() {
             ? error.message
             : "Could not simulate the payment.",
       });
+    } finally {
+      payRef.current = false;
     }
   }
 
@@ -222,6 +242,13 @@ export function CheckoutForm() {
           </Link>{" "}
           to add a size again.
         </p>
+        <button
+          type="button"
+          onClick={() => void loadCart()}
+          className="mt-4 rounded-full border border-[#7a1f18]/40 px-5 py-2.5 font-body text-sm transition-colors hover:bg-white/40"
+        >
+          Try again
+        </button>
       </div>
     );
   }

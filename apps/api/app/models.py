@@ -356,6 +356,24 @@ class OrderItem(TimestampMixin, Base):
         ),
         CheckConstraint("quantity > 0", name="ck_order_items_quantity_positive"),
         CheckConstraint("line_total_paise >= 0", name="ck_order_items_total_non_negative"),
+        CheckConstraint(
+            "unit_price_paise >= 0", name="ck_order_items_unit_price_non_negative"
+        ),
+        CheckConstraint(
+            "taxable_value_paise >= 0", name="ck_order_items_taxable_non_negative"
+        ),
+        CheckConstraint("gst_paise >= 0", name="ck_order_items_gst_non_negative"),
+        CheckConstraint(
+            "taxable_value_paise + gst_paise = line_total_paise",
+            name="ck_order_items_split_adds_up",
+        ),
+        CheckConstraint(
+            "gst_rate_pct in (5, 18)", name="ck_order_items_known_gst_rate"
+        ),
+        CheckConstraint(
+            "stock_state in ('reserved', 'sold', 'released')",
+            name="ck_order_items_stock_state",
+        ),
     )
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -397,6 +415,7 @@ class Payment(TimestampMixin, Base):
         UniqueConstraint("provider_order_id", name="uq_payments_provider_order"),
         UniqueConstraint("provider_payment_id", name="uq_payments_provider_payment"),
         CheckConstraint("amount_paise >= 0", name="ck_payments_amount_non_negative"),
+        CheckConstraint("refunded_paise >= 0", name="ck_payments_refunded_non_negative"),
     )
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -417,6 +436,10 @@ class Payment(TimestampMixin, Base):
     failure_reason: Mapped[str | None] = mapped_column(Text)
     refund_id: Mapped[str | None] = mapped_column(String(80))
     refunded_paise: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
+    needs_review: Mapped[bool] = mapped_column(
+        Boolean, default=False, nullable=False, index=True
+    )
+    review_reason: Mapped[str | None] = mapped_column(Text)
 
     order: Mapped[Order] = relationship(back_populates="payments")
 
@@ -443,3 +466,38 @@ class WebhookEvent(TimestampMixin, Base):
     payload: Mapped[dict | None] = mapped_column(JSON)
     error: Mapped[str | None] = mapped_column(Text)
     processed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class EmailOutbox(TimestampMixin, Base):
+    """Durable outbox for transactional email.
+
+    The row is written in the same transaction that marks an order paid, so a
+    dead SMTP server cannot undo a captured payment. A dispatcher retries
+    pending rows with bounded attempts.
+    """
+
+    __tablename__ = "email_outbox"
+    __table_args__ = (
+        UniqueConstraint("order_id", name="uq_email_outbox_order"),
+        CheckConstraint("attempts >= 0", name="ck_email_outbox_attempts_non_negative"),
+        CheckConstraint(
+            "status in ('pending', 'sent', 'failed')",
+            name="ck_email_outbox_status",
+        ),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    order_id: Mapped[int] = mapped_column(
+        ForeignKey("orders.id", ondelete="CASCADE"), index=True, nullable=False
+    )
+    to_email: Mapped[str] = mapped_column(String(254), nullable=False)
+    subject: Mapped[str] = mapped_column(String(200), nullable=False)
+    body: Mapped[str] = mapped_column(Text, nullable=False)
+    status: Mapped[str] = mapped_column(
+        String(16), default="pending", nullable=False, index=True
+    )
+    attempts: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
+    last_error: Mapped[str | None] = mapped_column(Text)
+    sent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+    order: Mapped[Order] = relationship()
